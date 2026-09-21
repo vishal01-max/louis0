@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Fixed Navbar</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial;
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      padding: 18px 30px;
+      background: #1e293b;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      color: white;
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    .links a {
+      color: white;
+      text-decoration: none;
+      margin-left: 25px;
+    }
+
+    .links a:hover {
+      color: teal;
+    }
+
+    main {
+      padding: 100px 30px;
+      height: 1200px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav>
+    <div class="logo">MySite</div>
+
+    <div class="links">
+      <a href="#">Home</a>
+      <a href="#">About</a>
+      <a href="#">Contact</a>
+    </div>
+  </nav>
+
+  <main>
+    <h1>Welcome</h1>
+    <p>Scroll down to see the fixed navigation bar.</p>
+  </main>
+
+</body>
+</html>
