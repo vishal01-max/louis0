@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My Portfolio Page</title>
+  <style>
+    :root {
+      --main: teal;
+      --bg: #f2fafa;
+      --text: #222;
+      --card: white;
+      --gap: 20px;
+    }
+
+    body {
+      margin: 0;
+      padding: 80px 25px;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Arial;
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      padding: 18px;
+      background: #1e293b;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    nav a {
+      color: white;
+      margin: 10px;
+      text-decoration: none;
+    }
+
+    nav a:hover { color: var(--main); }
+
+    .hero {
+      text-align: center;
+      animation: fade 1s;
+    }
+
+    @keyframes fade {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    h2 {
+      position: sticky;
+      top: 55px;
+      background: var(--bg);
+      padding: 10px;
+    }
+
+    .skills {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--gap);
+    }
+
+    .card {
+      padding: 20px;
+      background: var(--card);
+      border-radius: 10px;
+      transition: .3s;
+    }
+
+    .card::before { content: "⭐"; }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 15px #999;
+    }
+
+    @media (min-width: 640px) {
+      .skills { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #182020;
+        --text: white;
+        --card: #263333;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav>
+    <b>Louis</b>
+    <div>
+      <a href="#">Home</a>
+      <a href="#skills">Skills</a>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <h1>Hi, I'm Louis</h1>
+    <p>Computer Science Student & Developer</p>
+  </section>
+
+  <h2 id="skills">My Skills</h2>
+
+  <div class="skills">
+    <div class="card"><h3>Python</h3><p>Programming & Data Science</p></div>
+    <div class="card"><h3>Web Development</h3><p>HTML & CSS</p></div>
+    <div class="card"><h3>Machine Learning</h3><p>ML & AI basics</p></div>
+  </div>
+
+</body>
+</html>
