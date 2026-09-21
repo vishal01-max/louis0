@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Grid Cards</title>
+
+  <style>
+    :root {
+      --main: #008080;
+      --bg: #f2fafa;
+      --text: #222;
+      --card: white;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 30px;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Arial;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    .card {
+      position: relative;
+      padding: 25px;
+      background: var(--card);
+      border-radius: 10px;
+      transition: 0.3s;
+    }
+
+    .card::before {
+      content: "⭐";
+      display: block;
+      font-size: 25px;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 8px 18px #999;
+    }
+
+    @media (min-width: 640px) {
+      .grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --main: #66cccc;
+        --bg: #182020;
+        --text: #eee;
+        --card: #263333;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="grid">
+    <div class="card">
+      <h2>Books</h2>
+      <p>I enjoy reading interesting books.</p>
+    </div>
+
+    <div class="card">
+      <h2>Movies</h2>
+      <p>I like watching good movies.</p>
+    </div>
+
+    <div class="card">
+      <h2>Technology</h2>
+      <p>I enjoy learning new technology.</p>
+    </div>
+  </div>
+
+</body>
+</html>
