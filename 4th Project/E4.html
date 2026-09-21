@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>CSS Variables</title>
+
+  <style>
+    :root {
+      --primary: #008080;
+      --accent: #66cccc;
+      --bg: #f2fafa;
+      --text: #222;
+      --radius: 10px;
+      --space: 20px;
+    }
+
+    body {
+      margin: 0;
+      padding: var(--space);
+      background: var(--bg);
+      color: var(--text);
+      font-family: Arial;
+    }
+
+    .card {
+      padding: var(--space);
+      margin-bottom: var(--space);
+      border-radius: var(--radius);
+      background: white;
+    }
+
+    button {
+      padding: 10px 18px;
+      border: 0;
+      border-radius: var(--radius);
+      background: var(--primary);
+      color: var(--bg);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --primary: #66cccc;
+        --accent: #008080;
+        --bg: #182020;
+        --text: #eee;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="card">
+    <h2>My Card</h2>
+    <p>This page changes with your system theme.</p>
+    <button>Click Me</button>
+  </div>
+
+</body>
+</html>
