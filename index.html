@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Vishal · Weekly Tasks Portfolio</title>
+<style>
+:root{
+  --bg:#0a0e14;--panel:#111721;--line:#1e2733;
+  --text:#e6edf3;--muted:#8b98a5;--green:#3fb950;--accent:#58a6ff;
+  --mono:"SF Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;line-height:1.5}
+a{color:inherit;text-decoration:none}
+.hero{max-width:1100px;margin:0 auto;padding:48px 24px 24px}
+.hero-top{display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:.8rem;color:var(--muted);margin-bottom:40px}
+.repo{color:var(--green)}
+.hero h1{font-size:clamp(2rem,6vw,4rem);line-height:1.05;letter-spacing:-.02em}
+.sub{color:var(--muted);margin-top:16px;max-width:560px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:36px}
+.stat{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px}
+.stat b{display:block;font-size:1.8rem;color:var(--green)}
+.stat span{color:var(--muted);font-size:.8rem}
+.marquee{border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden;padding:12px 0;margin:32px 0}
+.marquee-track{white-space:nowrap;font-family:var(--mono);color:var(--muted);animation:scroll 30s linear infinite}
+@keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.wrap{max-width:1100px;margin:0 auto;padding:24px}
+.kicker{font-family:var(--mono);color:var(--green);font-size:.8rem}
+.wrap h2{font-size:2rem;margin:6px 0}
+.lead{color:var(--muted);max-width:600px}
+.controls{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;margin:28px 0 8px}
+.filters{display:flex;flex-wrap:wrap;gap:8px}
+.chip{background:var(--panel);border:1px solid var(--line);color:var(--muted);padding:8px 14px;border-radius:999px;cursor:pointer;font-size:.85rem;transition:.2s}
+.chip b{color:var(--text)}
+.chip:hover{border-color:var(--green)}
+.chip.active{background:var(--green);color:#001b06;border-color:var(--green)}
+.chip.active b{color:#001b06}
+#search{background:var(--panel);border:1px solid var(--line);color:var(--text);padding:10px 14px;border-radius:8px;min-width:220px;font-size:.9rem}
+#search:focus{outline:none;border-color:var(--accent)}
+.count{color:var(--muted);font-family:var(--mono);font-size:.78rem;margin:10px 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;padding-bottom:48px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px;display:flex;flex-direction:column;transition:.2s}
+.card:hover{transform:translateY(-4px);border-color:var(--green)}
+.card .meta{display:flex;justify-content:space-between;font-family:var(--mono);font-size:.72rem;color:var(--muted)}
+.badge{padding:2px 8px;border-radius:999px;border:1px solid var(--line)}
+.badge.Foundational{color:var(--green)}
+.badge.Intermediate{color:var(--accent)}
+.badge.Advanced{color:#d29922}
+.card h3{margin:12px 0 6px;font-size:1.1rem}
+.card p{color:var(--muted);font-size:.88rem;flex:1}
+.tags{display:flex;gap:6px;flex-wrap:wrap;margin:12px 0}
+.tag{background:#0d1117;border:1px solid var(--line);color:var(--muted);font-size:.7rem;padding:3px 8px;border-radius:6px}
+.actions{display:flex;gap:8px;margin-top:8px}
+.actions a{flex:1;text-align:center;padding:8px;border-radius:8px;font-size:.82rem;border:1px solid var(--line)}
+.actions .live{background:var(--green);color:#001b06;border-color:var(--green);font-weight:600}
+.actions .src:hover{border-color:var(--accent)}
+.foot{border-top:1px solid var(--line);padding:24px;text-align:center;color:var(--muted);font-size:.85rem}
+.foot a{color:var(--green)}
+@media(max-width:520px){.stats{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="hero-top">
+    <span>Vishal · Weekly Tasks Portfolio</span>
+    <a class="repo" href="https://github.com/vishal01-max/louis0" target="_blank" rel="noopener">vishal01-max / louis0</a>
+  </div>
+  <h1>Four weeks of code.<br/>Thirty-one builds.<br/>One repository.</h1>
+  <p class="sub">A living archive of my front-end journey — from my first HTML page to advanced CSS components.</p>
+  <div class="stats">
+    <div class="stat"><b>04</b><span>Learning Weeks</span></div>
+    <div class="stat"><b>31</b><span>Tasks Shipped</span></div>
+    <div class="stat"><b>01</b><span>Repository</span></div>
+    <div class="stat"><b>100%</b><span>Hand-coded</span></div>
+  </div>
+</header>
+
+<div class="marquee"><div class="marquee-track">
+  <span>HTML5 ✦ CSS3 ✦ Semantic Markup ✦ Flexbox ✦ CSS Grid ✦ Box Model ✦ Responsive UI ✦ Animations ✦ Git &amp; GitHub ✦ Portfolio Craft ✦ HTML5 ✦ CSS3 ✦ Semantic Markup ✦ Flexbox ✦ CSS Grid ✦ Box Model ✦ Responsive UI ✦ Animations ✦ Git &amp; GitHub ✦ Portfolio Craft ✦</span>
+</div></div>
+
+<main class="wrap">
+  <p class="kicker">// task archive</p>
+  <h2>Browse the builds</h2>
+  <p class="lead">Pick a week or search across all 31 tasks — every card links to a live preview and the source.</p>
+  <div class="controls">
+    <div class="filters" id="filters">
+      <button class="chip active" data-week="all">All <b>31</b></button>
+      <button class="chip" data-week="1">Week 1 <b>8</b></button>
+      <button class="chip" data-week="2">Week 2 <b>8</b></button>
+      <button class="chip" data-week="3">Week 3 <b>8</b></button>
+      <button class="chip" data-week="4">Week 4 <b>7</b></button>
+    </div>
+    <input id="search" type="search" placeholder="Search tasks…" />
+  </div>
+  <p class="count" id="count"></p>
+  <section class="grid" id="grid"></section>
+</main>
+
+<footer class="foot">
+  <p>Built by Vishal · <a href="https://github.com/vishal01-max/louis0" target="_blank" rel="noopener">louis0 on GitHub</a></p>
+</footer>
+
+<script>
+const LIVE="https://htmlpreview.github.io/?https://github.com/vishal01-max/louis0/blob/main/";
+const SRC="https://github.com/vishal01-max/louis0/blob/main/";
+const FOLDER={1:"Week%202_1/",2:"2nd%20Project/",3:"3rd%20Project/",4:"4th%20Project/"};
+const TASKS=[
+{w:1,f:"task1.html",t:"My First Page",d:"The very first HTML document — headings, paragraphs and basic structure.",tags:["HTML5","Basics"],lvl:"Foundational"},
+{w:1,f:"task2.html",t:"My Favourite Sport",d:"A page about football built with headings, strong and emphasis text.",tags:["HTML5","Text"],lvl:"Foundational"},
+{w:1,f:"task3.html",t:"Navigation",d:"Anchor-based navigation linking pages and sections together.",tags:["Links","Nav"],lvl:"Foundational"},
+{w:1,f:"task4.html",t:"University Students",d:"Structured student data presented with an HTML table.",tags:["Tables","Data"],lvl:"Foundational"},
+{w:1,f:"task5.html",t:"My Profile",d:"Personal profile page with bio, details and lists.",tags:["Profile","Lists"],lvl:"Foundational"},
+{w:1,f:"task6.html",t:"Broken Page",d:"Debugging exercise — finding and fixing intentionally broken markup.",tags:["Debugging","HTML5"],lvl:"Intermediate"},
+{w:1,f:"task7.html",t:"How to Make Mo:Mo",d:"Step-by-step recipe page using ordered and unordered lists.",tags:["Lists","Recipe"],lvl:"Foundational"},
+{w:1,f:"task8.html",t:"My Favourites",d:"A favourites page combining links, images and lists.",tags:["Links","Images"],lvl:"Foundational"},
+{w:2,f:"task1.html",t:"Gachon Blog",d:"Semantic blog shell with header, nav, article, aside and footer.",tags:["Semantics","Layout"],lvl:"Intermediate"},
+{w:2,f:"task2.html",t:"Blog Post",d:"A formatted blog article page with semantic typography.",tags:["Article","Typography"],lvl:"Foundational"},
+{w:2,f:"task3.html",t:"Figures",d:"Using figure and figcaption to present images with captions.",tags:["Figure","Media"],lvl:"Foundational"},
+{w:2,f:"task4.html",t:"Web Programming FAQ",d:"Frequently asked questions page about web programming.",tags:["FAQ","Content"],lvl:"Foundational"},
+{w:2,f:"task5.html",t:"Vishal — Portfolio",d:"First personal portfolio page built with semantic HTML.",tags:["Portfolio","Semantics"],lvl:"Intermediate"},
+{w:2,f:"task6.html",t:"My Blog",d:"Multi-section blog layout with articles and navigation.",tags:["Blog","Layout"],lvl:"Intermediate"},
+{w:2,f:"task7.html",t:"Inspirational Quotes",d:"A quotes collection page using blockquotes and citations.",tags:["Blockquote","Content"],lvl:"Foundational"},
+{w:2,f:"task8.html",t:"AI Is Changing Technology",d:"Tech news article page on how AI is changing technology.",tags:["News","Article"],lvl:"Intermediate"},
+{w:3,f:"task1.html",t:"Styled Heading & Paragraph",d:"First CSS styling — colours, sizes and spacing applied to text.",tags:["CSS3","Text"],lvl:"Foundational"},
+{w:3,f:"task2.html",t:"CSS Methods",d:"Inline, internal and external CSS compared in one exercise.",tags:["CSS3","Methods"],lvl:"Foundational"},
+{w:3,f:"task3.html",t:"Colour Swatches",d:"A palette of colour swatches styled with CSS classes.",tags:["Colors","Classes"],lvl:"Foundational"},
+{w:3,f:"task4.html",t:"Box Model Visualization",d:"Margin, border, padding and content visualised with CSS.",tags:["Box Model","Layout"],lvl:"Intermediate"},
+{w:3,f:"task5.html",t:"Internal CSS Styling",d:"Green-themed article styled with an internal stylesheet.",tags:["CSS3","Theming"],lvl:"Foundational"},
+{w:3,f:"task6.html",t:"Navigation Bar",d:"CSS-styled navigation bar with hover states.",tags:["Navbar","Hover"],lvl:"Intermediate"},
+{w:3,f:"task7.html",t:"Profile Card",d:"A centred profile card with avatar, bio and styled details.",tags:["Card","UI"],lvl:"Intermediate"},
+{w:3,f:"task8.html",t:"About Me",d:"Styled about-me page combining text and layout CSS.",tags:["About","Layout"],lvl:"Intermediate"},
+{w:4,f:"E1.html",t:"Sale Card",d:"Promotional sale card component with pricing and call-to-action.",tags:["Card","Component"],lvl:"Intermediate"},
+{w:4,f:"E2.html",t:"Hover Card",d:"Interactive card with smooth CSS hover transitions.",tags:["Hover","Transitions"],lvl:"Intermediate"},
+{w:4,f:"E3.html",t:"Loading",d:"Pure CSS loading spinner animation.",tags:["Animation","Loader"],lvl:"Intermediate"},
+{w:4,f:"E4.html",t:"CSS Variables",d:"A theme built entirely with CSS custom properties.",tags:["Variables","Theming"],lvl:"Advanced"},
+{w:4,f:"E5.html",t:"Fixed Navbar",d:"Fixed navigation bar that stays in place while scrolling.",tags:["Navbar","Position"],lvl:"Intermediate"},
+{w:4,f:"E6.html",t:"Grid Cards",d:"Responsive card layout built with CSS Grid.",tags:["CSS Grid","Responsive"],lvl:"Advanced"},
+{w:4,f:"E7.html",t:"My Portfolio Page",d:"Capstone — a full personal portfolio page in HTML and CSS.",tags:["Portfolio","Capstone"],lvl:"Advanced"}
+];
+const grid=document.getElementById("grid"),countEl=document.getElementById("count"),searchEl=document.getElementById("search");
+let activeWeek="all";
+const url=(base,t)=>base+FOLDER[t.w]+t.f;
+function render(){
+  const q=searchEl.value.trim().toLowerCase();
+  const list=TASKS.filter(t=>{
+    const weekOk=activeWeek==="all"||String(t.w)===activeWeek;
+    const text=(t.t+" "+t.d+" "+t.tags.join(" ")).toLowerCase();
+    return weekOk&&text.includes(q);
+  });
+  countEl.textContent=`showing ${list.length} / ${TASKS.length} tasks`;
+  grid.innerHTML=list.map(t=>`
+    <article class="card">
+      <div class="meta"><span>${t.f}</span><span class="badge ${t.lvl}">${t.lvl}</span></div>
+      <h3>${t.t}</h3>
+      <p>${t.d}</p>
+      <div class="tags">${t.tags.map(x=>`<span class="tag">${x}</span>`).join("")}</div>
+      <div class="actions">
+        <a class="src" href="${url(SRC,t)}" target="_blank" rel="noopener">Source</a>
+        <a class="live" href="${url(LIVE,t)}" target="_blank" rel="noopener">Live</a>
+      </div>
+    </article>`).join("");
+}
+document.getElementById("filters").addEventListener("click",e=>{
+  const btn=e.target.closest(".chip");if(!btn)return;
+  document.querySelectorAll(".chip").forEach(c=>c.classList.remove("active"));
+  btn.classList.add("active");activeWeek=btn.dataset.week;render();
+});
+searchEl.addEventListener("input",render);
+render();
+</script>
+</body>
+</html>
