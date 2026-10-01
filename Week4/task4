@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Student Search</title>
+
+  <style>
+    body {
+      font-family: system-ui;
+      padding: 24px;
+      text-align: center;
+    }
+
+    #search {
+      padding: 12px;
+      width: 250px;
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
+
+    .student {
+      padding: 12px;
+      margin: 8px auto;
+      width: 250px;
+      background: #f1f5f9;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h2>Student Search</h2>
+
+  <input id="search" type="text" placeholder="Search student...">
+
+  <div id="students">
+    <div class="student">louisdai</div>
+    <div class="student">John</div>
+    <div class="student">Karl</div>
+    <div class="student">Michael</div>
+    <div class="student">David</div>
+    <div class="student">Alex</div>
+  </div>
+
+  <script>
+    // Select the search box
+    const search = document.querySelector('#search');
+
+    // Listen for input
+    search.addEventListener('input', function(e) {
+
+      // Get search term
+      const term = e.target.value.toLowerCase();
+
+      // Get all students
+      const students = document.querySelectorAll('.student');
+
+      // Check each student
+      students.forEach(function(student) {
+
+        const name = student.textContent.toLowerCase();
+
+        if (name.includes(term)) {
+          student.style.display = 'block';
+        } else {
+          student.style.display = 'none';
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
