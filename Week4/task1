@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Click Counter</title>
+
+  <style>
+    .done {
+      background: #16a34a !important;
+    }
+  </style>
+</head>
+
+<body style="font-family:system-ui;padding:24px;text-align:center">
+
+  <button id="clicker" style="
+    padding:14px 32px;
+    font-size:18px;
+    border:none;
+    background:#1a56db;
+    color:white;
+    border-radius:10px;
+    cursor:pointer;
+    transition:background .3s">
+    Click me!
+  </button>
+
+  <p id="count" style="
+    font-size:32px;
+    font-weight:bold;
+    margin:16px 0">
+    0
+  </p>
+
+  <p id="message" style="
+    font-size:16px;
+    color:#666">
+    Keep clicking...
+  </p>
+
+  <script>
+    // Select the button, count, and message
+    const button = document.querySelector('#clicker');
+    const count = document.querySelector('#count');
+    const message = document.querySelector('#message');
+
+    // Counter starts at 0
+    let clicks = 0;
+
+    // Add click event
+    button.addEventListener('click', function() {
+
+      // Increase counter
+      clicks++;
+
+      // Update count
+      count.textContent = clicks;
+
+      // After 5 clicks
+      if (clicks >= 5) {
+        button.classList.add('done');
+        message.textContent = 'Congratulations! You reached 5 clicks!';
+      }
+    });
+  </script>
+
+</body>
+</html>
