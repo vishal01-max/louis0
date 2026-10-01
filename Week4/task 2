@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Profile Card</title>
+
+  <style>
+    .card {
+      width: 300px;
+      margin: 50px auto;
+      padding: 25px;
+      text-align: center;
+      background: white;
+      color: black;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px #ccc;
+    }
+
+    .card.dark {
+      background: #222;
+      color: white;
+    }
+
+    button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="card" id="profileCard">
+    <h2>Bishal</h2>
+    <p>Web Programming Student</p>
+
+    <button id="toggleButton">Dark Mode</button>
+  </div>
+
+  <script>
+    // Select the card and toggle button
+    const card = document.querySelector('#profileCard');
+    const button = document.querySelector('#toggleButton');
+
+    // Add click listener
+    button.addEventListener('click', function() {
+
+      // Toggle dark class
+      card.classList.toggle('dark');
+
+      // Update button text
+      if (card.classList.contains('dark')) {
+        button.textContent = 'Light Mode';
+      } else {
+        button.textContent = 'Dark Mode';
+      }
+    });
+  </script>
+
+</body>
+</html>
