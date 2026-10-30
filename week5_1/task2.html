@@ -1,24 +1,394 @@
+
 <!DOCTYPE html>
-<html lang="en">    
-    <head>
-        <meta charset="UTF-8">
-        <title>Counter</title>
-    </head>
-    <body>
-        <h1>Counter:<span id="count">0</span></h1>
-        <button onclick="change(1)">+ Add</button>
-        <button onclick="change(-1)"> - Subtract</button>
-        <button onclick="reset()"> Reset</button>
-        <script>
-            let count = 0;
-            function change(amount) {
-                count = count + amount;
-                document.getElementById('count').textContent = count;
-            }
-            function reset() {
-                count = 0;
-                document.getElementById('count').textContent = 0;
-            }
-        </script>
-    </body>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>My Counter App</title>
+
+<style>
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #eeeaff, #e3f0ff);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    color: #29304a;
+}
+
+.container {
+    width: 100%;
+    max-width: 400px;
+    background: white;
+    padding: 35px 28px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 12px 35px rgba(80, 70, 150, 0.12);
+}
+
+.icon {
+    width: 65px;
+    height: 65px;
+    background: #eeeaff;
+    border-radius: 18px;
+    display: grid;
+    place-items: center;
+    margin: 0 auto 18px;
+    font-size: 30px;
+}
+
+h1 {
+    font-size: 25px;
+    margin-bottom: 8px;
+    color: #343052;
+}
+
+.subtitle {
+    color: #9292a7;
+    font-size: 14px;
+    margin-bottom: 30px;
+}
+
+.counter-box {
+    background: #f7f5ff;
+    border-radius: 15px;
+    padding: 25px;
+    margin-bottom: 25px;
+}
+
+.counter-box p {
+    color: #8985a8;
+    font-size: 12px;
+    letter-spacing: 2px;
+    font-weight: bold;
+}
+
+#count {
+    font-size: 75px;
+    font-weight: bold;
+    color: #7965d8;
+    margin: 10px 0;
+    transition: 0.2s;
+}
+
+#count.pop {
+    transform: scale(1.12);
+}
+
+#message {
+    font-size: 13px;
+    color: #9693aa;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 13px;
+    margin-bottom: 22px;
+}
+
+button {
+    border: none;
+    cursor: pointer;
+    transition: 0.2s;
+    font-weight: bold;
+}
+
+button:hover {
+    transform: translateY(-3px);
+}
+
+button:active {
+    transform: scale(0.95);
+}
+
+.main-btn {
+    width: 58px;
+    height: 58px;
+    border-radius: 14px;
+    font-size: 25px;
+}
+
+.minus {
+    background: #ffe9ed;
+    color: #ed6680;
+}
+
+.plus {
+    background: #7965d8;
+    color: white;
+}
+
+.reset {
+    background: #eeeaff;
+    color: #7965d8;
+    font-size: 20px;
+}
+
+.quick-actions {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+.quick-actions button {
+    background: #f1efff;
+    color: #7965d8;
+    padding: 10px 17px;
+    border-radius: 9px;
+    font-size: 13px;
+}
+
+.settings {
+    border-top: 1px solid #eeeef5;
+    padding-top: 20px;
+}
+
+.settings label {
+    display: block;
+    font-size: 13px;
+    color: #77758e;
+    margin-bottom: 10px;
+}
+
+.settings input {
+    width: 90px;
+    padding: 10px;
+    border: 1px solid #e1def5;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 15px;
+    outline: none;
+}
+
+.settings input:focus {
+    border-color: #7965d8;
+}
+
+.footer {
+    margin-top: 23px;
+    color: #aaa8b9;
+    font-size: 11px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="icon">🔢</div>
+
+    <h1>Counter App</h1>
+
+    <p class="subtitle">
+        Simple counting, made beautiful.
+    </p>
+
+    <!-- Counter Display -->
+
+    <div class="counter-box">
+
+        <p>CURRENT COUNT</p>
+
+        <div id="count">0</div>
+
+        <div id="message">Ready to count!</div>
+
+    </div>
+
+    <!-- Main Buttons -->
+
+    <div class="buttons">
+
+        <button class="main-btn minus"
+                onclick="decrement()">
+            −
+        </button>
+
+        <button class="main-btn reset"
+                onclick="resetCounter()">
+            ↻
+        </button>
+
+        <button class="main-btn plus"
+                onclick="increment()">
+            +
+        </button>
+
+    </div>
+
+    <!-- Quick Actions -->
+
+    <div class="quick-actions">
+
+        <button onclick="changeCount(5)">+5</button>
+
+        <button onclick="changeCount(10)">+10</button>
+
+        <button onclick="changeCount(-5)">-5</button>
+
+    </div>
+
+    <!-- Step Settings -->
+
+    <div class="settings">
+
+        <label for="step">
+            Custom Step Value
+        </label>
+
+        <input type="number"
+               id="step"
+               value="1"
+               min="1">
+
+    </div>
+
+    <div class="footer">
+        Made with HTML, CSS & JavaScript ✨
+    </div>
+
+</div>
+
+
+<script>
+
+// Get saved counter value
+
+let count = Number(localStorage.getItem("myCounter")) || 0;
+
+
+// Update counter display
+
+function updateDisplay() {
+
+    const display = document.getElementById("count");
+
+    display.textContent = count;
+
+    // Save counter in localStorage
+
+    localStorage.setItem("myCounter", count);
+
+    // Animation
+
+    display.classList.remove("pop");
+
+    void display.offsetWidth;
+
+    display.classList.add("pop");
+
+}
+
+
+// Get custom step value
+
+function getStep() {
+
+    const step = Number(
+        document.getElementById("step").value
+    );
+
+    if (!Number.isInteger(step) || step < 1) {
+
+        alert("Please enter a valid positive whole number.");
+
+        return null;
+    }
+
+    return step;
+
+}
+
+
+// Increase counter
+
+function increment() {
+
+    const step = getStep();
+
+    if (step === null) return;
+
+    count += step;
+
+    updateDisplay();
+
+    showMessage("Count increased! 🎉");
+
+}
+
+
+// Decrease counter
+
+function decrement() {
+
+    const step = getStep();
+
+    if (step === null) return;
+
+    count -= step;
+
+    updateDisplay();
+
+    showMessage("Count decreased!");
+
+}
+
+
+// Reset counter
+
+function resetCounter() {
+
+    count = 0;
+
+    updateDisplay();
+
+    showMessage("Counter reset successfully!");
+
+}
+
+
+// Quick actions
+
+function changeCount(value) {
+
+    count += value;
+
+    updateDisplay();
+
+    showMessage("Counter updated!");
+
+}
+
+
+// Display messages
+
+function showMessage(text) {
+
+    document.getElementById("message").textContent = text;
+
+}
+
+
+// Initialize application
+
+updateDisplay();
+
+</script>
+
+</body>
 </html>
