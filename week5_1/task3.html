@@ -1,0 +1,640 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Interactive JavaScript Loops</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #eef2f7;
+    margin: 0;
+    padding: 30px;
+    color: #26334d;
+}
+
+.container {
+    max-width: 1000px;
+    margin: auto;
+}
+
+h1 {
+    text-align: center;
+    color: #173b75;
+}
+
+.subtitle {
+    text-align: center;
+    color: #64748b;
+    margin-bottom: 30px;
+}
+
+.card {
+    background: white;
+    padding: 22px;
+    margin-bottom: 22px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px #00000012;
+}
+
+h2 {
+    color: #173b75;
+    margin-top: 0;
+}
+
+.controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+}
+
+input {
+    padding: 11px;
+    border: 1px solid #ccd5e1;
+    border-radius: 6px;
+    font-size: 15px;
+}
+
+button {
+    padding: 11px 16px;
+    border: none;
+    border-radius: 6px;
+    background: #173b75;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+button:hover {
+    background: #2455a0;
+}
+
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.output {
+    background: #f1f5f9;
+    min-height: 55px;
+    padding: 15px;
+    margin-top: 15px;
+    border-radius: 7px;
+    line-height: 2;
+}
+
+.active {
+    background: #dbeafe;
+    border: 2px solid #2563eb;
+    padding: 8px;
+    border-radius: 6px;
+}
+
+.fruit-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 18px;
+}
+
+.fruit {
+    background: #dbeafe;
+    color: #173b75;
+    padding: 12px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: bold;
+}
+
+.remove {
+    background: #dc3545;
+    padding: 5px 9px;
+}
+
+.remove:hover {
+    background: #a91d2a;
+}
+
+.status {
+    color: #15803d;
+    font-weight: bold;
+    margin-top: 12px;
+}
+
+.progress {
+    height: 10px;
+    background: #e2e8f0;
+    border-radius: 10px;
+    margin-top: 15px;
+    overflow: hidden;
+}
+
+.bar {
+    height: 100%;
+    width: 0%;
+    background: #2563eb;
+    transition: width 0.3s;
+}
+
+select {
+    padding: 11px;
+    border: 1px solid #ccd5e1;
+    border-radius: 6px;
+}
+
+footer {
+    text-align: center;
+    color: #64748b;
+    padding: 20px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Interactive JavaScript Loops</h1>
+
+<p class="subtitle">
+Learn how JavaScript loops work through interactive examples.
+</p>
+
+<!-- SECTION 1: FOR LOOP -->
+
+<div class="card">
+
+<h2>1. For Loop – Number Counter</h2>
+
+<p>Choose how many times you want the loop to execute.</p>
+
+<div class="controls">
+
+<input type="number" id="loopCount"
+       value="5" min="1" max="50">
+
+<button onclick="startForLoop()">Start Loop</button>
+
+<button onclick="pauseLoop()">Pause</button>
+
+<button onclick="resetLoop()">Reset</button>
+
+</div>
+
+<div class="progress">
+    <div class="bar" id="progressBar"></div>
+</div>
+
+<div class="output" id="forOutput">
+    Waiting to start...
+</div>
+
+<p class="status" id="forStatus">
+    Status: Ready
+</p>
+
+</div>
+
+
+<!-- SECTION 2: FOR OF LOOP -->
+
+<div class="card">
+
+<h2>2. For...of Loop – Fruit Explorer</h2>
+
+<p>Add your favorite fruits and see how the loop visits each item.</p>
+
+<div class="controls">
+
+<input type="text" id="fruitInput"
+       placeholder="Enter fruit name">
+
+<button onclick="addFruit()">Add Fruit</button>
+
+<button onclick="startFruitLoop()">Run For...of</button>
+
+<button onclick="resetFruitLoop()">Reset</button>
+
+</div>
+
+<div class="fruit-list" id="fruitList"></div>
+
+<div class="output" id="fruitOutput">
+    Your fruit results will appear here.
+</div>
+
+</div>
+
+
+<!-- SECTION 3: FOREACH LOOP -->
+
+<div class="card">
+
+<h2>3. forEach() – Array with Index</h2>
+
+<p>
+This loop displays every fruit together with its array index.
+</p>
+
+<button onclick="runForEach()">Run forEach()</button>
+
+<div class="output" id="eachOutput">
+    Click the button to see array indexes.
+</div>
+
+</div>
+
+
+<!-- SECTION 4: WHILE LOOP -->
+
+<div class="card">
+
+<h2>4. While Loop – Number Countdown</h2>
+
+<p>Enter a starting number and watch the countdown.</p>
+
+<div class="controls">
+
+<input type="number" id="startNumber"
+       value="5" min="1" max="50">
+
+<button onclick="startWhileLoop()">Start Countdown</button>
+
+<button onclick="resetWhile()">Reset</button>
+
+</div>
+
+<div class="output" id="whileOutput">
+    Countdown has not started.
+</div>
+
+</div>
+
+
+<!-- SECTION 5: LOOP COMPARISON -->
+
+<div class="card">
+
+<h2>5. Loop Comparison</h2>
+
+<p>Select a loop to understand how it works.</p>
+
+<select id="loopType" onchange="showExplanation()">
+
+<option value="for">For Loop</option>
+<option value="forof">For...of Loop</option>
+<option value="foreach">forEach()</option>
+<option value="while">While Loop</option>
+
+</select>
+
+<div class="output" id="explanation">
+    A for loop repeats code a specific number of times.
+</div>
+
+</div>
+
+<footer>
+    JavaScript Practice | Interactive Loop Demonstration
+</footer>
+
+</div>
+
+
+<script>
+
+// ===============================
+// GLOBAL VARIABLES
+// ===============================
+
+let timer = null;
+let currentStep = 0;
+let totalSteps = 0;
+let isPaused = false;
+
+let fruits = ["Apple", "Banana", "Cherry", "Mango", "Orange"];
+
+
+// ===============================
+// 1. FOR LOOP
+// ===============================
+
+function startForLoop() {
+
+    clearInterval(timer);
+
+    totalSteps = Number(
+        document.getElementById("loopCount").value
+    );
+
+    if (!Number.isInteger(totalSteps) ||
+        totalSteps < 1 || totalSteps > 50) {
+
+        alert("Enter a whole number between 1 and 50.");
+        return;
+    }
+
+    currentStep = 0;
+    isPaused = false;
+
+    document.getElementById("forOutput").innerHTML = "";
+    document.getElementById("forStatus").textContent =
+        "Status: Running";
+
+    runNextStep();
+}
+
+function runNextStep() {
+
+    if (currentStep >= totalSteps) {
+
+        clearInterval(timer);
+
+        document.getElementById("forStatus").textContent =
+            "Status: Completed!";
+
+        return;
+    }
+
+    currentStep++;
+
+    document.getElementById("forOutput").innerHTML +=
+        `<span class="active">Step ${currentStep}</span> `;
+
+    document.getElementById("progressBar").style.width =
+        (currentStep / totalSteps * 100) + "%";
+
+    if (currentStep === totalSteps) {
+
+        document.getElementById("forStatus").textContent =
+            "Status: Completed!";
+
+    } else {
+
+        document.getElementById("forStatus").textContent =
+            `Status: Running (${currentStep}/${totalSteps})`;
+
+    }
+}
+
+function pauseLoop() {
+
+    if (timer) {
+        clearInterval(timer);
+        timer = null;
+        isPaused = true;
+
+        document.getElementById("forStatus").textContent =
+            "Status: Paused";
+    }
+}
+
+function resetLoop() {
+
+    clearInterval(timer);
+    timer = null;
+
+    currentStep = 0;
+
+    document.getElementById("forOutput").textContent =
+        "Waiting to start...";
+
+    document.getElementById("forStatus").textContent =
+        "Status: Ready";
+
+    document.getElementById("progressBar").style.width = "0%";
+}
+
+
+// ===============================
+// 2. FOR...OF LOOP
+// ===============================
+
+function displayFruits() {
+
+    const list = document.getElementById("fruitList");
+
+    list.innerHTML = "";
+
+    fruits.forEach((fruit, index) => {
+
+        const item = document.createElement("div");
+
+        item.className = "fruit";
+
+        const name = document.createElement("span");
+        name.textContent = fruit;
+
+        const remove = document.createElement("button");
+
+        remove.textContent = "×";
+        remove.className = "remove";
+
+        remove.onclick = () => {
+
+            fruits.splice(index, 1);
+
+            displayFruits();
+
+            document.getElementById("fruitOutput").textContent =
+                "Fruit removed successfully.";
+
+        };
+
+        item.appendChild(name);
+        item.appendChild(remove);
+
+        list.appendChild(item);
+
+    });
+}
+
+function addFruit() {
+
+    const input = document.getElementById("fruitInput");
+
+    const fruit = input.value.trim();
+
+    if (fruit === "") {
+
+        alert("Please enter a fruit name.");
+        return;
+    }
+
+    if (fruits.some(item =>
+        item.toLowerCase() === fruit.toLowerCase())) {
+
+        alert("This fruit already exists.");
+        return;
+    }
+
+    fruits.push(fruit);
+
+    input.value = "";
+
+    displayFruits();
+
+    document.getElementById("fruitOutput").textContent =
+        fruit + " added successfully!";
+}
+
+async function startFruitLoop() {
+
+    const output = document.getElementById("fruitOutput");
+
+    output.innerHTML = "";
+
+    for (const fruit of fruits) {
+
+        const line = document.createElement("div");
+
+        line.textContent = "Processing: " + fruit;
+
+        output.appendChild(line);
+
+        await new Promise(resolve =>
+            setTimeout(resolve, 700)
+        );
+
+    }
+
+    output.innerHTML +=
+        "<strong>All fruits processed!</strong>";
+}
+
+function resetFruitLoop() {
+
+    fruits = ["Apple", "Banana", "Cherry", "Mango", "Orange"];
+
+    displayFruits();
+
+    document.getElementById("fruitOutput").textContent =
+        "Fruit list has been reset.";
+}
+
+
+// ===============================
+// 3. FOREACH LOOP
+// ===============================
+
+function runForEach() {
+
+    const output = document.getElementById("eachOutput");
+
+    output.innerHTML = "";
+
+    fruits.forEach((fruit, index) => {
+
+        const line = document.createElement("div");
+
+        line.textContent =
+            `Index: ${index} | Fruit: ${fruit}`;
+
+        output.appendChild(line);
+
+    });
+
+}
+
+
+// ===============================
+// 4. WHILE LOOP
+// ===============================
+
+async function startWhileLoop() {
+
+    const input = document.getElementById("startNumber");
+
+    let number = Number(input.value);
+
+    if (!Number.isInteger(number) ||
+        number < 1 || number > 50) {
+
+        alert("Enter a whole number between 1 and 50.");
+        return;
+    }
+
+    const output = document.getElementById("whileOutput");
+
+    output.innerHTML = "";
+
+    while (number > 0) {
+
+        const line = document.createElement("div");
+
+        line.textContent = "Countdown: " + number;
+
+        output.appendChild(line);
+
+        number--;
+
+        await new Promise(resolve =>
+            setTimeout(resolve, 500)
+        );
+
+    }
+
+    output.innerHTML += "<strong>Countdown Finished!</strong>";
+
+}
+
+function resetWhile() {
+
+    document.getElementById("whileOutput").textContent =
+        "Countdown has not started.";
+
+    document.getElementById("startNumber").value = 5;
+}
+
+
+// ===============================
+// 5. LOOP EXPLANATION
+// ===============================
+
+function showExplanation() {
+
+    const type = document.getElementById("loopType").value;
+
+    const explanations = {
+
+        for:
+        "A for loop repeats code using initialization, condition and increment. Example: for(let i = 1; i <= 5; i++).",
+
+        forof:
+        "A for...of loop visits each value in an iterable such as an array. Example: for(const fruit of fruits).",
+
+        foreach:
+        "forEach() executes a callback function for every array element. It also provides the index when requested.",
+
+        while:
+        "A while loop repeats as long as its condition is true. Always update the condition to avoid an infinite loop."
+
+    };
+
+    document.getElementById("explanation").textContent =
+        explanations[type];
+
+}
+
+
+// ===============================
+// INITIAL DISPLAY
+// ===============================
+
+displayFruits();
+
+</script>
+
+</body>
+</html>
