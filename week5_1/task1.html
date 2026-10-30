@@ -1,30 +1,131 @@
+
 <!DOCTYPE html>
 <html lang="en">
-<head><meta charset="UTF-8"><title>Conditions</title></head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Grade Calculator</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #eef2f7;
+            text-align: center;
+            padding: 40px;
+        }
+
+        .container {
+            background: white;
+            max-width: 450px;
+            margin: auto;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px #0002;
+        }
+
+        input, button {
+            padding: 12px;
+            margin: 10px;
+            width: 80%;
+            font-size: 16px;
+        }
+
+        button {
+            background: #173b75;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-size: 18px;
+            line-height: 1.8;
+        }
+    </style>
+</head>
+
 <body>
-  <h2>Grade Checker</h2>
-  <label>Score (0-100): <input type="number" id="score" value="75" min="0" max="100"></label>
-  <button onclick="checkGrade()">Check Grade</button>
-  <h3>Grade: <span id="result">-</span></h3>
 
-  <script>
-    function checkGrade() {
-      let score = Number(document.getElementById('score').value);
-      let grade;
+<div class="container">
+    <h1>Grade Calculator</h1>
 
-      if (score >= 90) {
-        grade = 'A';
-      } else if (score >= 80) {
-        grade = 'B';
-      } else if (score >= 70) {
-        grade = 'C';
-      } else {
-        grade = 'F';
-      }
+    <p>Enter your examination score (0–100)</p>
 
-      console.log(grade);
-      document.getElementById('result').textContent = grade;
+    <input type="number" id="score" placeholder="Enter your marks"
+           min="0" max="100" step="0.01">
+
+    <br>
+
+    <button onclick="calculateGrade()">Calculate Grade</button>
+
+    <div id="result"></div>
+</div>
+
+<script>
+
+function calculateGrade() {
+
+    let scoreInput = document.getElementById("score").value;
+    let score = Number(scoreInput);
+
+    let grade;
+    let remarks;
+    let status;
+
+    // Input validation
+    if (scoreInput.trim() === "" || !Number.isFinite(score) ||
+        score < 0 || score > 100) {
+
+        document.getElementById("result").innerHTML =
+            "<span style='color:red'>Please enter a valid score between 0 and 100.</span>";
+
+        return;
     }
-  </script>
+
+    // Grade conditions
+    if (score >= 90) {
+        grade = "A";
+        remarks = "Excellent Performance!";
+        status = "Pass";
+    }
+
+    else if (score >= 80) {
+        grade = "B";
+        remarks = "Very Good Performance!";
+        status = "Pass";
+    }
+
+    else if (score >= 70) {
+        grade = "C";
+        remarks = "Good Performance!";
+        status = "Pass";
+    }
+
+    else if (score >= 60) {
+        grade = "D";
+        remarks = "Satisfactory Performance!";
+        status = "Pass";
+    }
+
+    else {
+        grade = "F";
+        remarks = "You need more improvement.";
+        status = "Fail";
+    }
+
+    // Display result
+    document.getElementById("result").innerHTML = `
+        <h2>Result</h2>
+        Score: ${score}<br>
+        Grade: <strong>${grade}</strong><br>
+        Status: ${status}<br>
+        Remarks: ${remarks}
+    `;
+}
+
+</script>
+
 </body>
 </html>
