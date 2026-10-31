@@ -1,0 +1,492 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Blog Explorer | JSONPlaceholder API</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f3f5fb;
+    color: #26334d;
+    padding: 30px 15px;
+}
+
+.container {
+    max-width: 1000px;
+    margin: auto;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+header h1 {
+    color: #244b91;
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+
+header p {
+    color: #7b879b;
+    font-size: 14px;
+}
+
+.controls {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 25px;
+}
+
+input {
+    flex: 1;
+    padding: 13px;
+    border: 1px solid #dce2ef;
+    border-radius: 8px;
+    font-size: 14px;
+    outline: none;
+}
+
+input:focus {
+    border-color: #4778d6;
+}
+
+button {
+    border: none;
+    border-radius: 8px;
+    padding: 12px 18px;
+    background: #3867c8;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+button:hover {
+    background: #244b91;
+    transform: translateY(-2px);
+}
+
+.stats {
+    background: white;
+    padding: 17px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    color: #64748b;
+    font-size: 14px;
+}
+
+#posts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 18px;
+}
+
+.post-card {
+    background: white;
+    padding: 22px;
+    border-radius: 12px;
+    border: 1px solid #e7eaf1;
+    box-shadow: 0 4px 12px #00000008;
+    transition: 0.2s;
+}
+
+.post-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px #00000012;
+}
+
+.post-card h3 {
+    color: #244b91;
+    font-size: 17px;
+    line-height: 1.5;
+    margin: 12px 0;
+    text-transform: capitalize;
+}
+
+.post-card p {
+    color: #69768c;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.post-id {
+    display: inline-block;
+    background: #eaf0ff;
+    color: #3867c8;
+    padding: 5px 9px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.read-btn {
+    margin-top: 15px;
+    padding: 9px 13px;
+    font-size: 12px;
+}
+
+#message {
+    text-align: center;
+    padding: 25px;
+    color: #7b879b;
+    grid-column: 1 / -1;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.pagination button:disabled {
+    background: #aab5c8;
+    cursor: not-allowed;
+    transform: none;
+}
+
+#pageNumber {
+    font-weight: bold;
+    color: #3867c8;
+}
+
+footer {
+    text-align: center;
+    margin-top: 35px;
+    color: #9aa4b5;
+    font-size: 12px;
+}
+
+@media(max-width: 500px) {
+    .controls {
+        flex-direction: column;
+    }
+
+    header h1 {
+        font-size: 24px;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <header>
+        <h1>📚 Blog Explorer</h1>
+        <p>Discover blog posts using JSONPlaceholder API</p>
+    </header>
+
+    <!-- Search Section -->
+
+    <div class="controls">
+
+        <input
+            type="text"
+            id="search"
+            placeholder="Search blog posts..."
+        >
+
+        <button onclick="searchPosts()">Search</button>
+
+        <button onclick="loadPosts()">Refresh</button>
+
+    </div>
+
+    <!-- Statistics -->
+
+    <div class="stats" id="stats">
+        Loading blog information...
+    </div>
+
+    <!-- Blog Posts -->
+
+    <div id="posts">
+        <div id="message">Please wait, loading posts...</div>
+    </div>
+
+    <!-- Pagination -->
+
+    <div class="pagination">
+
+        <button id="prevBtn" onclick="changePage(-1)">
+            Previous
+        </button>
+
+        <span id="pageNumber">Page 1</span>
+
+        <button id="nextBtn" onclick="changePage(1)">
+            Next
+        </button>
+
+    </div>
+
+    <footer>
+        Powered by JSONPlaceholder API | JavaScript Fetch Practice
+    </footer>
+
+</div>
+
+
+<script>
+
+// ===================================
+// 1. VARIABLES
+// ===================================
+
+const API_URL = "https://jsonplaceholder.typicode.com/posts";
+
+let allPosts = [];
+
+let filteredPosts = [];
+
+let currentPage = 1;
+
+const postsPerPage = 6;
+
+
+// ===================================
+// 2. FETCH API DATA
+// ===================================
+
+async function loadPosts() {
+
+    const container = document.getElementById("posts");
+
+    container.innerHTML =
+        '<div id="message">⏳ Loading posts...</div>';
+
+    try {
+
+        const response = await fetch(API_URL);
+
+        if (!response.ok) {
+            throw new Error("Failed to fetch posts.");
+        }
+
+        allPosts = await response.json();
+
+        filteredPosts = allPosts;
+
+        currentPage = 1;
+
+        displayPosts();
+
+        updateStats();
+
+    }
+
+    catch (error) {
+
+        container.innerHTML =
+            `<div id="message">⚠ ${error.message}</div>`;
+
+    }
+
+}
+
+
+// ===================================
+// 3. DISPLAY BLOG POSTS
+// ===================================
+
+function displayPosts() {
+
+    const container = document.getElementById("posts");
+
+    container.innerHTML = "";
+
+    const start = (currentPage - 1) * postsPerPage;
+
+    const end = start + postsPerPage;
+
+    const currentPosts = filteredPosts.slice(start, end);
+
+    if (currentPosts.length === 0) {
+
+        container.innerHTML =
+            '<div id="message">No posts found.</div>';
+
+        updatePagination();
+
+        return;
+    }
+
+    currentPosts.forEach(post => {
+
+        const card = document.createElement("div");
+
+        card.className = "post-card";
+
+        const id = document.createElement("span");
+
+        id.className = "post-id";
+
+        id.textContent = "POST #" + post.id;
+
+        const title = document.createElement("h3");
+
+        title.textContent = post.title;
+
+        const body = document.createElement("p");
+
+        body.textContent = post.body;
+
+        const button = document.createElement("button");
+
+        button.className = "read-btn";
+
+        button.textContent = "Read More";
+
+        button.addEventListener("click", () => {
+            showDetails(post);
+        });
+
+        card.append(id, title, body, button);
+
+        container.appendChild(card);
+
+    });
+
+    updatePagination();
+
+}
+
+
+// ===================================
+// 4. SEARCH POSTS
+// ===================================
+
+function searchPosts() {
+
+    const keyword = document
+        .getElementById("search")
+        .value.toLowerCase()
+        .trim();
+
+    filteredPosts = allPosts.filter(post => {
+
+        return post.title.toLowerCase().includes(keyword) ||
+               post.body.toLowerCase().includes(keyword);
+
+    });
+
+    currentPage = 1;
+
+    displayPosts();
+
+    updateStats();
+
+}
+
+
+// ===================================
+// 5. SHOW POST DETAILS
+// ===================================
+
+function showDetails(post) {
+
+    alert(
+        "POST DETAILS\n\n" +
+        "Post ID: " + post.id +
+        "\nUser ID: " + post.userId +
+        "\n\nTitle: " + post.title +
+        "\n\nContent: " + post.body
+    );
+
+}
+
+
+// ===================================
+// 6. UPDATE STATISTICS
+// ===================================
+
+function updateStats() {
+
+    document.getElementById("stats").textContent =
+        "Total Posts: " + allPosts.length +
+        " | Search Results: " + filteredPosts.length;
+
+}
+
+
+// ===================================
+// 7. PAGINATION
+// ===================================
+
+function changePage(direction) {
+
+    const totalPages = Math.ceil(
+        filteredPosts.length / postsPerPage
+    );
+
+    currentPage += direction;
+
+    if (currentPage < 1) currentPage = 1;
+
+    if (currentPage > totalPages) {
+        currentPage = totalPages;
+    }
+
+    displayPosts();
+
+}
+
+
+function updatePagination() {
+
+    const totalPages = Math.ceil(
+        filteredPosts.length / postsPerPage
+    );
+
+    document.getElementById("pageNumber").textContent =
+        "Page " + currentPage + " of " + totalPages;
+
+    document.getElementById("prevBtn").disabled =
+        currentPage <= 1;
+
+    document.getElementById("nextBtn").disabled =
+        currentPage >= totalPages || totalPages === 0;
+
+}
+
+
+// ===================================
+// 8. SEARCH ON ENTER KEY
+// ===================================
+
+document.getElementById("search")
+    .addEventListener("keydown", function(event) {
+
+        if (event.key === "Enter") {
+            searchPosts();
+        }
+
+    });
+
+
+// ===================================
+// 9. START APPLICATION
+// ===================================
+
+loadPosts();
+
+</script>
+
+</body>
+</html>
