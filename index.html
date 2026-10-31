@@ -1,280 +1,554 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Web Programming | Weekly Tasks</title>
-
+  <meta name="description" content="Bishal's Web Programming portfolio — weekly HTML, CSS and JavaScript assignments and projects.">
+  <meta name="theme-color" content="#102b4e">
+  <title>Web Programming Portfolio | Bishal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
   <style>
-    * {
-      box-sizing: border-box;
+    :root {
+      --navy: #102b4e;
+      --navy-2: #183d68;
+      --blue: #2864a5;
+      --blue-soft: #edf4fc;
+      --ink: #17283d;
+      --muted: #65758a;
+      --line: #e3eaf2;
+      --surface: #ffffff;
+      --background: #f6f8fb;
+      --shadow: 0 12px 34px rgba(20, 48, 79, .07);
+      --radius: 18px;
     }
-
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f4f7fb;
-      color: #172033;
+      color: var(--ink);
+      background: var(--background);
+      font-family: "DM Sans", sans-serif;
+      line-height: 1.6;
     }
-
-    header {
-      background: #173b75;
-      color: white;
-      text-align: center;
-      padding: 48px 20px;
+    a { color: inherit; }
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(255,255,255,.94);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(14px);
     }
-
-    header h1 {
-      margin: 0 0 10px;
-      font-size: 38px;
+    .nav-wrap {
+      max-width: 1160px;
+      min-height: 72px;
+      margin: auto;
+      padding: 0 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
     }
-
-    header p {
-      margin: 0;
-      color: #dbeafe;
-    }
-
-    main {
-      max-width: 950px;
-      margin: 35px auto;
-      padding: 0 18px;
-    }
-
-    .intro {
-      text-align: center;
-      margin-bottom: 30px;
-    }
-
-    .week {
-      background: white;
-      border: 1px solid #e1e8f0;
-      border-radius: 14px;
-      padding: 22px;
-      margin: 18px 0;
-      box-shadow: 0 4px 14px #1e293b08;
-    }
-
-    .week h2 {
-      margin-top: 0;
-      color: #173b75;
-    }
-
-    .tasks {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(145px, 1fr));
-      gap: 12px;
-    }
-
-    .task {
-      display: block;
-      padding: 15px;
-      border-radius: 9px;
-      background: #edf4ff;
-      color: #173b75;
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+      color: var(--navy);
+      font: 800 17px "Manrope", sans-serif;
       text-decoration: none;
-      font-weight: bold;
-      border: 1px solid #d7e6ff;
-      text-align: center;
-      transition: 0.2s;
+      letter-spacing: -.4px;
     }
-
-    .task:hover {
-      background: #dceaff;
-      transform: translateY(-2px);
-    }
-
-    /* CONTACT FORM */
-    .contact {
-      background: white;
-      border: 1px solid #e1e8f0;
-      border-radius: 14px;
-      padding: 28px;
-      margin: 30px 0;
-      box-shadow: 0 4px 14px #1e293b08;
-    }
-
-    .contact h2 {
-      text-align: center;
-      color: #173b75;
-      margin-top: 0;
-    }
-
-    .contact-description {
-      text-align: center;
-      color: #64748b;
-      margin-bottom: 25px;
-    }
-
-    .form-group {
-      margin-bottom: 18px;
-    }
-
-    .contact label {
-      display: block;
-      font-weight: bold;
-      margin-bottom: 7px;
-    }
-
-    .contact input,
-    .contact textarea {
-      display: block;
-      width: 100%;
-      padding: 12px;
-      font-family: Arial, sans-serif;
-      font-size: 15px;
-      border: 2px solid #cbd5e1;
-      border-radius: 7px;
-      background: white;
-      color: #172033;
-      transition: border-color 0.2s;
-    }
-
-    .contact textarea {
-      min-height: 140px;
-      resize: vertical;
-    }
-
-    /* HTML5 validation styles */
-    .contact input:invalid:not(:placeholder-shown),
-    .contact textarea:invalid:not(:placeholder-shown) {
-      border-color: #dc2626;
-      background-color: #fff7f7;
-    }
-
-    .contact input:valid:not(:placeholder-shown),
-    .contact textarea:valid:not(:placeholder-shown) {
-      border-color: #16a34a;
-      background-color: #f0fdf4;
-    }
-
-    .contact input:focus,
-    .contact textarea:focus {
-      outline: 2px solid #93c5fd;
-      outline-offset: 1px;
-    }
-
-    .send-button {
-      width: 100%;
-      padding: 13px;
-      background: #173b75;
+    .brand-mark {
+      width: 36px;
+      height: 36px;
+      display: grid;
+      place-items: center;
+      border-radius: 11px;
       color: white;
-      border: none;
-      border-radius: 7px;
-      font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: 0.2s;
+      background: var(--navy);
+      font-size: 15px;
     }
-
-    .send-button:hover {
-      background: #2454a0;
+    .nav-links { display: flex; align-items: center; gap: 28px; }
+    .nav-links a {
+      color: #53657a;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      transition: color .2s ease;
     }
-
-    footer {
+    .nav-links a:hover { color: var(--blue); }
+    .nav-links .repo-link {
+      padding: 9px 15px;
+      color: white;
+      background: var(--navy);
+      border-radius: 9px;
+    }
+    .nav-links .repo-link:hover { color: white; background: var(--navy-2); }
+    .hero {
+      position: relative;
+      overflow: hidden;
+      color: white;
+      background: linear-gradient(115deg, #102b4e 0%, #173e6b 58%, #24588b 100%);
+    }
+    .hero::before, .hero::after {
+      content: "";
+      position: absolute;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .hero::before { width: 520px; height: 520px; right: -130px; top: -300px; }
+    .hero::after { width: 380px; height: 380px; right: 60px; top: -225px; }
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 1160px;
+      margin: auto;
+      padding: 82px 28px 76px;
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      margin-bottom: 20px;
+      color: #c6dcf3;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+    .eyebrow::before {
+      content: "";
+      width: 24px;
+      height: 2px;
+      background: #91c5f4;
+    }
+    h1, h2, h3 { font-family: "Manrope", sans-serif; }
+    .hero h1 {
+      max-width: 720px;
+      margin: 0;
+      font-size: clamp(38px, 5.5vw, 62px);
+      line-height: 1.12;
+      letter-spacing: -2.2px;
+      font-weight: 800;
+    }
+    .hero-copy {
+      max-width: 590px;
+      margin: 22px 0 0;
+      color: #d4e2f1;
+      font-size: 17px;
+      line-height: 1.8;
+    }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 0 18px;
+      border: 1px solid transparent;
+      border-radius: 9px;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 700;
+      transition: transform .2s ease, background .2s ease;
+    }
+    .button:hover { transform: translateY(-2px); }
+    .button-light { color: var(--navy); background: white; }
+    .button-outline { color: white; border-color: rgba(255,255,255,.35); background: transparent; }
+    .page-main { max-width: 1160px; margin: auto; padding: 54px 28px 76px; }
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: -88px;
+      position: relative;
+      z-index: 3;
+    }
+    .stat {
+      min-height: 104px;
+      padding: 22px 24px;
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      box-shadow: var(--shadow);
+    }
+    .stat strong {
+      display: block;
+      color: var(--navy);
+      font: 800 27px "Manrope", sans-serif;
+      letter-spacing: -.8px;
+    }
+    .stat span { color: var(--muted); font-size: 13px; font-weight: 600; }
+    .section-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 24px;
+      margin: 64px 0 22px;
+    }
+    .section-kicker {
+      margin: 0 0 7px;
+      color: var(--blue);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+    }
+    .section-heading h2 {
+      margin: 0;
+      color: var(--navy);
+      font-size: clamp(25px, 3vw, 32px);
+      letter-spacing: -.8px;
+    }
+    .section-heading p { margin: 7px 0 0; color: var(--muted); font-size: 14px; }
+    .search-wrap { width: min(100%, 310px); position: relative; }
+    .search-wrap input {
+      width: 100%;
+      height: 46px;
+      padding: 0 15px 0 42px;
+      color: var(--ink);
+      background: white;
+      border: 1px solid #dce5ef;
+      border-radius: 10px;
+      outline: none;
+      font: 500 14px "DM Sans", sans-serif;
+    }
+    .search-wrap input:focus { border-color: #7ba7d3; box-shadow: 0 0 0 3px rgba(40,100,165,.1); }
+    .search-icon { position: absolute; left: 15px; top: 11px; color: #7b8ba0; font-size: 17px; }
+    .weeks-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+    .week-card {
+      min-width: 0;
+      padding: 23px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: 0 4px 16px rgba(20,48,79,.035);
+      transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease;
+    }
+    .week-card:hover { border-color: #c6d8eb; box-shadow: var(--shadow); transform: translateY(-2px); }
+    .week-top { display: flex; align-items: center; justify-content: space-between; gap: 14px; margin-bottom: 17px; }
+    .week-title { display: flex; align-items: center; gap: 12px; }
+    .week-number {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      flex: 0 0 auto;
+      color: var(--blue);
+      background: var(--blue-soft);
+      border-radius: 12px;
+      font: 800 14px "Manrope", sans-serif;
+    }
+    .week-title h3 { margin: 0; color: var(--navy); font-size: 17px; letter-spacing: -.3px; }
+    .week-count { color: #8190a2; font-size: 12px; font-weight: 600; white-space: nowrap; }
+    .assignment-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px; }
+    .assignment {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      min-height: 43px;
+      padding: 9px 11px;
+      color: #42556c;
+      background: #f8fafc;
+      border: 1px solid #edf1f6;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 1.35;
+      transition: background .2s ease, color .2s ease, border-color .2s ease;
+    }
+    .assignment::after { content: "↗"; color: #8a9aaf; font-size: 14px; flex: 0 0 auto; }
+    .assignment:hover { color: var(--blue); background: var(--blue-soft); border-color: #d9e7f5; }
+    .assignment:hover::after { color: var(--blue); }
+    .empty-state {
+      display: none;
+      padding: 35px;
       text-align: center;
-      padding: 25px;
-      background: #e8eef7;
-      color: #64748b;
-      margin-top: 40px;
+      color: var(--muted);
+      background: white;
+      border: 1px dashed #cbd7e4;
+      border-radius: 14px;
     }
-
-    @media (max-width: 500px) {
-      header h1 {
-        font-size: 30px;
-      }
-
-      .contact {
-        padding: 20px;
-      }
+    .about-panel {
+      display: grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 30px;
+      margin-top: 64px;
+      padding: 32px;
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+    }
+    .about-panel h2 { margin: 0 0 10px; color: var(--navy); font-size: 24px; letter-spacing: -.6px; }
+    .about-panel p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.8; }
+    .skills { display: flex; align-content: center; align-items: center; justify-content: flex-end; flex-wrap: wrap; gap: 9px; }
+    .skill {
+      padding: 8px 12px;
+      color: #315d89;
+      background: #edf4fc;
+      border: 1px solid #dce9f6;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+    footer { color: #7b899a; background: white; border-top: 1px solid var(--line); }
+    .footer-inner {
+      max-width: 1160px;
+      margin: auto;
+      padding: 23px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      font-size: 12px;
+    }
+    .footer-inner a { color: var(--blue); text-decoration: none; font-weight: 700; }
+    @media (max-width: 760px) {
+      .nav-wrap { min-height: 64px; padding: 0 20px; }
+      .nav-links { gap: 15px; }
+      .nav-links a { font-size: 12px; }
+      .hero-inner { padding: 65px 22px 100px; }
+      .page-main { padding: 35px 20px 55px; }
+      .weeks-grid { grid-template-columns: 1fr; }
+      .about-panel { grid-template-columns: 1fr; }
+      .skills { justify-content: flex-start; }
+    }
+    @media (max-width: 520px) {
+      .brand { font-size: 14px; }
+      .brand-mark { width: 32px; height: 32px; }
+      .nav-links { gap: 12px; }
+      .nav-links a:not(.repo-link) { display: none; }
+      .nav-links .repo-link { padding: 8px 10px; }
+      .hero h1 { letter-spacing: -1.3px; }
+      .hero-copy { font-size: 15px; }
+      .stats { gap: 8px; }
+      .stat { min-height: 88px; padding: 15px 12px; }
+      .stat strong { font-size: 22px; }
+      .stat span { font-size: 11px; }
+      .section-heading { align-items: stretch; flex-direction: column; margin-top: 48px; }
+      .search-wrap { width: 100%; }
+      .week-card { padding: 18px; }
+      .assignment-list { grid-template-columns: 1fr; }
+      .about-panel { padding: 23px; }
+      .footer-inner { align-items: flex-start; flex-direction: column; padding: 20px; }
     }
   </style>
 </head>
-
 <body>
-
-  <header>
-    <h1>Web Programming</h1>
-    <p>My Weekly Assignments</p>
+  <header class="site-header">
+    <div class="nav-wrap">
+      <a class="brand" href="#top" aria-label="Web Programming Portfolio home">
+        <span class="brand-mark">W</span>
+        <span>Web Programming</span>
+      </a>
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="#assignments">Assignments</a>
+        <a href="#about">About</a>
+        <a class="repo-link" href="https://github.com/vishal01-max/louis0" target="_blank" rel="noopener noreferrer">GitHub Repository ↗</a>
+      </nav>
+    </div>
   </header>
 
-  <main>
-    <div class="intro">
-      <h2>My Tasks</h2>
-      <p>Select a task from each week.</p>
+  <section class="hero" id="top">
+    <div class="hero-inner">
+      <div class="eyebrow">Learning · Building · Improving</div>
+      <h1>Web Programming<br>Portfolio</h1>
+      <p class="hero-copy">A collection of weekly assignments, exercises and practical projects created while learning the fundamentals of web development.</p>
+      <div class="hero-actions">
+        <a class="button button-light" href="#assignments">Explore assignments ↓</a>
+        <a class="button button-outline" href="https://github.com/vishal01-max/louis0" target="_blank" rel="noopener noreferrer">View source repository ↗</a>
+      </div>
     </div>
+  </section>
 
-    <!-- WEEK 1 -->
-    <section class="week">
-      <h2>Week 1</h2>
-      <div class="tasks">
-        <a class="task" href="https://vishal01-max.github.io/louis0/Week%202_1/task1.html">Task 1</a>
-        <a class="task" href="https://vishal01-max.github.io/louis0/Week%202_1/task2.html">Task 2</a>
-        <a class="task" href="https://vishal01-max.github.io/louis0/Week%202_1/task3.html">Task 3</a>
-        <a class="task" href="https://vishal01-max.github.io/louis0/Week%202_1/task4.html">Task 4</a>
-        <a class="task" href="https://vishal01-max.github.io/louis0/Week%202_1/task5.html">Task 5</a>
-        <a class="task" href="https://vishal01-max.github.io/louis0/Week%202_1/task6.html">Task 6</a>
-        <a class="task" href="https://vishal01-max.github.io/louis0/Week%202_1/task7.html">Task 7</a>
-        <a class="task" href="https://vishal01-max.github.io/louis0/Week%202_1/task8.html">Task 8</a>
-      </div>
+  <main class="page-main">
+    <section class="stats" aria-label="Portfolio overview">
+      <div class="stat"><strong>08</strong><span>Learning weeks</span></div>
+      <div class="stat"><strong>55</strong><span>Available exercises</span></div>
+      <div class="stat"><strong>03</strong><span>Core technologies</span></div>
     </section>
 
-    <!-- WEEK 2 -->
-    <section class="week">
-      <h2>Week 2</h2>
-      <div class="tasks">
-        <a class="task" href="https://github.com/vishal01-max/louis0/blob/main/Week%202_1/task1.html">Task 1</a>
-        <a class="task" href="https://vishal01-max.github.io/louis0/Week2_2/task2.html">Task 2</a>
-        <a class="task" href="https://vishal01-max.github.io/louis0/Week2_2/task3.html">Task 3</a>
-        <a class="task" href="https://vishal01-max.github.io/louis0/Week2_2/task4.html">Task 4</a>
-        <a class="task" href="https://vishal01-max.github.io/louis0/Week2_2/task5.html">Task 5</a>
-        <a class="task" href="https://vishal01-max.github.io/louis0/Week2_2/task6.html">Task 6</a>
-        <a class="task" href="https://vishal01-max.github.io/louis0/Week2_2/task7.html">Task 7</a>
-        <a class="task" href="https://vishal01-max.github.io/louis0/Week2_2/task8.html">Task 8</a>
+    <section id="assignments">
+      <div class="section-heading">
+        <div>
+          <p class="section-kicker">Coursework collection</p>
+          <h2>Weekly assignments</h2>
+          <p>Choose an exercise to open its published webpage.</p>
+        </div>
+        <label class="search-wrap">
+          <span class="search-icon" aria-hidden="true">⌕</span>
+          <input id="assignmentSearch" type="search" placeholder="Search assignments..." aria-label="Search assignments">
+        </label>
       </div>
+
+      <div class="weeks-grid" id="weeksGrid">
+        <section class="week-card" data-week="week 1">
+          <div class="week-top"><div class="week-title"><span class="week-number">01</span><h3>Week 1</h3></div><span class="week-count">8 exercises</span></div>
+          <div class="assignment-list">
+            <a class="assignment" href="Week%202_1/task1.html">My First Page</a>
+            <a class="assignment" href="Week%202_1/task2.html">My Favourite Sport</a>
+            <a class="assignment" href="Week%202_1/task3.html">Navigation Bar</a>
+            <a class="assignment" href="Week%202_1/task4.html">University Students</a>
+            <a class="assignment" href="Week%202_1/task5.html">My Profile</a>
+            <a class="assignment" href="Week%202_1/task6.html">Fixing HTML Bugs</a>
+            <a class="assignment" href="Week%202_1/task7.html">Mo:Mo Recipe</a>
+            <a class="assignment" href="Week%202_1/task8.html">My Favourites</a>
+          </div>
+        </section>
+
+        <section class="week-card" data-week="week 2">
+          <div class="week-top"><div class="week-title"><span class="week-number">02</span><h3>Week 2</h3></div><span class="week-count">7 exercises</span></div>
+          <div class="assignment-list">
+            <a class="assignment" href="Week2_2/task2.html">Blog Post</a>
+            <a class="assignment" href="Week2_2/task3.html">Figures & Images</a>
+            <a class="assignment" href="Week2_2/task4.html">Web Programming FAQ</a>
+            <a class="assignment" href="Week2_2/task5.html">Personal Portfolio</a>
+            <a class="assignment" href="Week2_2/task6.html">Semantic HTML Blog</a>
+            <a class="assignment" href="Week2_2/task7.html">Inspirational Quotes</a>
+            <a class="assignment" href="Week2_2/task8.html">AI Technology Article</a>
+          </div>
+        </section>
+
+        <section class="week-card" data-week="week 3">
+          <div class="week-top"><div class="week-title"><span class="week-number">03</span><h3>Week 3</h3></div><span class="week-count">8 exercises</span></div>
+          <div class="assignment-list">
+            <a class="assignment" href="Week3/task1.html">Styled Heading & Paragraph</a>
+            <a class="assignment" href="Week3/task2.html">CSS Methods</a>
+            <a class="assignment" href="Week3/task3.html">Colour Swatches</a>
+            <a class="assignment" href="Week3/task4.html">Box Model Visualization</a>
+            <a class="assignment" href="Week3/task5.html">Fix the CSS</a>
+            <a class="assignment" href="Week3/task6.html">Navigation Bar</a>
+            <a class="assignment" href="Week3/task7.html">Profile Card</a>
+            <a class="assignment" href="Week3/task8.html">About Me</a>
+          </div>
+        </section>
+
+        <section class="week-card" data-week="week 4">
+          <div class="week-top"><div class="week-title"><span class="week-number">04</span><h3>Week 4</h3></div><span class="week-count">8 exercises</span></div>
+          <div class="assignment-list">
+            <a class="assignment" href="Week4/E1.html">Sale Card</a>
+            <a class="assignment" href="Week4/E2.html">Hover Card</a>
+            <a class="assignment" href="Week4/E3.html">Loading Animation</a>
+            <a class="assignment" href="Week4/E4.html">CSS Variables</a>
+            <a class="assignment" href="Week4/E5.html">Fixed Navigation</a>
+            <a class="assignment" href="Week4/E6.html">Grid Cards</a>
+            <a class="assignment" href="Week4/E7.html">Portfolio Page</a>
+            <a class="assignment" href="Week4_1/task1.html">Interactive Colour Palette</a>
+          </div>
+        </section>
+
+        <section class="week-card" data-week="week 5">
+          <div class="week-top"><div class="week-title"><span class="week-number">05</span><h3>Week 5</h3></div><span class="week-count">7 exercises</span></div>
+          <div class="assignment-list">
+            <a class="assignment" href="week5/task1.html">Click Counter</a>
+            <a class="assignment" href="week5/task2.html">Profile Card</a>
+            <a class="assignment" href="week5/task3.html">To-Do List</a>
+            <a class="assignment" href="week5/task4.html">Student Search</a>
+            <a class="assignment" href="week5_1/task1.html">Grade Calculator</a>
+            <a class="assignment" href="week5_1/task2.html">Counter App</a>
+            <a class="assignment" href="week5_1/task3.html">JavaScript Loops</a>
+          </div>
+        </section>
+
+        <section class="week-card" data-week="week 6">
+          <div class="week-top"><div class="week-title"><span class="week-number">06</span><h3>Week 6</h3></div><span class="week-count">6 exercises</span></div>
+          <div class="assignment-list">
+            <a class="assignment" href="week6/task1.html">Random Joke Generator</a>
+            <a class="assignment" href="week6/task2.html">Blog Explorer</a>
+            <a class="assignment" href="week6/task3.html">Weather Dashboard</a>
+            <a class="assignment" href="week6/task4.html">Random User API</a>
+            <a class="assignment" href="week6/task5.html">Pokémon Information</a>
+            <a class="assignment" href="week6/task6.html">World Countries Explorer</a>
+          </div>
+        </section>
+
+        <section class="week-card" data-week="week 7">
+          <div class="week-top"><div class="week-title"><span class="week-number">07</span><h3>Week 7</h3></div><span class="week-count">1 exercise</span></div>
+          <div class="assignment-list">
+            <a class="assignment" href="week7/task1.html">Book Search Application</a>
+          </div>
+        </section>
+
+        <section class="week-card" data-week="week 8">
+          <div class="week-top"><div class="week-title"><span class="week-number">08</span><h3>Week 8</h3></div><span class="week-count">10 exercises</span></div>
+          <div class="assignment-list">
+            <a class="assignment" href="week8_1/task1.html">Contact Page</a>
+            <a class="assignment" href="week8_1/task2.html">Student Registration Form</a>
+            <a class="assignment" href="week8_2/forms%20significance.html">Introduction to HTML Forms</a>
+            <a class="assignment" href="week8_2/task6.html">The Form Element</a>
+            <a class="assignment" href="week8_2/task4.html">HTML5 Input Types</a>
+            <a class="assignment" href="week8_2/task7.html">HTML5 Form Validation</a>
+            <a class="assignment" href="week8_2/task2.html">Grouping Form Fields</a>
+            <a class="assignment" href="week8_2/task5.html">Labels & Accessibility</a>
+            <a class="assignment" href="week8_2/task1.html">CSS Form Validation</a>
+            <a class="assignment" href="week8_2/task3.html">Aether Academy Registration</a>
+          </div>
+        </section>
+      </div>
+      <div class="empty-state" id="emptyState">No assignments match your search. Try another keyword.</div>
     </section>
 
-    <!-- WEEK 3 -->
-    <section class="week">
-      <h2>Week 3</h2>
-      <div class="tasks">
-        <a class="task" href="https://vishal01-max.github.io/louis0/Week3/task1.html">Task 1</a>
-        <a class="task" href="https://vishal01-max.github.io/louis0/Week3/task2.html">Task 2</a>
-        <a class="task" href="https://vishal01-max.github.io/louis0/Week3/task3.html">Task 3</a>
-        <a class="task" href="https://vishal01-max.github.io/louis0/Week3/task4.html">Task 4</a>
-        <a class="task" href="https://vishal01-max.github.io/louis0/Week3/task5.html">Task 5</a>
-        <a class="task" href="https://vishal01-max.github.io/louis0/Week3/task6.html">Task 6</a>
-        <a class="task" href="https://vishal01-max.github.io/louis0/Week3/task7.html">Task 7</a>
-        <a class="task" href="https://vishal01-max.github.io/louis0/Week3/task8.html">Task 8</a>
+    <section class="about-panel" id="about">
+      <div>
+        <p class="section-kicker">About this portfolio</p>
+        <h2>Learning by building</h2>
+        <p>This portfolio brings together practical coursework from the Web Programming course. It follows the learning journey from HTML structure and CSS styling to JavaScript interactions, APIs and accessible forms. Select any assignment above to view its published page.</p>
+      </div>
+      <div class="skills" aria-label="Technologies covered">
+        <span class="skill">HTML</span>
+        <span class="skill">CSS</span>
+        <span class="skill">JavaScript</span>
+        <span class="skill">APIs</span>
+        <span class="skill">Accessibility</span>
       </div>
     </section>
-
-    <!-- WEEK 4 -->
-    <section class="week">
-      <h2>Week 4</h2>
-      <div class="tasks">
-        <a class="task" href="https://vishal01-max.github.io/louis0/Week4/E1.html">Task 1</a>
-        <a class="task" href="https://vishal01-max.github.io/louis0/Week4/E2.html">Task 2</a>
-        <a class="task" href="https://vishal01-max.github.io/louis0/Week4/E3.html">Task 3</a>
-        <a class="task" href="https://vishal01-max.github.io/louis0/Week4/E4.html">Task 4</a>
-        <a class="task" href="https://vishal01-max.github.io/louis0/Week4/E5.html">Task 5</a>
-        <a class="task" href="https://vishal01-max.github.io/louis0/Week4/E6.html">Task 6</a>
-        <a class="task" href="https://vishal01-max.github.io/louis0/Week4/E7.html">Task 7</a>
-      </div>
-    </section>
-
-   <!-- WEEK 7 -->
-<section class="week">
-  <h2>Week 7</h2>
-  <div class="tasks">
-    <a class="task" href="https://vishal01-max.github.io/louis0/Week7/task1.html"></a>
-  </div>
-</section>
   </main>
 
   <footer>
-    Web Programming · Weekly Assignments
+    <div class="footer-inner">
+      <span>Web Programming Portfolio · Weekly Coursework</span>
+      <a href="https://github.com/vishal01-max/louis0" target="_blank" rel="noopener noreferrer">View repository on GitHub ↗</a>
+    </div>
   </footer>
 
+  <script>
+    const searchInput = document.getElementById("assignmentSearch");
+    const weekCards = Array.from(document.querySelectorAll(".week-card"));
+    const emptyState = document.getElementById("emptyState");
+
+    searchInput.addEventListener("input", () => {
+      const query = searchInput.value.trim().toLowerCase();
+      let visibleWeeks = 0;
+
+      weekCards.forEach(card => {
+        const links = Array.from(card.querySelectorAll(".assignment"));
+        let visibleAssignments = 0;
+
+        links.forEach(link => {
+          const matches = link.textContent.toLowerCase().includes(query);
+          link.hidden = !matches;
+          if (matches) visibleAssignments++;
+        });
+
+        const showCard = visibleAssignments > 0 || !query;
+        card.hidden = !showCard;
+        if (showCard) visibleWeeks++;
+
+        const count = card.querySelector(".week-count");
+        if (count) {
+          count.textContent = query
+            ? visibleAssignments + (visibleAssignments === 1 ? " match" : " matches")
+            : links.length + (links.length === 1 ? " exercise" : " exercises");
+        }
+      });
+
+      emptyState.style.display = visibleWeeks === 0 ? "block" : "none";
+    });
+  </script>
 </body>
 </html>
