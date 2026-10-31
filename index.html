@@ -16,7 +16,7 @@
       --blue: #2864a5;
       --blue-soft: #edf4fc;
       --ink: #17283d;
-      --muted: #65758a;
+      --muted: #526276;
       --line: #e3eaf2;
       --surface: #ffffff;
       --background: #f6f8fb;
@@ -25,6 +25,30 @@
     }
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
+    .skip-link {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      z-index: 100;
+      padding: 10px 14px;
+      color: #ffffff;
+      background: #102b4e;
+      border-radius: 8px;
+      transform: translateY(-150%);
+    }
+    .skip-link:focus { transform: translateY(0); }
+    a:focus-visible, input:focus-visible {
+      outline: 3px solid #145da0;
+      outline-offset: 3px;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
     body {
       margin: 0;
       color: var(--ink);
@@ -72,7 +96,7 @@
     }
     .nav-links { display: flex; align-items: center; gap: 28px; }
     .nav-links a {
-      color: #53657a;
+      color: #4c5d72;
       text-decoration: none;
       font-size: 14px;
       font-weight: 600;
@@ -217,7 +241,7 @@
       font: 500 14px "DM Sans", sans-serif;
     }
     .search-wrap input:focus { border-color: #7ba7d3; box-shadow: 0 0 0 3px rgba(40,100,165,.1); }
-    .search-icon { position: absolute; left: 15px; top: 11px; color: #7b8ba0; font-size: 17px; }
+    .search-icon { position: absolute; left: 15px; top: 11px; color: #596b80; font-size: 17px; }
     .weeks-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
     .week-card {
       min-width: 0;
@@ -243,7 +267,7 @@
       font: 800 14px "Manrope", sans-serif;
     }
     .week-title h3 { margin: 0; color: var(--navy); font-size: 17px; letter-spacing: -.3px; }
-    .week-count { color: #8190a2; font-size: 12px; font-weight: 600; white-space: nowrap; }
+    .week-count { color: #596b80; font-size: 12px; font-weight: 600; white-space: nowrap; }
     .assignment-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px; }
     .assignment {
       display: flex;
@@ -262,7 +286,7 @@
       line-height: 1.35;
       transition: background .2s ease, color .2s ease, border-color .2s ease;
     }
-    .assignment::after { content: "↗"; color: #8a9aaf; font-size: 14px; flex: 0 0 auto; }
+    .assignment::after { content: "↗"; color: #596b80; font-size: 14px; flex: 0 0 auto; }
     .assignment:hover { color: var(--blue); background: var(--blue-soft); border-color: #d9e7f5; }
     .assignment:hover::after { color: var(--blue); }
     .empty-state {
@@ -296,7 +320,7 @@
       font-size: 12px;
       font-weight: 700;
     }
-    footer { color: #7b899a; background: white; border-top: 1px solid var(--line); }
+    footer { color: #536174; background: white; border-top: 1px solid var(--line); }
     .footer-inner {
       max-width: 1160px;
       margin: auto;
@@ -340,6 +364,7 @@
   </style>
 </head>
 <body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
   <header class="site-header">
     <div class="nav-wrap">
       <a class="brand" href="#top" aria-label="Web Programming Portfolio home">
@@ -364,7 +389,7 @@
     </div>
   </section>
 
-  <main class="page-main">
+  <main class="page-main" id="main-content">
     <section class="stats" aria-label="Portfolio overview">
       <div class="stat"><strong>08</strong><span>Learning weeks</span></div>
       <div class="stat"><strong>55</strong><span>Available exercises</span></div>
@@ -380,7 +405,7 @@
         </div>
         <label class="search-wrap">
           <span class="search-icon" aria-hidden="true">⌕</span>
-          <input id="assignmentSearch" type="search" placeholder="Search assignments..." aria-label="Search assignments">
+          <input id="assignmentSearch" type="search" placeholder="Search assignments..." aria-label="Search weekly assignments" aria-controls="weeksGrid" autocomplete="off">
         </label>
       </div>
 
@@ -488,7 +513,7 @@
           </div>
         </section>
       </div>
-      <div class="empty-state" id="emptyState">No assignments match your search. Try another keyword.</div>
+      <div class="empty-state" id="emptyState" role="status" aria-live="polite">No assignments match your search. Try another keyword.</div>
     </section>
 
     <section class="about-panel" id="about">
