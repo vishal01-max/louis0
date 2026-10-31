@@ -2,280 +2,362 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Web Programming | Weekly Tasks</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Registration Form</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-    }
+    <style>
+        * {
+            box-sizing: border-box;
+        }
 
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f4f7fb;
-      color: #172033;
-    }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f4f8;
+            margin: 0;
+            padding: 30px 15px;
+        }
 
-    header {
-      background: #173b75;
-      color: white;
-      text-align: center;
-      padding: 48px 20px;
-    }
+        .container {
+            max-width: 650px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
 
-    header h1 {
-      margin: 0 0 10px;
-      font-size: 38px;
-    }
+        h1 {
+            text-align: center;
+            color: #1d3557;
+            margin-bottom: 10px;
+        }
 
-    header p {
-      margin: 0;
-      color: #dbeafe;
-    }
+        .description {
+            text-align: center;
+            color: #666;
+            margin-bottom: 25px;
+        }
 
-    main {
-      max-width: 950px;
-      margin: 35px auto;
-      padding: 0 18px;
-    }
+        fieldset {
+            border: 1px solid #ccd6e0;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 22px;
+        }
 
-    .intro {
-      text-align: center;
-      margin-bottom: 30px;
-    }
+        legend {
+            font-weight: bold;
+            color: #1d3557;
+            padding: 0 10px;
+        }
 
-    .week {
-      background: white;
-      border: 1px solid #e1e8f0;
-      border-radius: 14px;
-      padding: 22px;
-      margin: 18px 0;
-      box-shadow: 0 4px 14px #1e293b08;
-    }
+        .form-group {
+            margin-bottom: 18px;
+        }
 
-    .week h2 {
-      margin-top: 0;
-      color: #173b75;
-    }
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 7px;
+            color: #333;
+        }
 
-    .tasks {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(145px, 1fr));
-      gap: 12px;
-    }
+        input:not([type="checkbox"]):not([type="range"]),
+        select {
+            width: 100%;
+            padding: 11px;
+            border: 1px solid #bbb;
+            border-radius: 5px;
+            font-size: 15px;
+        }
 
-    .task {
-      display: block;
-      padding: 15px;
-      border-radius: 9px;
-      background: #edf4ff;
-      color: #173b75;
-      text-decoration: none;
-      font-weight: bold;
-      border: 1px solid #d7e6ff;
-      text-align: center;
-      transition: 0.2s;
-    }
+        input:focus,
+        select:focus {
+            outline: 2px solid #8ab4f8;
+            border-color: #2563eb;
+        }
 
-    .task:hover {
-      background: #dceaff;
-      transform: translateY(-2px);
-    }
+        /* Invalid and valid input states */
+        input:invalid:not(:placeholder-shown) {
+            border: 2px solid #dc3545;
+            background-color: #fff5f5;
+        }
 
-    /* CONTACT FORM */
-    .contact {
-      background: white;
-      border: 1px solid #e1e8f0;
-      border-radius: 14px;
-      padding: 28px;
-      margin: 30px 0;
-      box-shadow: 0 4px 14px #1e293b08;
-    }
+        input:valid:not(:placeholder-shown) {
+            border: 2px solid #198754;
+            background-color: #f4fff8;
+        }
 
-    .contact h2 {
-      text-align: center;
-      color: #173b75;
-      margin-top: 0;
-    }
+        input[type="date"]:valid,
+        input[type="range"]:valid {
+            accent-color: #198754;
+        }
 
-    .contact-description {
-      text-align: center;
-      color: #64748b;
-      margin-bottom: 25px;
-    }
+        select:valid {
+            border-color: #198754;
+        }
 
-    .form-group {
-      margin-bottom: 18px;
-    }
+        .hint {
+            font-size: 12px;
+            color: #666;
+            margin-top: 5px;
+        }
 
-    .contact label {
-      display: block;
-      font-weight: bold;
-      margin-bottom: 7px;
-    }
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 20px 0;
+        }
 
-    .contact input,
-    .contact textarea {
-      display: block;
-      width: 100%;
-      padding: 12px;
-      font-family: Arial, sans-serif;
-      font-size: 15px;
-      border: 2px solid #cbd5e1;
-      border-radius: 7px;
-      background: white;
-      color: #172033;
-      transition: border-color 0.2s;
-    }
+        .checkbox-group label {
+            margin: 0;
+            font-weight: normal;
+        }
 
-    .contact textarea {
-      min-height: 140px;
-      resize: vertical;
-    }
+        .checkbox-group input {
+            width: 17px;
+            height: 17px;
+        }
 
-    /* HTML5 validation styles */
-    .contact input:invalid:not(:placeholder-shown),
-    .contact textarea:invalid:not(:placeholder-shown) {
-      border-color: #dc2626;
-      background-color: #fff7f7;
-    }
+        .range-values {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            color: #666;
+        }
 
-    .contact input:valid:not(:placeholder-shown),
-    .contact textarea:valid:not(:placeholder-shown) {
-      border-color: #16a34a;
-      background-color: #f0fdf4;
-    }
+        input[type="range"] {
+            width: 100%;
+            cursor: pointer;
+        }
 
-    .contact input:focus,
-    .contact textarea:focus {
-      outline: 2px solid #93c5fd;
-      outline-offset: 1px;
-    }
+        #experienceValue {
+            color: #2563eb;
+            font-weight: bold;
+        }
 
-    .send-button {
-      width: 100%;
-      padding: 13px;
-      background: #173b75;
-      color: white;
-      border: none;
-      border-radius: 7px;
-      font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: 0.2s;
-    }
+        button {
+            width: 100%;
+            padding: 13px;
+            border: none;
+            border-radius: 6px;
+            background-color: #2563eb;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
 
-    .send-button:hover {
-      background: #2454a0;
-    }
+        button:hover {
+            background-color: #1d4ed8;
+        }
 
-    footer {
-      text-align: center;
-      padding: 25px;
-      background: #e8eef7;
-      color: #64748b;
-      margin-top: 40px;
-    }
+        button:active {
+            transform: scale(0.99);
+        }
 
-    @media (max-width: 500px) {
-      header h1 {
-        font-size: 30px;
-      }
+        .required {
+            color: red;
+        }
 
-      .contact {
-        padding: 20px;
-      }
-    }
-  </style>
+        footer {
+            text-align: center;
+            color: #777;
+            font-size: 12px;
+            margin-top: 20px;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 20px;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-  <header>
-    <h1>Web Programming</h1>
-    <p>My Weekly Assignments</p>
-  </header>
+<div class="container">
 
-  <main>
-    <div class="intro">
-      <h2>My Tasks</h2>
-      <p>Select a task from each week.</p>
-    </div>
+    <h1>Student Registration</h1>
+    <p class="description">
+        Please complete the form to register as a student.
+    </p>
 
-    <!-- WEEK 1 -->
-    <section class="week">
-      <h2>Week 1</h2>
-      <div class="tasks">
-        <a class="task" href="https://vishal01-max.github.io/louis0/Week%202_1/task1.html">Task 1</a>
-        <a class="task" href="https://vishal01-max.github.io/louis0/Week%202_1/task2.html">Task 2</a>
-        <a class="task" href="https://vishal01-max.github.io/louis0/Week%202_1/task3.html">Task 3</a>
-        <a class="task" href="https://vishal01-max.github.io/louis0/Week%202_1/task4.html">Task 4</a>
-        <a class="task" href="https://vishal01-max.github.io/louis0/Week%202_1/task5.html">Task 5</a>
-        <a class="task" href="https://vishal01-max.github.io/louis0/Week%202_1/task6.html">Task 6</a>
-        <a class="task" href="https://vishal01-max.github.io/louis0/Week%202_1/task7.html">Task 7</a>
-        <a class="task" href="https://vishal01-max.github.io/louis0/Week%202_1/task8.html">Task 8</a>
-      </div>
-    </section>
+    <form action="#" method="post">
 
-    <!-- WEEK 2 -->
-    <section class="week">
-      <h2>Week 2</h2>
-      <div class="tasks">
-        <a class="task" href="https://github.com/vishal01-max/louis0/blob/main/Week%202_1/task1.html">Task 1</a>
-        <a class="task" href="https://vishal01-max.github.io/louis0/Week2_2/task2.html">Task 2</a>
-        <a class="task" href="https://vishal01-max.github.io/louis0/Week2_2/task3.html">Task 3</a>
-        <a class="task" href="https://vishal01-max.github.io/louis0/Week2_2/task4.html">Task 4</a>
-        <a class="task" href="https://vishal01-max.github.io/louis0/Week2_2/task5.html">Task 5</a>
-        <a class="task" href="https://vishal01-max.github.io/louis0/Week2_2/task6.html">Task 6</a>
-        <a class="task" href="https://vishal01-max.github.io/louis0/Week2_2/task7.html">Task 7</a>
-        <a class="task" href="https://vishal01-max.github.io/louis0/Week2_2/task8.html">Task 8</a>
-      </div>
-    </section>
+        <!-- Personal Information -->
+        <fieldset>
+            <legend>Personal Information</legend>
 
-    <!-- WEEK 3 -->
-    <section class="week">
-      <h2>Week 3</h2>
-      <div class="tasks">
-        <a class="task" href="https://vishal01-max.github.io/louis0/Week3/task1.html">Task 1</a>
-        <a class="task" href="https://vishal01-max.github.io/louis0/Week3/task2.html">Task 2</a>
-        <a class="task" href="https://vishal01-max.github.io/louis0/Week3/task3.html">Task 3</a>
-        <a class="task" href="https://vishal01-max.github.io/louis0/Week3/task4.html">Task 4</a>
-        <a class="task" href="https://vishal01-max.github.io/louis0/Week3/task5.html">Task 5</a>
-        <a class="task" href="https://vishal01-max.github.io/louis0/Week3/task6.html">Task 6</a>
-        <a class="task" href="https://vishal01-max.github.io/louis0/Week3/task7.html">Task 7</a>
-        <a class="task" href="https://vishal01-max.github.io/louis0/Week3/task8.html">Task 8</a>
-      </div>
-    </section>
+            <div class="form-group">
+                <label for="fullName">
+                    Full Name <span class="required">*</span>
+                </label>
+                <input
+                    type="text"
+                    id="fullName"
+                    name="fullName"
+                    placeholder="Enter your full name"
+                    required
+                >
+            </div>
 
-    <!-- WEEK 4 -->
-    <section class="week">
-      <h2>Week 4</h2>
-      <div class="tasks">
-        <a class="task" href="https://vishal01-max.github.io/louis0/Week4/E1.html">Task 1</a>
-        <a class="task" href="https://vishal01-max.github.io/louis0/Week4/E2.html">Task 2</a>
-        <a class="task" href="https://vishal01-max.github.io/louis0/Week4/E3.html">Task 3</a>
-        <a class="task" href="https://vishal01-max.github.io/louis0/Week4/E4.html">Task 4</a>
-        <a class="task" href="https://vishal01-max.github.io/louis0/Week4/E5.html">Task 5</a>
-        <a class="task" href="https://vishal01-max.github.io/louis0/Week4/E6.html">Task 6</a>
-        <a class="task" href="https://vishal01-max.github.io/louis0/Week4/E7.html">Task 7</a>
-      </div>
-    </section>
+            <div class="form-group">
+                <label for="studentId">
+                    Student ID <span class="required">*</span>
+                </label>
+                <input
+                    type="text"
+                    id="studentId"
+                    name="studentId"
+                    pattern="\d{9}"
+                    placeholder="Enter 9-digit student ID"
+                    title="Student ID must contain exactly 9 digits"
+                    required
+                >
+                <p class="hint">Enter exactly 9 digits.</p>
+            </div>
 
-    <!-- CONTACT FORM -->
-    <!-- WEEK 7-->
-    <section class="week">
-      <h2>Week 7</h2>
-      <div class="tasks">
-        <a class="task" href="https://vishal01-max.github.io/louis0/week7/task1.html">Task 1</a>
+            <div class="form-group">
+                <label for="dob">Date of Birth</label>
+                <input
+                    type="date"
+                    id="dob"
+                    name="dob"
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="major">Major</label>
+                <select id="major" name="major" required>
+                    <option value="" disabled selected>
+                        Select your major
+                    </option>
+                    <option value="Computer Engineering">
+                        Computer Engineering
+                    </option>
+                    <option value="Data Science">
+                        Data Science
+                    </option>
+                    <option value="Business Administration">
+                        Business Administration
+                    </option>
+                    <option value="Information Technology">
+                        Information Technology
+                    </option>
+                    <option value="Artificial Intelligence">
+                        Artificial Intelligence
+                    </option>
+                </select>
+            </div>
+
+            <!-- Bonus: Coding Experience Slider -->
+            <div class="form-group">
+                <label for="experience">
+                    Years of Coding Experience:
+                    <span id="experienceValue">0</span> years
+                </label>
+
+                <input
+                    type="range"
+                    id="experience"
+                    name="experience"
+                    min="0"
+                    max="10"
+                    value="0"
+                >
+
+                <div class="range-values">
+                    <span>0 years</span>
+                    <span>10 years</span>
+                </div>
+            </div>
+        </fieldset>
+
+        <!-- Account Information -->
+        <fieldset>
+            <legend>Account Information</legend>
+
+            <div class="form-group">
+                <label for="email">
+                    Email <span class="required">*</span>
+                </label>
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="example@email.com"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="password">
+                    Password <span class="required">*</span>
+                </label>
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    minlength="8"
+                    placeholder="Enter at least 8 characters"
+                    required
+                >
+                <p class="hint">
+                    Password must contain at least 8 characters.
+                </p>
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input
+                    type="text"
+                    id="phone"
+                    name="phone"
+                    pattern="\d{3}-\d{4}-\d{4}"
+                    placeholder="010-1234-5678"
+                    title="Use the format 010-1234-5678"
+                >
+                <p class="hint">
+                    Format: 010-1234-5678
+                </p>
+            </div>
+        </fieldset>
+
+        <!-- Terms and Conditions -->
+        <div class="checkbox-group">
+            <input
+                type="checkbox"
+                id="terms"
+                name="terms"
+                required
+            >
+            <label for="terms">
+                I agree to the terms <span class="required">*</span>
+            </label>
         </div>
-    </section>
-  </main>
 
-  <footer>
-    Web Programming · Weekly Assignments
-  </footer>
+        <button type="submit">Register Now</button>
+
+    </form>
+
+    <footer>
+        Student Registration Form | Web Programming
+    </footer>
+
+</div>
+
+<script>
+    const experienceSlider = document.getElementById("experience");
+    const experienceValue = document.getElementById("experienceValue");
+
+    experienceSlider.addEventListener("input", function () {
+        experienceValue.textContent = experienceSlider.value;
+    });
+</script>
 
 </body>
 </html>
