@@ -1,0 +1,77 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PokéAPI</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background: #f4f7fb;
+      padding: 30px;
+    }
+
+    .container {
+      background: white;
+      padding: 25px;
+      max-width: 400px;
+      margin: auto;
+      border-radius: 12px;
+    }
+
+    img {
+      width: 180px;
+    }
+
+    button {
+      padding: 10px 20px;
+      background: #e63946;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>Pokémon Information</h2>
+    <input type="text" id="pokemon" value="pikachu">
+    <button onclick="getPokemon()">Search</button>
+    <div id="result">Search for a Pokémon.</div>
+  </div>
+
+  <script>
+    function getPokemon() {
+      const name = document.getElementById("pokemon").value.toLowerCase().trim();
+
+      if (!name) return;
+
+      fetch(`https://pokeapi.co/api/v2/pokemon/${encodeURIComponent(name)}`)
+        .then(response => {
+          if (!response.ok) throw new Error("Pokémon not found");
+          return response.json();
+        })
+        .then(data => {
+          document.getElementById("result").innerHTML = `
+            <h3>${data.name.toUpperCase()}</h3>
+            <img src="${data.sprites.front_default}" alt="${data.name}">
+            <p>ID: ${data.id}</p>
+            <p>Height: ${data.height}</p>
+            <p>Weight: ${data.weight}</p>
+            <p>Type: ${data.types.map(t => t.type.name).join(", ")}</p>
+          `;
+        })
+        .catch(error => {
+          document.getElementById("result").textContent = error.message;
+        });
+    }
+
+    getPokemon();
+  </script>
+
+</body>
+</html>
