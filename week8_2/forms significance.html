@@ -1,0 +1,203 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Topic 01 | Introduction to HTML Forms</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f1f5f9;
+      color: #334155;
+      margin: 0;
+      padding: 45px 18px;
+    }
+
+    main {
+      max-width: 620px;
+      margin: auto;
+      background: #ffffff;
+      padding: 32px;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      box-shadow: 0 5px 18px rgba(0, 0, 0, 0.05);
+    }
+
+    .topic {
+      color: #64748b;
+      font-size: 12px;
+      font-weight: bold;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      color: #234b75;
+      font-size: 27px;
+      margin: 0 0 14px;
+    }
+
+    p {
+      font-size: 15px;
+      line-height: 1.7;
+      color: #526174;
+    }
+
+    .info {
+      background: #f0f6fc;
+      border: 1px solid #d9e7f5;
+      border-radius: 8px;
+      padding: 17px 20px;
+      margin: 24px 0;
+    }
+
+    .info h3 {
+      margin: 0 0 8px;
+      color: #234b75;
+      font-size: 16px;
+    }
+
+    .info p {
+      margin: 0;
+      font-size: 14px;
+    }
+
+    .demo {
+      margin-top: 28px;
+      padding-top: 22px;
+      border-top: 1px solid #e5e7eb;
+    }
+
+    .demo h2 {
+      font-size: 18px;
+      color: #263f59;
+      margin: 0 0 8px;
+    }
+
+    .demo p {
+      font-size: 14px;
+      margin-bottom: 15px;
+    }
+
+    label {
+      display: block;
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      font-size: 14px;
+      margin-bottom: 12px;
+      outline: none;
+    }
+
+    input:focus {
+      border-color: #4779a8;
+      box-shadow: 0 0 0 2px rgba(71, 121, 168, 0.12);
+    }
+
+    button {
+      background: #315f89;
+      color: white;
+      border: none;
+      padding: 11px 19px;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    button:hover {
+      background: #234766;
+    }
+
+    .back {
+      display: inline-block;
+      margin-top: 27px;
+      color: #315f89;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .back:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 480px) {
+      main {
+        padding: 23px;
+      }
+
+      h1 {
+        font-size: 23px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <main>
+    <div class="topic">Web Programming / Topic 01</div>
+
+    <h1>Getting Started with HTML Forms</h1>
+
+    <p>
+      Forms are an important part of almost every website.
+      They allow visitors to enter information, create accounts,
+      search for content, and communicate with web applications.
+      Without forms, it would be difficult for websites to collect
+      information from their users.
+    </p>
+
+    <div class="info">
+      <h3>Where do we use forms?</h3>
+      <p>
+        Some common examples include login pages, registration forms,
+        contact sections, online surveys, and search boxes.
+        Whenever a website asks you to enter information,
+        there is a good chance that an HTML form is being used.
+      </p>
+    </div>
+
+    <section class="demo">
+      <h2>Try a Simple Search Form</h2>
+
+      <p>
+        Here's a small example of how an HTML form works.
+        Enter something you'd like to find and click the search button.
+      </p>
+
+      <form action="https://www.google.com/search" method="get" target="_blank">
+        <label for="q">What are you looking for?</label>
+
+        <input
+          type="text"
+          id="q"
+          name="q"
+          placeholder="e.g. Introduction to HTML"
+          required>
+
+        <button type="submit">Search on Google</button>
+      </form>
+    </section>
+
+    <a class="back" href="index.html">← Back to Index</a>
+
+  </main>
+
+</body>
+</html>
