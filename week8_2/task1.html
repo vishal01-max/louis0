@@ -1,0 +1,128 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Topic 07 | CSS Form Validation</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 40px 16px;
+      max-width: 580px;
+      margin: auto;
+      color: #263445;
+      background: #eef2f7;
+    }
+
+    main {
+      background: #ffffff;
+      padding: 32px;
+      border-radius: 15px;
+      box-shadow: 0 5px 20px rgba(30, 50, 80, 0.09);
+    }
+
+    h1 {
+      color: #6246a5;
+      margin-top: 0;
+      font-size: 25px;
+    }
+
+    p {
+      line-height: 1.6;
+      color: #526174;
+    }
+
+    .field {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      font-size: 14px;
+      margin-bottom: 7px;
+    }
+
+    input {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 12px;
+      border: 2px solid #d4dce8;
+      border-radius: 7px;
+      font-size: 15px;
+      outline: none;
+      transition: 0.25s;
+    }
+
+    /* Valid input */
+    input:valid:not(:placeholder-shown) {
+      border-color: #15966b;
+      background-color: #edfaf4;
+    }
+
+    /* Invalid input */
+    input:invalid:not(:placeholder-shown) {
+      border-color: #e04444;
+      background-color: #fff1f1;
+    }
+
+    /* Input focus effect */
+    input:focus {
+      box-shadow: 0 0 0 3px rgba(98, 70, 165, 0.18);
+    }
+
+    .back {
+      display: inline-block;
+      margin-top: 22px;
+      color: #6246a5;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .back:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <h1>Topic 07: Form Validation</h1>
+
+    <p>
+      Explore CSS validation pseudo-classes such as
+      <code>:valid</code>, <code>:invalid</code>, and
+      <code>:not(:placeholder-shown)</code> to see how input
+      fields change their appearance automatically.
+    </p>
+
+    <form>
+      <div class="field">
+        <label for="v-email">Email Address</label>
+        <input
+          type="email"
+          id="v-email"
+          required
+          placeholder="Enter your email"
+        >
+      </div>
+
+      <div class="field">
+        <label for="v-pwd">Password (minimum 8 characters)</label>
+        <input
+          type="password"
+          id="v-pwd"
+          required
+          minlength="8"
+          placeholder="Enter your password"
+        >
+      </div>
+    </form>
+
+    <a class="back" href="index.html">← Back to Index</a>
+  </main>
+</body>
+</html>
