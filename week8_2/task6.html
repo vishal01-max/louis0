@@ -1,0 +1,166 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Topic 02 | The Form Element</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f1f5f3;
+      color: #263b35;
+      padding: 35px 16px;
+      max-width: 560px;
+      margin: auto;
+    }
+
+    main {
+      background: #ffffff;
+      padding: 30px;
+      border-radius: 15px;
+      border-top: 5px solid #15803d;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.07);
+    }
+
+    h1 {
+      color: #15803d;
+      margin-top: 0;
+      font-size: 24px;
+    }
+
+    p {
+      color: #64748b;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    code {
+      color: #166534;
+      background: #dcfce7;
+      padding: 2px 5px;
+      border-radius: 4px;
+    }
+
+    pre {
+      background: #172b25;
+      color: #86efac;
+      padding: 16px;
+      border-radius: 9px;
+      font-size: 13px;
+      line-height: 1.6;
+      overflow-x: auto;
+      margin: 20px 0;
+    }
+
+    pre code {
+      background: transparent;
+      color: inherit;
+      padding: 0;
+    }
+
+    .field {
+      margin: 20px 0;
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      font-size: 14px;
+      margin-bottom: 8px;
+    }
+
+    input {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 12px;
+      border: 1px solid #cbd5e1;
+      border-radius: 7px;
+      font-size: 14px;
+      background: #f8fafc;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: #15803d;
+      box-shadow: 0 0 0 3px rgba(21, 128, 61, 0.12);
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background: #15803d;
+      color: white;
+      border: none;
+      border-radius: 7px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    button:hover {
+      background: #166534;
+    }
+
+    .back {
+      display: inline-block;
+      margin-top: 22px;
+      color: #15803d;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .back:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 480px) {
+      main {
+        padding: 22px;
+      }
+
+      h1 {
+        font-size: 21px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <h1>Topic 02: The &lt;form&gt; Element</h1>
+
+    <p>
+      The HTML form element collects user information and controls
+      how that information is submitted using the action and method attributes.
+    </p>
+
+    <pre><code>&lt;!-- Form submission example --&gt;
+&lt;form action="/submit" method="POST"&gt;
+  &lt;input type="text" name="username"&gt;
+  &lt;button type="submit"&gt;Send&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+
+    <!-- GET request demonstration -->
+    <form action="topic_02_the_form_element.html" method="GET">
+
+      <div class="field">
+        <label for="user">Enter Your Username</label>
+        <input
+          type="text"
+          id="user"
+          name="username"
+          placeholder="e.g. gachon_student"
+          required
+        >
+      </div>
+
+      <button type="submit">Send GET Request</button>
+    </form>
+
+    <a class="back" href="index.html">← Back to Index</a>
+  </main>
+</body>
+</html>
