@@ -1,0 +1,619 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student Registration | Aether Academy</title>
+
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #101827;
+  color: #f1f5f9;
+  padding: 25px 15px;
+  transition: 0.3s;
+}
+
+body.light {
+  background: #f1f5f9;
+  color: #172033;
+}
+
+.container {
+  max-width: 850px;
+  margin: auto;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+header h1 {
+  font-size: 25px;
+  color: #60a5fa;
+}
+
+header button, .btn {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 7px;
+  cursor: pointer;
+  background: #2563eb;
+  color: white;
+}
+
+.card {
+  background: #1e293b;
+  padding: 25px;
+  border-radius: 13px;
+  margin-bottom: 20px;
+  border: 1px solid #334155;
+}
+
+.light .card {
+  background: white;
+  border-color: #dbe3ef;
+}
+
+.card h2 {
+  font-size: 19px;
+  margin-bottom: 18px;
+  color: #60a5fa;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.field {
+  margin-bottom: 16px;
+}
+
+label {
+  display: block;
+  margin-bottom: 7px;
+  font-size: 14px;
+}
+
+input, select, textarea {
+  width: 100%;
+  padding: 11px;
+  border: 1px solid #475569;
+  border-radius: 7px;
+  background: #0f172a;
+  color: white;
+  outline: none;
+}
+
+.light input, .light select, .light textarea {
+  background: #f8fafc;
+  color: #172033;
+  border-color: #cbd5e1;
+}
+
+input:focus, select:focus, textarea:focus {
+  border-color: #3b82f6;
+}
+
+input:valid {
+  border-color: #16a34a;
+}
+
+input:invalid:not(:placeholder-shown) {
+  border-color: #ef4444;
+}
+
+small {
+  display: block;
+  margin-top: 5px;
+  color: #94a3b8;
+}
+
+.options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.options button {
+  padding: 7px 12px;
+  border-radius: 6px;
+  border: 1px solid #64748b;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+
+.options button:hover {
+  background: #2563eb;
+  color: white;
+}
+
+.progress {
+  height: 7px;
+  background: #475569;
+  border-radius: 10px;
+  margin: 12px 0 20px;
+  overflow: hidden;
+}
+
+#progressBar {
+  height: 100%;
+  width: 0%;
+  background: #3b82f6;
+  transition: 0.3s;
+}
+
+.password-row {
+  display: flex;
+  gap: 8px;
+}
+
+.password-row input {
+  flex: 1;
+}
+
+.password-row button {
+  padding: 0 12px;
+  border-radius: 7px;
+  border: none;
+  cursor: pointer;
+}
+
+.range-info {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 8px;
+}
+
+input[type="range"] {
+  padding: 0;
+}
+
+.checkbox {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin: 15px 0;
+}
+
+.checkbox input {
+  width: auto;
+}
+
+.submit {
+  width: 100%;
+  padding: 13px;
+  background: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.submit:hover, .btn:hover {
+  background: #1d4ed8;
+}
+
+#success {
+  display: none;
+  text-align: center;
+}
+
+.student-id {
+  background: #0f172a;
+  border: 1px solid #475569;
+  padding: 20px;
+  border-radius: 12px;
+  margin: 20px 0;
+}
+
+.student-id h2 {
+  color: #60a5fa;
+  margin-bottom: 10px;
+}
+
+#avatar {
+  font-size: 45px;
+  margin-bottom: 10px;
+}
+
+#clock {
+  color: #94a3b8;
+  font-size: 13px;
+}
+
+@media(max-width: 600px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  header h1 {
+    font-size: 19px;
+  }
+
+  .card {
+    padding: 18px;
+  }
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+<header>
+  <div>
+    <h1>Aether Academy</h1>
+    <p>Student Registration Portal</p>
+  </div>
+  <div>
+    <p id="clock"></p>
+    <button type="button" onclick="toggleTheme()">Change Theme</button>
+  </div>
+</header>
+
+<div class="card">
+  <strong>Registration Progress</strong>
+  <div class="progress">
+    <div id="progressBar"></div>
+  </div>
+  <small id="progressText">Complete the form to continue.</small>
+</div>
+
+<form id="registrationForm">
+
+<div class="card">
+  <h2>01. Personal Information</h2>
+
+  <div class="grid">
+    <div class="field">
+      <label for="firstName">First Name</label>
+      <input id="firstName" type="text" placeholder="Enter first name" required minlength="2">
+    </div>
+
+    <div class="field">
+      <label for="lastName">Last Name</label>
+      <input id="lastName" type="text" placeholder="Enter last name" required minlength="2">
+    </div>
+
+    <div class="field">
+      <label for="email">Email Address</label>
+      <input id="email" type="email" placeholder="example@email.com" required>
+    </div>
+
+    <div class="field">
+      <label for="phone">Phone Number</label>
+      <input id="phone" type="tel" placeholder="010-1234-5678"
+             pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" required>
+      <small>Format: 010-1234-5678</small>
+    </div>
+
+    <div class="field">
+      <label for="dob">Date of Birth</label>
+      <input id="dob" type="date" required>
+    </div>
+
+    <div class="field">
+      <label for="gender">Gender</label>
+      <select id="gender" required>
+        <option value="">Select gender</option>
+        <option>Male</option>
+        <option>Female</option>
+        <option>Other</option>
+        <option>Prefer not to say</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <h2>02. Academic Information</h2>
+
+  <div class="field">
+    <label for="studentName">Student ID</label>
+    <input id="studentName" type="text" value="Automatically assigned after registration" disabled>
+  </div>
+
+  <div class="field">
+    <label for="major">Choose Your Major</label>
+    <select id="major" required>
+      <option value="">Select your major</option>
+      <option value="cs">Computer Science</option>
+      <option value="sw">Software Engineering</option>
+      <option value="ai">Artificial Intelligence</option>
+      <option value="ds">Data Science</option>
+    </select>
+
+    <div class="options">
+      <button type="button" onclick="chooseMajor('cs')">Computer Science</button>
+      <button type="button" onclick="chooseMajor('sw')">Software</button>
+      <button type="button" onclick="chooseMajor('ai')">AI</button>
+      <button type="button" onclick="chooseMajor('ds')">Data Science</button>
+    </div>
+  </div>
+
+  <div class="field">
+    <label for="year">Academic Year</label>
+    <select id="year" required>
+      <option value="">Select year</option>
+      <option>First Year</option>
+      <option>Second Year</option>
+      <option>Third Year</option>
+      <option>Fourth Year</option>
+    </select>
+  </div>
+
+  <div class="field">
+    <label for="experience">Coding Experience (0–10)</label>
+    <input type="range" id="experience" min="0" max="10" value="5">
+    <div class="range-info">
+      <span>Beginner</span>
+      <strong id="experienceValue">5 / 10</strong>
+      <span>Advanced</span>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <h2>03. Account Information</h2>
+
+  <div class="field">
+    <label for="password">Create Password</label>
+    <div class="password-row">
+      <input id="password" type="password" placeholder="Minimum 8 characters"
+             minlength="8" required>
+      <button type="button" onclick="togglePassword('password')">Show</button>
+      <button type="button" onclick="generatePassword()">Generate</button>
+    </div>
+    <small id="strength">Password strength: Not entered</small>
+  </div>
+
+  <div class="field">
+    <label for="confirmPassword">Confirm Password</label>
+    <input id="confirmPassword" type="password" placeholder="Repeat password" required>
+    <small id="matchMessage"></small>
+  </div>
+</div>
+
+<div class="card">
+  <h2>04. Additional Information</h2>
+
+  <div class="field">
+    <label for="address">Address</label>
+    <textarea id="address" rows="3" placeholder="Enter your address" required></textarea>
+  </div>
+
+  <div class="checkbox">
+    <input type="checkbox" id="terms" required>
+    <label for="terms">I agree to the terms and conditions.</label>
+  </div>
+
+  <button type="submit" class="submit">Complete Registration</button>
+</div>
+
+</form>
+
+<div class="card" id="success">
+  <div id="avatar">🎓</div>
+  <h2>Registration Successful!</h2>
+  <p>Your student account has been created.</p>
+
+  <div class="student-id">
+    <h2>AETHER ACADEMY</h2>
+    <p id="resultName"></p>
+    <p id="resultEmail"></p>
+    <p id="resultMajor"></p>
+    <h3 id="resultID"></h3>
+  </div>
+
+  <button class="btn" type="button" onclick="window.print()">Print ID Card</button>
+  <button class="btn" type="button" onclick="copyID()">Copy Student ID</button>
+  <button class="btn" type="button" onclick="resetForm()">Register Another</button>
+</div>
+
+</div>
+
+<script>
+// Live clock
+function updateClock() {
+  document.getElementById("clock").textContent =
+    new Date().toLocaleString();
+}
+updateClock();
+setInterval(updateClock, 1000);
+
+// Theme toggle
+function toggleTheme() {
+  document.body.classList.toggle("light");
+}
+
+// Major selection
+function chooseMajor(value) {
+  document.getElementById("major").value = value;
+  updateProgress();
+}
+
+// Password visibility
+function togglePassword(id) {
+  const field = document.getElementById(id);
+  field.type = field.type === "password" ? "text" : "password";
+}
+
+// Password generator
+function generatePassword() {
+  const chars = "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789@#$!";
+  let password = "";
+  for (let i = 0; i < 12; i++) {
+    password += chars[Math.floor(Math.random() * chars.length)];
+  }
+  document.getElementById("password").value = password;
+  checkPassword();
+}
+
+// Password strength
+function checkPassword() {
+  const password = document.getElementById("password").value;
+  let strength = "Weak";
+
+  if (password.length >= 8) strength = "Medium";
+  if (password.length >= 10 && /[A-Z]/.test(password) &&
+      /[0-9]/.test(password) && /[^A-Za-z0-9]/.test(password)) {
+    strength = "Strong";
+  }
+
+  document.getElementById("strength").textContent =
+    "Password strength: " + (password ? strength : "Not entered");
+
+  checkMatch();
+}
+
+// Confirm password
+function checkMatch() {
+  const password = document.getElementById("password").value;
+  const confirm = document.getElementById("confirmPassword").value;
+  const message = document.getElementById("matchMessage");
+
+  if (!confirm) {
+    message.textContent = "";
+  } else if (password === confirm) {
+    message.textContent = "Passwords match.";
+  } else {
+    message.textContent = "Passwords do not match.";
+  }
+}
+
+// Experience slider
+document.getElementById("experience").addEventListener("input", function() {
+  document.getElementById("experienceValue").textContent =
+    this.value + " / 10";
+});
+
+// Phone formatting
+document.getElementById("phone").addEventListener("input", function() {
+  let digits = this.value.replace(/\D/g, "").slice(0, 11);
+
+  if (digits.length > 7) {
+    this.value = digits.slice(0, 3) + "-" +
+                 digits.slice(3, 7) + "-" + digits.slice(7);
+  } else if (digits.length > 3) {
+    this.value = digits.slice(0, 3) + "-" + digits.slice(3);
+  } else {
+    this.value = digits;
+  }
+});
+
+// Progress bar
+function updateProgress() {
+  const form = document.getElementById("registrationForm");
+  const fields = [...form.querySelectorAll("input[required], select[required], textarea[required]")];
+  const completed = fields.filter(field =>
+    field.type === "checkbox" ? field.checked : field.value.trim() !== ""
+  ).length;
+
+  const percentage = Math.round((completed / fields.length) * 100);
+  document.getElementById("progressBar").style.width = percentage + "%";
+  document.getElementById("progressText").textContent =
+    percentage + "% completed";
+}
+
+document.getElementById("registrationForm").addEventListener("input", updateProgress);
+document.getElementById("registrationForm").addEventListener("change", updateProgress);
+
+document.getElementById("password").addEventListener("input", checkPassword);
+document.getElementById("confirmPassword").addEventListener("input", checkMatch);
+
+// Registration submission
+document.getElementById("registrationForm").addEventListener("submit", function(event) {
+  event.preventDefault();
+
+  const password = document.getElementById("password").value;
+  const confirm = document.getElementById("confirmPassword").value;
+
+  if (password !== confirm) {
+    alert("Passwords do not match. Please try again.");
+    return;
+  }
+
+  const firstName = document.getElementById("firstName").value;
+  const lastName = document.getElementById("lastName").value;
+  const majorVal = document.getElementById("major").value;
+
+  const avatarMap = {
+    cs: "💻",
+    sw: "⚡",
+    ai: "🧠",
+    ds: "📊"
+  };
+
+  const majorNames = {
+    cs: "Computer Science",
+    sw: "Software Engineering",
+    ai: "Artificial Intelligence",
+    ds: "Data Science"
+  };
+
+  const studentID = "AET" + Math.floor(100000 + Math.random() * 900000);
+
+  document.getElementById("avatar").textContent =
+    avatarMap[majorVal] || "🎓";
+
+  document.getElementById("resultName").textContent =
+    "Name: " + firstName + " " + lastName;
+
+  document.getElementById("resultEmail").textContent =
+    "Email: " + document.getElementById("email").value;
+
+  document.getElementById("resultMajor").textContent =
+    "Major: " + majorNames[majorVal];
+
+  document.getElementById("resultID").textContent =
+    "Student ID: " + studentID;
+
+  document.getElementById("registrationForm").style.display = "none";
+  document.getElementById("success").style.display = "block";
+
+  window.scrollTo({ top: 0, behavior: "smooth" });
+});
+
+// Copy student ID
+function copyID() {
+  const id = document.getElementById("resultID").textContent;
+  navigator.clipboard.writeText(id)
+    .then(() => alert("Student ID copied!"))
+    .catch(() => alert("Unable to copy automatically."));
+}
+
+// Register another student
+function resetForm() {
+  document.getElementById("registrationForm").reset();
+  document.getElementById("registrationForm").style.display = "block";
+  document.getElementById("success").style.display = "none";
+
+  document.getElementById("experienceValue").textContent = "5 / 10";
+  document.getElementById("strength").textContent = "Password strength: Not entered";
+  document.getElementById("matchMessage").textContent = "";
+  updateProgress();
+
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+updateProgress();
+</script>
+
+</body>
+</html>
