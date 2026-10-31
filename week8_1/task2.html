@@ -1,0 +1,685 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Registration Form</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f4f6fb;
+      color: #1e293b;
+    }
+
+    .font-mono-code {
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* Main registration card */
+    #registrationForm {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 18px;
+      box-shadow: 0 10px 35px rgba(30, 41, 59, 0.07);
+    }
+
+    /* Input validation */
+    .form-input:not(:placeholder-shown):invalid {
+      border-color: #ef4444;
+      background-color: #fffafa;
+    }
+
+    .form-input:not(:placeholder-shown):valid {
+      border-color: #10b981;
+      background-color: #fafffc;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: #6366f1 !important;
+      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.12);
+    }
+
+    /* Fieldset styling */
+    fieldset {
+      border-radius: 12px;
+      transition: border-color 0.2s ease;
+    }
+
+    fieldset:hover {
+      border-color: #a5b4fc;
+    }
+
+    legend {
+      padding: 0 10px;
+    }
+
+    /* Experience slider */
+    input[type="range"].exp-range {
+      appearance: none;
+      -webkit-appearance: none;
+      width: 100%;
+      height: 8px;
+      border-radius: 20px;
+      background: #e2e8f0;
+      outline: none;
+      cursor: pointer;
+    }
+
+    input[type="range"].exp-range::-webkit-slider-thumb {
+      appearance: none;
+      -webkit-appearance: none;
+      width: 21px;
+      height: 21px;
+      border-radius: 50%;
+      background: #4f46e5;
+      border: 3px solid white;
+      box-shadow: 0 2px 7px rgba(79, 70, 229, 0.35);
+      cursor: grab;
+    }
+
+    input[type="range"].exp-range::-moz-range-thumb {
+      width: 17px;
+      height: 17px;
+      border-radius: 50%;
+      background: #4f46e5;
+      border: 3px solid white;
+      box-shadow: 0 2px 7px rgba(79, 70, 229, 0.35);
+      cursor: grab;
+    }
+
+    /* Skill badges */
+    .skill-tag {
+      transition: all 0.2s ease;
+    }
+
+    .skill-tag:hover {
+      transform: translateY(-2px);
+    }
+
+    /* Submit button */
+    .submit-btn {
+      background: #4f46e5;
+      transition: all 0.25s ease;
+    }
+
+    .submit-btn:hover {
+      background: #4338ca;
+      transform: translateY(-2px);
+      box-shadow: 0 7px 16px rgba(79, 70, 229, 0.2);
+    }
+
+    /* Modal animation */
+    #feedbackModal > div {
+      animation: appear 0.25s ease;
+    }
+
+    @keyframes appear {
+      from {
+        opacity: 0;
+        transform: scale(0.96);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    @media (max-width: 640px) {
+      #registrationForm {
+        padding: 20px;
+      }
+
+      fieldset {
+        padding: 16px;
+      }
+    }
+  </style>
+</head>
+
+<body class="min-h-screen py-10 px-4 sm:px-6 text-slate-800">
+
+  <div class="max-w-2xl mx-auto">
+
+    <!-- Header -->
+    <header class="text-center mb-8">
+
+      <div class="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-indigo-600 text-white shadow-lg shadow-indigo-200 mb-4">
+        <svg class="w-9 h-9" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222" />
+        </svg>
+      </div>
+
+      <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900">
+        Student Registration
+      </h1>
+
+      <p class="mt-3 text-sm sm:text-base text-slate-500">
+        Complete your academic profile and start your developer journey.
+      </p>
+
+    </header>
+
+    <!-- Registration Form -->
+    <form id="registrationForm" action="/api/register" method="post"
+      class="p-6 sm:p-9 space-y-8">
+
+      <!-- Personal Information -->
+      <fieldset class="border border-slate-200 p-5 sm:p-6 bg-slate-50/70">
+
+        <legend class="text-base font-bold text-indigo-700 bg-white border border-slate-200 rounded-lg px-3 py-2">
+          Personal Information
+        </legend>
+
+        <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-5">
+
+          <div class="sm:col-span-2">
+            <label for="fullName" class="block text-sm font-semibold mb-2">
+              Full Name <span class="text-red-500">*</span>
+            </label>
+
+            <input type="text" id="fullName" name="fullName"
+              required minlength="2" maxlength="50"
+              placeholder="Jane Doe"
+              class="form-input w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-lg text-sm">
+            
+            <p class="text-xs text-slate-500 mt-1">
+              Enter your official name.
+            </p>
+          </div>
+
+          <div>
+            <label for="studentId" class="block text-sm font-semibold mb-2">
+              Student ID <span class="text-red-500">*</span>
+            </label>
+
+            <input type="text" id="studentId" name="studentId"
+              required pattern="\d{9}" maxlength="9"
+              title="Enter exactly 9 digits."
+              placeholder="123456789"
+              class="form-input w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-lg text-sm font-mono">
+
+            <p class="text-xs text-slate-500 mt-1">
+              Exactly 9 digits.
+            </p>
+          </div>
+
+          <div>
+            <label for="dob" class="block text-sm font-semibold mb-2">
+              Date of Birth
+            </label>
+
+            <input type="date" id="dob" name="dob"
+              class="form-input w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-lg text-sm">
+
+            <p class="text-xs text-slate-500 mt-1">
+              Optional birth date.
+            </p>
+          </div>
+
+          <div class="sm:col-span-2">
+            <label for="major" class="block text-sm font-semibold mb-2">
+              Intended Major <span class="text-red-500">*</span>
+            </label>
+
+            <select id="major" name="major" required
+              class="w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-lg text-sm">
+              <option value="" disabled selected>Select your major</option>
+              <option value="Computer Science">Computer Science</option>
+              <option value="Data Science & AI">Data Science & AI</option>
+              <option value="Software Engineering">Software Engineering</option>
+              <option value="Information Systems">Information Systems</option>
+              <option value="Cybersecurity">Cybersecurity</option>
+            </select>
+          </div>
+
+        </div>
+      </fieldset>
+
+      <!-- Account Information -->
+      <fieldset class="border border-slate-200 p-5 sm:p-6 bg-slate-50/70">
+
+        <legend class="text-base font-bold text-indigo-700 bg-white border border-slate-200 rounded-lg px-3 py-2">
+          Account Information
+        </legend>
+
+        <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-5">
+
+          <div class="sm:col-span-2">
+            <label for="email" class="block text-sm font-semibold mb-2">
+              Campus Email <span class="text-red-500">*</span>
+            </label>
+
+            <input type="email" id="email" name="email"
+              required placeholder="jane.doe@university.edu"
+              class="form-input w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-lg text-sm">
+
+            <p class="text-xs text-slate-500 mt-1">
+              Enter your email address.
+            </p>
+          </div>
+
+          <div>
+            <label for="password" class="block text-sm font-semibold mb-2">
+              Account Password <span class="text-red-500">*</span>
+            </label>
+
+            <input type="password" id="password" name="password"
+              minlength="8" required placeholder="Minimum 8 characters"
+              class="form-input w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-lg text-sm">
+
+            <p class="text-xs text-slate-500 mt-1">
+              At least 8 characters.
+            </p>
+          </div>
+
+          <div>
+            <label for="phone" class="block text-sm font-semibold mb-2">
+              Phone Number
+            </label>
+
+            <input type="tel" id="phone" name="phone"
+              pattern="\d{3}-\d{4}-\d{4}"
+              placeholder="123-4567-8901"
+              title="Use the format 123-4567-8901."
+              class="form-input w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-lg text-sm">
+
+            <p class="text-xs text-slate-500 mt-1">
+              Format: 123-4567-8901
+            </p>
+          </div>
+
+        </div>
+      </fieldset>
+
+      <!-- Developer Experience -->
+      <fieldset class="border border-indigo-200 p-5 sm:p-6 bg-indigo-50/40">
+
+        <legend class="text-base font-bold text-indigo-800 bg-white border border-indigo-200 rounded-lg px-3 py-2">
+          Developer Journey & Coding Experience
+        </legend>
+
+        <div class="mt-4 space-y-6">
+
+          <!-- Rank -->
+          <div class="flex items-center justify-between gap-3 bg-white p-4 rounded-xl border border-slate-200">
+
+            <div>
+              <span class="text-xs font-semibold uppercase tracking-wider text-slate-500">
+                Current Rank
+              </span>
+
+              <div id="rankTitle" class="text-base font-bold text-indigo-700 mt-1">
+                Hello World Novice 🌱
+              </div>
+            </div>
+
+            <div class="text-right">
+              <span class="text-xs text-slate-500 block">Experience Level</span>
+              <span id="rankLevel" class="text-sm font-bold text-indigo-600 font-mono-code">
+                LVL 0
+              </span>
+            </div>
+
+            <div id="rankBadgeIcon" class="text-2xl bg-indigo-50 rounded-xl p-3">
+              🌱
+            </div>
+
+          </div>
+
+          <!-- Slider -->
+          <div>
+
+            <div class="flex justify-between items-center mb-3">
+              <label for="experience" class="text-sm font-semibold">
+                Years of Coding Experience
+              </label>
+
+              <span id="expTextBadge"
+                class="text-xs font-bold bg-indigo-100 text-indigo-800 px-3 py-1 rounded-lg">
+                0 Years
+              </span>
+            </div>
+
+            <input type="range" id="experience" name="experience"
+              min="0" max="10" step="1" value="0"
+              class="exp-range">
+
+            <div class="flex justify-between text-xs text-slate-500 mt-2">
+              <span>0 Beginner</span>
+              <span>5 Intermediate</span>
+              <span>10 Expert</span>
+            </div>
+
+          </div>
+
+          <!-- Skills -->
+          <div>
+
+            <div class="flex justify-between mb-3">
+              <span class="text-xs font-bold uppercase tracking-wide text-slate-500">
+                Unlocked Skills
+              </span>
+
+              <span id="unlockedCount" class="text-xs font-semibold text-indigo-600">
+                1 / 6
+              </span>
+            </div>
+
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 text-xs">
+
+              <div id="perk-0" class="skill-tag p-3 rounded-lg border bg-indigo-100 border-indigo-300 text-indigo-900">
+                ✓ HTML5 & Markdown
+              </div>
+
+              <div id="perk-1" class="skill-tag p-3 rounded-lg border bg-white border-slate-200 text-slate-400">
+                JS & Git
+              </div>
+
+              <div id="perk-3" class="skill-tag p-3 rounded-lg border bg-white border-slate-200 text-slate-400">
+                Fullstack Frameworks
+              </div>
+
+              <div id="perk-5" class="skill-tag p-3 rounded-lg border bg-white border-slate-200 text-slate-400">
+                Cloud Microservices
+              </div>
+
+              <div id="perk-8" class="skill-tag p-3 rounded-lg border bg-white border-slate-200 text-slate-400">
+                System Architecture
+              </div>
+
+              <div id="perk-10" class="skill-tag p-3 rounded-lg border bg-white border-slate-200 text-slate-400">
+                Team Mastery
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Terminal -->
+          <div class="bg-slate-900 rounded-xl p-4 text-slate-200 font-mono-code text-xs shadow-sm">
+
+            <div class="flex items-center gap-2 mb-3 border-b border-slate-700 pb-3">
+              <span class="w-2.5 h-2.5 rounded-full bg-red-400"></span>
+              <span class="w-2.5 h-2.5 rounded-full bg-yellow-400"></span>
+              <span class="w-2.5 h-2.5 rounded-full bg-green-400"></span>
+              <span class="text-slate-400 ml-2">developer-profile.js</span>
+            </div>
+
+            <pre class="overflow-x-auto leading-6"><span class="text-purple-400">const</span> studentDev = {
+  yearsExp: <span id="termExp" class="text-yellow-300">0</span>,
+  rank: <span id="termRank" class="text-green-400">"Hello World Novice 🌱"</span>,
+  status: <span id="termStatus" class="text-blue-300">"Writing first console.log()"</span>
+};</pre>
+
+          </div>
+
+        </div>
+      </fieldset>
+
+      <!-- Terms -->
+      <div class="bg-slate-50 border border-slate-200 rounded-xl p-4">
+
+        <div class="flex items-start gap-3">
+
+          <input id="terms" name="terms" type="checkbox" required
+            class="w-4 h-4 mt-1 accent-indigo-600">
+
+          <div>
+            <label for="terms" class="text-sm font-semibold cursor-pointer">
+              I agree to the terms <span class="text-red-500">*</span>
+            </label>
+
+            <p class="text-xs text-slate-500 mt-1 leading-relaxed">
+              I confirm that all information provided is accurate and agree to follow academic guidelines.
+            </p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Submit -->
+      <button type="submit"
+        class="submit-btn w-full py-3.5 px-6 rounded-xl text-white font-bold text-sm shadow-md">
+        Submit Registration Application →
+      </button>
+
+    </form>
+
+    <!-- Success Modal -->
+    <div id="feedbackModal"
+      class="hidden fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-sm flex items-center justify-center p-4">
+
+      <div class="bg-white rounded-2xl max-w-md w-full p-7 shadow-2xl text-center">
+
+        <div class="w-14 h-14 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl">
+          ✓
+        </div>
+
+        <h3 class="text-xl font-bold text-slate-900">
+          Registration Successful!
+        </h3>
+
+        <p id="submissionDetails"
+          class="text-sm text-slate-600 leading-relaxed mt-4">
+        </p>
+
+        <button id="closeModal" type="button"
+          class="w-full mt-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold rounded-lg">
+          Back to Form
+        </button>
+
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="text-center text-xs text-slate-400 mt-7">
+      © 2026 Student Registration | Designed with HTML, CSS & JavaScript
+    </footer>
+
+  </div>
+
+  <script>
+    // Developer ranks
+    const ranks = [
+      {
+        min: 0, max: 0,
+        title: "Hello World Novice 🌱",
+        icon: "🌱",
+        status: "Writing first console.log()"
+      },
+      {
+        min: 1, max: 2,
+        title: "Script Kiddie & Bug Hunter 🐛",
+        icon: "🐛",
+        status: "Learning JavaScript and debugging"
+      },
+      {
+        min: 3, max: 4,
+        title: "Code Craftsman ⚡",
+        icon: "⚡",
+        status: "Building small applications"
+      },
+      {
+        min: 5, max: 7,
+        title: "Full-Stack Developer 🧙",
+        icon: "🧙",
+        status: "Building full-stack applications"
+      },
+      {
+        min: 8, max: 9,
+        title: "Architecture Expert 🔮",
+        icon: "🔮",
+        status: "Designing advanced systems"
+      },
+      {
+        min: 10, max: 10,
+        title: "Legendary Tech Lead 👑",
+        icon: "👑",
+        status: "Leading development projects"
+      }
+    ];
+
+    const expSlider = document.getElementById("experience");
+    const expTextBadge = document.getElementById("expTextBadge");
+    const rankTitle = document.getElementById("rankTitle");
+    const rankLevel = document.getElementById("rankLevel");
+    const rankBadgeIcon = document.getElementById("rankBadgeIcon");
+
+    const termExp = document.getElementById("termExp");
+    const termRank = document.getElementById("termRank");
+    const termStatus = document.getElementById("termStatus");
+    const unlockedCount = document.getElementById("unlockedCount");
+
+    const perks = [
+      { id: "perk-0", req: 0 },
+      { id: "perk-1", req: 1 },
+      { id: "perk-3", req: 3 },
+      { id: "perk-5", req: 5 },
+      { id: "perk-8", req: 8 },
+      { id: "perk-10", req: 10 }
+    ];
+
+    // Update developer experience
+    function updateExperienceUI(value) {
+
+      const years = Number(value);
+
+      const currentRank = ranks.find(rank =>
+        years >= rank.min && years <= rank.max
+      );
+
+      expTextBadge.textContent =
+        `${years} ${years === 1 ? "Year" : "Years"}`;
+
+      rankTitle.textContent = currentRank.title;
+      rankLevel.textContent = `LVL ${years}`;
+      rankBadgeIcon.textContent = currentRank.icon;
+
+      termExp.textContent = years;
+      termRank.textContent = `"${currentRank.title}"`;
+      termStatus.textContent = `"${currentRank.status}"`;
+
+      // Update slider progress
+      const percentage = (years / 10) * 100;
+
+      expSlider.style.background =
+        `linear-gradient(to right, #4f46e5 ${percentage}%, #e2e8f0 ${percentage}%)`;
+
+      // Update unlocked skills
+      let unlocked = 0;
+
+      perks.forEach(perk => {
+
+        const element = document.getElementById(perk.id);
+
+        if (years >= perk.req) {
+
+          unlocked++;
+
+          element.className =
+            "skill-tag p-3 rounded-lg border bg-indigo-100 border-indigo-300 text-indigo-900 font-semibold";
+
+        } else {
+
+          element.className =
+            "skill-tag p-3 rounded-lg border bg-white border-slate-200 text-slate-400";
+
+        }
+
+      });
+
+      unlockedCount.textContent = `${unlocked} / 6`;
+    }
+
+    expSlider.addEventListener("input", function() {
+      updateExperienceUI(this.value);
+    });
+
+    // Registration form
+    const form = document.getElementById("registrationForm");
+    const modal = document.getElementById("feedbackModal");
+    const details = document.getElementById("submissionDetails");
+    const closeModal = document.getElementById("closeModal");
+
+    function escapeHtml(text) {
+      return String(text || "").replace(/[&<>"']/g, function(char) {
+        return {
+          "&": "&amp;",
+          "<": "&lt;",
+          ">": "&gt;",
+          '"': "&quot;",
+          "'": "&#039;"
+        }[char];
+      });
+    }
+
+    form.addEventListener("submit", function(event) {
+
+      event.preventDefault();
+
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+
+      const formData = new FormData(form);
+
+      const studentName = formData.get("fullName");
+      const studentId = formData.get("studentId");
+      const major = formData.get("major");
+      const experience = formData.get("experience");
+      const rank = rankTitle.textContent;
+
+      details.innerHTML = `
+        Welcome, <strong>${escapeHtml(studentName)}</strong>!<br><br>
+
+        Student ID:
+        <strong>${escapeHtml(studentId)}</strong><br>
+
+        Major:
+        <strong>${escapeHtml(major)}</strong><br>
+
+        Developer Rank:
+        <strong class="text-indigo-600">${escapeHtml(rank)}</strong><br>
+
+        Coding Experience:
+        <strong>${escapeHtml(experience)} years</strong><br><br>
+
+        <span class="text-xs text-green-600">
+          All form validation requirements passed.
+        </span>
+      `;
+
+      modal.classList.remove("hidden");
+    });
+
+    closeModal.addEventListener("click", function() {
+      modal.classList.add("hidden");
+    });
+
+    // Close modal by clicking outside
+    modal.addEventListener("click", function(event) {
+      if (event.target === modal) {
+        modal.classList.add("hidden");
+      }
+    });
+
+    // Initialize slider
+    updateExperienceUI(expSlider.value);
+  </script>
+
+</body>
+</html>
