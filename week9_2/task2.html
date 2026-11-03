@@ -729,8 +729,6 @@
     } catch (e) {
       if (e.name === 'AbortError') return;
 
-      console.error(e);
-
       setHint('Connection error', true);
 
       resultsMeta.textContent = '';
