@@ -68,14 +68,29 @@ footer{color:#65768a;text-align:center;font-size:13px;padding:10px 20px 30px}
 <div class="callout"><strong>How to read the matrix:</strong> “Lower” is better for every row. A value below the good threshold is in the recommended range. Your five displayed results are all within that range.</div>
 </section>
 <section class="panel">
-<h2>What these results mean</h2>
+<h2>Key insights from the screenshot</h2>
+<p class="sub">These observations are based only on the five metrics visible in the supplied performance panel.</p>
 <div class="insights">
-<div class="insight"><h3>1 · Faster first impression</h3><p>FCP of 0.5 s means visitors begin seeing page content quickly, reducing the blank-screen feeling.</p></div>
-<div class="insight"><h3>2 · Main content arrives early</h3><p>LCP of 0.5 s suggests the main visible content is available quickly in this test.</p></div>
-<div class="insight"><h3>3 · Smooth loading interaction</h3><p>TBT of 0 ms means the audit recorded no measurable long-task blocking during the measured loading period.</p></div>
-<div class="insight"><h3>4 · Stable visual layout</h3><p>CLS of 0 means elements did not unexpectedly jump around while the page loaded.</p></div>
-<div class="insight"><h3>5 · Quick visual completion</h3><p>Speed Index of 0.5 s indicates that visible parts of the page rendered rapidly under the tested conditions.</p></div>
+<div class="insight"><h3>1 · Content appears almost immediately</h3><p>FCP is 0.5 s. The browser displayed the first visible text or image quickly, so visitors are less likely to experience a blank page while waiting.</p></div>
+<div class="insight"><h3>2 · The main content is available early</h3><p>LCP is also 0.5 s. The largest visible content element appeared quickly, helping visitors reach the main information without a long wait.</p></div>
+<div class="insight"><h3>3 · No measured loading delay from blocking tasks</h3><p>TBT is 0 ms. This run recorded no measurable blocking time from long tasks during the loading measurement, which is a positive sign for responsiveness.</p></div>
+<div class="insight"><h3>4 · The layout stayed in place</h3><p>CLS is 0. Page elements did not unexpectedly shift during this run, making text and controls easier to follow and select.</p></div>
+<div class="insight"><h3>5 · The page became visible quickly</h3><p>Speed Index is 0.5 s. The visible parts of the page rendered rapidly, giving visitors a quicker sense that the portfolio is ready.</p></div>
+<div class="insight"><h3>6 · All five displayed results are in the good range</h3><p>Each value is below its corresponding Lighthouse “good” threshold. This gives a consistent positive result across loading speed, blocking time, and visual stability.</p></div>
 </div>
+</section>
+<section class="panel">
+<h2>Practical benefits for visitors</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>Performance strength</th><th>Visitor benefit</th><th>Portfolio impact</th></tr></thead>
+<tbody>
+<tr><td><strong>Fast first paint</strong></td><td>Visitors see that the page has started loading almost immediately.</td><td>Creates a stronger first impression and reduces perceived waiting.</td></tr>
+<tr><td><strong>Fast largest paint</strong></td><td>The main portfolio content becomes available quickly.</td><td>Helps visitors find assignments and information sooner.</td></tr>
+<tr><td><strong>Zero measured blocking time</strong></td><td>The loading audit found no measurable blocking from long tasks.</td><td>Supports a responsive experience while the page loads.</td></tr>
+<tr><td><strong>Zero layout shift</strong></td><td>Content remains in its expected position as it appears.</td><td>Makes reading and clicking links more predictable.</td></tr>
+<tr><td><strong>Fast visual completion</strong></td><td>The page looks ready quickly.</td><td>Encourages visitors to explore the weekly work instead of waiting.</td></tr>
+</tbody></table></div>
+<div class="callout"><strong>Overall benefit:</strong> The measured combination suggests that visitors can see the portfolio quickly, understand its layout without unexpected movement, and begin exploring its work with minimal loading delay.</div>
 </section>
 <section class="panel">
 <h2>Latest Lighthouse screenshot</h2>
@@ -87,8 +102,8 @@ footer{color:#65768a;text-align:center;font-size:13px;padding:10px 20px 30px}
 <section class="panel">
 <h2>Overall insight and conclusion</h2>
 <p>The audit indicates a fast and visually stable portfolio in this particular test: first content and largest content appeared in 0.5 seconds, blocking time was 0 ms, layout shift was zero, and Speed Index was 0.5 seconds. Together, these values point to a quick initial experience, responsive loading, and stable page presentation.</p>
-<p><strong>Comparison with the earlier audit:</strong> The earlier screenshot highlighted potential savings of 340 ms from render-blocking requests and 108 KiB from unused JavaScript, as well as one long main-thread task. The newer metric screenshot is encouraging, but it does not show whether those specific diagnostic warnings were resolved. A fresh Insights and Diagnostics panel is needed to confirm that.</p>
-<p class="sub" style="margin-top:12px">Note: Lighthouse results can vary with device, browser, network, cache, and test settings. These are results from the supplied audit, not a guarantee of identical performance for every visitor.</p>
+<p><strong>Conclusion:</strong> In the supplied test, the portfolio demonstrates very fast initial rendering and visual completion, no measured total blocking time, and no detected layout movement. These are strong signs of a smooth browsing experience and make the portfolio easier to access and explore.</p>
+<p class="sub" style="margin-top:12px">Important limitation: this screenshot shows performance metrics only. It does not show an overall Lighthouse performance score, accessibility score, SEO score, or the detailed diagnostics panel. Results may also vary with device, browser, network, cache, and test settings.</p>
 </section>
 </main>
 <footer>Week 9.2 · Task 2 — Lighthouse Performance Matrix</footer>
