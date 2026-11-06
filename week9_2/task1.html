@@ -173,9 +173,8 @@
       text-decoration: none;
       font-size: 14px;
       font-weight: 700;
-      transition: transform .2s ease, background .2s ease;
+      transition: background .15s ease;
     }
-    .button:hover { transform: translateY(-2px); }
     .button-light { color: var(--navy); background: white; }
     .button-outline { color: white; border-color: rgba(255,255,255,.35); background: transparent; }
     .page-main { max-width: 1160px; margin: auto; padding: 54px 28px 76px; }
@@ -250,9 +249,11 @@
       border: 1px solid var(--line);
       border-radius: var(--radius);
       box-shadow: 0 4px 16px rgba(20,48,79,.035);
-      transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease;
+      content-visibility: auto;
+      contain-intrinsic-size: auto 220px;
+      transition: border-color .15s ease;
     }
-    .week-card:hover { border-color: #c6d8eb; box-shadow: var(--shadow); transform: translateY(-2px); }
+    .week-card:hover { border-color: #c6d8eb; }
     .week-top { display: flex; align-items: center; justify-content: space-between; gap: 14px; margin-bottom: 17px; }
     .week-title { display: flex; align-items: center; gap: 12px; }
     .week-number {
@@ -284,7 +285,7 @@
       font-size: 12px;
       font-weight: 600;
       line-height: 1.35;
-      transition: background .2s ease, color .2s ease, border-color .2s ease;
+      transition: background .15s ease, color .15s ease;
     }
     .assignment::after { content: "↗"; color: #596b80; font-size: 14px; flex: 0 0 auto; }
     .assignment:hover { color: var(--blue); background: var(--blue-soft); border-color: #d9e7f5; }
