@@ -16,6 +16,12 @@
     .label{font-weight:700;color:#183d68}.note{color:#526276;font-size:14px}
     a{color:#245f9c;font-weight:700}a:focus-visible{outline:3px solid #145da0;outline-offset:3px}
     .back{display:inline-block;background:#fff;color:#102b4e;padding:11px 16px;border-radius:8px;text-decoration:none;margin-top:16px}
+    .comparison{border:1px solid #e8edf3;border-radius:10px;overflow:hidden;margin-top:14px}
+    .compare-row{display:grid;grid-template-columns:180px 1fr;gap:14px;padding:14px;border-bottom:1px solid #edf1f5}
+    .compare-row:last-child{border:0}.compare-label,.insight-title{font-weight:700;color:#183d68}
+    .insight{padding:13px 0;border-bottom:1px solid #edf1f5}.insight:last-of-type{border:0}
+    .insight p{margin:5px 0 0;color:#526276}
+    @media(max-width:600px){.compare-row{grid-template-columns:1fr;gap:4px}}
   </style>
 </head>
 <body>
@@ -49,8 +55,22 @@
       .audit-shot img{display:block;width:100%;height:auto;border:1px solid #dfe6ee;border-radius:10px}
       .audit-shot a:focus-visible{outline:3px solid #245f9c;outline-offset:4px;border-radius:10px}
     </style>
-    <section class="panel"><h2>How to verify</h2><p>Open the portfolio in Chrome, open DevTools → Lighthouse, select Performance, and run a fresh audit. Compare the new report with the earlier screenshot, especially render-blocking requests, network dependencies, unused JavaScript, and main-thread work.</p><p class="note">Performance scores can vary with device, browser, network, and Lighthouse settings. A new score should only be reported after running the audit.</p></section>
-    <section class="panel"><h2>Result</h2><p>The portfolio keeps its existing layout and responsive design, with fewer external dependencies, less off-screen rendering work, lighter card painting, and a more efficient search interaction.</p><p><a href="../index.html">View the optimized live portfolio →</a></p></section>
+    <section class="panel"><h2>What changed from the original website?</h2>
+      <p class="note">The original portfolio already had a clear layout and working assignment links. I kept that design and focused on the parts that could make the page heavier or slower.</p>
+      <div class="comparison">
+        <div class="compare-row"><div class="compare-label">Original version</div><div>Loaded web fonts from an external provider, used heavier card shadows, and rebuilt search text collections whenever the user typed.</div></div>
+        <div class="compare-row"><div class="compare-label">Updated version</div><div>Uses system fonts, lighter visual effects, off-screen content rendering hints, and cached search text to avoid repeated work.</div></div>
+      </div>
+      <p class="note" style="margin-top:14px">The goal was to improve loading and interaction efficiency without changing the portfolio's familiar blue-and-white appearance or removing coursework.</p>
+    </section>
+    <section class="panel"><h2>What the Lighthouse insights tell us</h2>
+      <div class="insight"><div class="insight-title">Render-blocking requests · estimated 340 ms</div><p>External resources can delay the first render. Replacing the externally loaded font with a system font removes that font request from the critical loading path.</p></div>
+      <div class="insight"><div class="insight-title">Unused JavaScript · estimated 108 KiB</div><p>The audit flags JavaScript that may not be needed for the initial page. Keeping the portfolio's interaction code small and avoiding unnecessary scripts helps reduce download and processing work.</p></div>
+      <div class="insight"><div class="insight-title">Main-thread work · 1 long task detected</div><p>Long JavaScript tasks can make a page feel less responsive. Caching assignment text and using a simple search loop reduces repeated processing during typing.</p></div>
+      <div class="insight"><div class="insight-title">Network dependency tree</div><p>Fewer third-party resources mean fewer external connections for the browser to resolve before the page is ready.</p></div>
+      <p class="note">These timings and warnings are the estimates shown in the supplied audit screenshot. They are diagnostic clues, not guaranteed savings; the updated page should be audited under the same Lighthouse conditions for a fair comparison.</p>
+    </section>
+    <section class="panel"><h2>Takeaway</h2><p>This task demonstrates that performance work is not only about visual redesign. Small technical changes — fewer external requests, less rendering work outside the viewport, lighter effects, and more efficient JavaScript — can make an existing site leaner while preserving its content and usability.</p><p><a href="../index.html">Visit the updated Web Programming Portfolio →</a></p></section>
   </main>
 </body>
 </html>
