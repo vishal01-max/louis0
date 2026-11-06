@@ -27,6 +27,28 @@
       <div class="item"><div class="label">3. Lighter visual rendering</div><div class="note">Reduced card shadows and kept hover transitions focused on simple color changes to limit paint work.</div></div>
       <div class="item"><div class="label">4. More efficient assignment search</div><div class="note">Cached assignment text once and skipped repeated filtering when the normalized search query has not changed.</div></div>
     </section>
+    <section class="panel">
+      <h2>Lighthouse performance screenshots</h2>
+      <p class="note">The screenshots below are included as visual evidence from the Lighthouse checks supplied for this task.</p>
+      <figure class="audit-shot">
+        <figcaption><strong>Performance score — 100</strong><span class="note">Lighthouse performance score shown in the supplied report.</span></figcaption>
+        <a href="Screenshot%202026-11-06%20113614.png" target="_blank" rel="noopener">
+          <img src="Screenshot%202026-11-06%20113614.png" alt="Lighthouse report showing a performance score of 100 for the Web Programming Portfolio" loading="lazy" decoding="async" width="1882" height="743">
+        </a>
+      </figure>
+      <figure class="audit-shot">
+        <figcaption><strong>Insights and diagnostics</strong><span class="note">Lighthouse audit details highlighting render-blocking requests, network dependencies, and unused JavaScript.</span></figcaption>
+        <a href="Screenshot%202026-11-06%20113700.png" target="_blank" rel="noopener">
+          <img src="Screenshot%202026-11-06%20113700.png" alt="Lighthouse insights and diagnostics for the Web Programming Portfolio" loading="lazy" decoding="async" width="1882" height="743">
+        </a>
+      </figure>
+    </section>
+    <style>
+      .audit-shot{margin:22px 0 0;padding-top:18px;border-top:1px solid #e8edf3}
+      .audit-shot figcaption{display:grid;gap:3px;margin-bottom:12px}
+      .audit-shot img{display:block;width:100%;height:auto;border:1px solid #dfe6ee;border-radius:10px}
+      .audit-shot a:focus-visible{outline:3px solid #245f9c;outline-offset:4px;border-radius:10px}
+    </style>
     <section class="panel"><h2>How to verify</h2><p>Open the portfolio in Chrome, open DevTools → Lighthouse, select Performance, and run a fresh audit. Compare the new report with the earlier screenshot, especially render-blocking requests, network dependencies, unused JavaScript, and main-thread work.</p><p class="note">Performance scores can vary with device, browser, network, and Lighthouse settings. A new score should only be reported after running the audit.</p></section>
     <section class="panel"><h2>Result</h2><p>The portfolio keeps its existing layout and responsive design, with fewer external dependencies, less off-screen rendering work, lighter card painting, and a more efficient search interaction.</p><p><a href="../index.html">View the optimized live portfolio →</a></p></section>
   </main>
