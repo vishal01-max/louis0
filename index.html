@@ -22,6 +22,7 @@
     }
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
+    /* Keep off-screen coursework from increasing the initial rendering cost. */
     .skip-link {
       position: absolute;
       top: 8px;
@@ -192,7 +193,7 @@
       background: white;
       border: 1px solid var(--line);
       border-radius: 14px;
-      box-shadow: var(--shadow);
+      box-shadow: 0 3px 12px rgba(20, 48, 79, .045);
     }
     .stat strong {
       display: block;
@@ -248,8 +249,9 @@
       background: var(--surface);
       border: 1px solid var(--line);
       border-radius: var(--radius);
-      box-shadow: 0 4px 16px rgba(20,48,79,.035);
+      box-shadow: 0 2px 8px rgba(20,48,79,.025);
       content-visibility: auto;
+      contain: layout paint;
       contain-intrinsic-size: auto 220px;
       transition: border-color .15s ease;
     }
@@ -601,8 +603,11 @@
         };
       });
 
+      let previousQuery = null;
       searchInput.addEventListener("input", () => {
         const query = searchInput.value.trim().toLowerCase();
+        if (query === previousQuery) return;
+        previousQuery = query;
         let visibleWeeks = 0;
 
         for (const week of weeks) {
