@@ -6,9 +6,6 @@
   <meta name="description" content="Bishal's Web Programming portfolio — weekly HTML, CSS and JavaScript assignments and projects.">
   <meta name="theme-color" content="#102b4e">
   <title>Web Programming Portfolio | Bishal</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
       --navy: #102b4e;
@@ -53,7 +50,7 @@
       margin: 0;
       color: var(--ink);
       background: var(--background);
-      font-family: "DM Sans", sans-serif;
+      font-family: Arial, Helvetica, sans-serif;
       line-height: 1.6;
     }
     a { color: inherit; }
@@ -63,7 +60,6 @@
       z-index: 20;
       background: rgba(255,255,255,.94);
       border-bottom: 1px solid var(--line);
-      backdrop-filter: blur(14px);
     }
     .nav-wrap {
       max-width: 1160px;
@@ -80,7 +76,7 @@
       align-items: center;
       gap: 11px;
       color: var(--navy);
-      font: 800 17px "Manrope", sans-serif;
+      font: 800 17px Arial, Helvetica, sans-serif;
       text-decoration: none;
       letter-spacing: -.4px;
     }
@@ -149,7 +145,7 @@
       height: 2px;
       background: #91c5f4;
     }
-    h1, h2, h3 { font-family: "Manrope", sans-serif; }
+    h1, h2, h3 { font-family: Arial, Helvetica, sans-serif; }
     .hero h1 {
       max-width: 720px;
       margin: 0;
@@ -202,7 +198,7 @@
     .stat strong {
       display: block;
       color: var(--navy);
-      font: 800 27px "Manrope", sans-serif;
+      font: 800 27px Arial, Helvetica, sans-serif;
       letter-spacing: -.8px;
     }
     .stat span { color: var(--muted); font-size: 13px; font-weight: 600; }
@@ -238,7 +234,7 @@
       border: 1px solid #dce5ef;
       border-radius: 10px;
       outline: none;
-      font: 500 14px "DM Sans", sans-serif;
+      font: 500 14px Arial, Helvetica, sans-serif;
     }
     .search-wrap input:focus { border-color: #7ba7d3; box-shadow: 0 0 0 3px rgba(40,100,165,.1); }
     .search-wrap input::placeholder {
@@ -268,7 +264,7 @@
       color: var(--blue);
       background: var(--blue-soft);
       border-radius: 12px;
-      font: 800 14px "Manrope", sans-serif;
+      font: 800 14px Arial, Helvetica, sans-serif;
     }
     .week-title h3 { margin: 0; color: var(--navy); font-size: 17px; letter-spacing: -.3px; }
     .week-count { color: #596b80; font-size: 12px; font-weight: 600; white-space: nowrap; }
@@ -583,38 +579,52 @@
   </footer>
 
   <script>
-    const searchInput = document.getElementById("assignmentSearch");
-    const weekCards = Array.from(document.querySelectorAll(".week-card"));
-    const emptyState = document.getElementById("emptyState");
+    (() => {
+      const searchInput = document.getElementById("assignmentSearch");
+      const emptyState = document.getElementById("emptyState");
+      const weekCards = document.querySelectorAll(".week-card");
 
-    searchInput.addEventListener("input", () => {
-      const query = searchInput.value.trim().toLowerCase();
-      let visibleWeeks = 0;
+      // Cache assignment text once instead of rebuilding arrays on every search.
+      const weeks = Array.from(weekCards, card => {
+        const links = card.querySelectorAll(".assignment");
+        const assignments = Array.from(links, link => ({
+          element: link,
+          searchText: link.textContent.toLowerCase()
+        }));
 
-      weekCards.forEach(card => {
-        const links = Array.from(card.querySelectorAll(".assignment"));
-        let visibleAssignments = 0;
-
-        links.forEach(link => {
-          const matches = link.textContent.toLowerCase().includes(query);
-          link.hidden = !matches;
-          if (matches) visibleAssignments++;
-        });
-
-        const showCard = visibleAssignments > 0 || !query;
-        card.hidden = !showCard;
-        if (showCard) visibleWeeks++;
-
-        const count = card.querySelector(".week-count");
-        if (count) {
-          count.textContent = query
-            ? visibleAssignments + (visibleAssignments === 1 ? " match" : " matches")
-            : links.length + (links.length === 1 ? " exercise" : " exercises");
-        }
+        return {
+          element: card,
+          count: card.querySelector(".week-count"),
+          assignments,
+          total: assignments.length
+        };
       });
 
-      emptyState.style.display = visibleWeeks === 0 ? "block" : "none";
-    });
+      searchInput.addEventListener("input", () => {
+        const query = searchInput.value.trim().toLowerCase();
+        let visibleWeeks = 0;
+
+        for (const week of weeks) {
+          let matches = 0;
+
+          for (const assignment of week.assignments) {
+            const isMatch = !query || assignment.searchText.includes(query);
+            assignment.element.hidden = !isMatch;
+            if (isMatch) matches++;
+          }
+
+          const showWeek = matches > 0;
+          week.element.hidden = !showWeek;
+          if (showWeek) visibleWeeks++;
+
+          week.count.textContent = query
+            ? matches + (matches === 1 ? " match" : " matches")
+            : week.total + (week.total === 1 ? " exercise" : " exercises");
+        }
+
+        emptyState.style.display = visibleWeeks === 0 ? "block" : "none";
+      });
+    })();
   </script>
 </body>
 </html>
