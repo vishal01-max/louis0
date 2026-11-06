@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Week 9.2 Task 2: Lighthouse performance metrics analysis for the Web Programming Portfolio.">
+  <meta name="theme-color" content="#102b4e">
+  <title>Week 9.2 · Task 2 | Lighthouse Metrics Analysis</title>
+  <style>
+    *{box-sizing:border-box}body{margin:0;background:#f4f7fb;color:#17283d;font:16px/1.65 Arial,Helvetica,sans-serif}
+    header{background:linear-gradient(115deg,#102b4e,#24588b);color:#fff;padding:48px 24px}
+    .wrap{max-width:980px;margin:auto}.tag{font-size:12px;font-weight:700;letter-spacing:1.5px;color:#c6dcf3;text-transform:uppercase}
+    h1{font-size:clamp(30px,5vw,46px);line-height:1.12;margin:12px 0}.lead{max-width:760px;color:#d4e2f1}
+    main{max-width:980px;margin:30px auto;padding:0 22px 60px}.panel{background:#fff;border:1px solid #e1e8f0;border-radius:14px;padding:24px;margin:18px 0}
+    h2{font-size:21px;color:#102b4e;margin:0 0 12px}p{margin:8px 0}.note{color:#586a80;font-size:14px}
+    a{color:#245f9c;font-weight:700}.back{display:inline-block;background:#fff;color:#102b4e;padding:10px 15px;border-radius:8px;text-decoration:none;margin-top:14px}
+    .metrics{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:16px}
+    .metric{border:1px solid #e2eaf2;border-radius:11px;padding:16px;background:#fbfdff}
+    .metric-name{font-size:14px;font-weight:700;color:#38516e}.metric-value{font-size:30px;font-weight:700;color:#07864d;margin:4px 0}
+    .metric-target{font-size:13px;color:#5a6d82}.status{display:inline-block;font-size:11px;font-weight:700;color:#087747;background:#e7f7ef;border-radius:20px;padding:3px 8px;margin-top:8px}
+    table{width:100%;border-collapse:collapse;margin-top:12px;font-size:14px}th,td{text-align:left;padding:12px 10px;border-bottom:1px solid #e8eef4;vertical-align:top}th{color:#38516e;background:#f7f9fc}
+    .good{color:#07864d;font-weight:700}.insight{padding:14px 0;border-bottom:1px solid #edf1f5}.insight:last-child{border:0}.insight strong{color:#183d68}
+    .callout{background:#eef5fc;border-left:4px solid #3978b8;padding:14px 16px;border-radius:7px;margin-top:14px}
+    @media(max-width:620px){.metrics{grid-template-columns:1fr}.panel{padding:18px}table{font-size:12px}th,td{padding:9px 6px}}
+  </style>
+</head>
+<body>
+  <header><div class="wrap"><div class="tag">Week 9.2 · Task 2</div><h1>Lighthouse Performance Metrics Analysis</h1><p class="lead">An analysis of the latest Lighthouse results for my Web Programming Portfolio, explaining what each metric measures, why lower values are better, and what the results say about the user experience.</p><a class="back" href="../index.html">← Back to portfolio</a></div></header>
+  <main>
+    <section class="panel"><h2>Latest audit results</h2><p class="note">Values transcribed from the supplied Lighthouse screenshot.</p>
+      <div class="metrics">
+        <div class="metric"><div class="metric-name">First Contentful Paint (FCP)</div><div class="metric-value">0.5 s</div><div class="metric-target">Good: 1.8 seconds or less</div><span class="status">Excellent</span></div>
+        <div class="metric"><div class="metric-name">Largest Contentful Paint (LCP)</div><div class="metric-value">0.5 s</div><div class="metric-target">Good: 2.5 seconds or less</div><span class="status">Excellent</span></div>
+        <div class="metric"><div class="metric-name">Total Blocking Time (TBT)</div><div class="metric-value">0 ms</div><div class="metric-target">Good: 200 milliseconds or less</div><span class="status">Excellent</span></div>
+        <div class="metric"><div class="metric-name">Cumulative Layout Shift (CLS)</div><div class="metric-value">0</div><div class="metric-target">Good: 0.1 or less</div><span class="status">Excellent</span></div>
+        <div class="metric"><div class="metric-name">Speed Index</div><div class="metric-value">0.5 s</div><div class="metric-target">Lower values indicate faster visual completion</div><span class="status">Very fast</span></div>
+      </div>
+    </section>
+    <section class="panel"><h2>Higher vs. lower values</h2><p>For these five metrics, lower values generally indicate better performance. The meaning of a low value differs by metric.</p>
+      <table><thead><tr><th>Metric</th><th>When the value is high</th><th>When the value is low</th><th>My result</th></tr></thead><tbody>
+        <tr><td><strong>FCP</strong></td><td>First visible content takes longer to appear.</td><td>Users see the page start rendering sooner.</td><td class="good">0.5 s</td></tr>
+        <tr><td><strong>LCP</strong></td><td>Main page content takes longer to load.</td><td>The largest visible content appears sooner.</td><td class="good">0.5 s</td></tr>
+        <tr><td><strong>TBT</strong></td><td>More time is spent with the main thread blocked.</td><td>Less blocking; interactions can feel more responsive.</td><td class="good">0 ms</td></tr>
+        <tr><td><strong>CLS</strong></td><td>Elements move unexpectedly as the page loads.</td><td>The layout stays visually stable.</td><td class="good">0</td></tr>
+        <tr><td><strong>Speed Index</strong></td><td>The visible page takes longer to fill in.</td><td>The page becomes visually complete sooner.</td><td class="good">0.5 s</td></tr>
+      </tbody></table>
+    </section>
+    <section class="panel"><h2>Key merits and insights</h2>
+      <div class="insight"><strong>1. Fast initial display</strong><p>FCP at 0.5 seconds means users see the first visible page content quickly, reducing the feeling of waiting.</p></div>
+      <div class="insight"><strong>2. Main content appears quickly</strong><p>LCP at 0.5 seconds indicates that the largest visible content in this test appeared quickly, helping users reach the main page experience sooner.</p></div>
+      <div class="insight"><strong>3. No measured blocking time</strong><p>TBT at 0 ms means Lighthouse detected no measurable total blocking time in this run. This is a positive sign for responsiveness during loading.</p></div>
+      <div class="insight"><strong>4. Stable page layout</strong><p>CLS at 0 means the audit detected no unexpected layout shifts. Buttons, text, and cards should remain in their expected positions as content loads.</p></div>
+      <div class="insight"><strong>5. Fast visual completion</strong><p>Speed Index at 0.5 seconds suggests the visible parts of the page rendered quickly in the tested conditions.</p></div>
+    </section>
+    <section class="panel"><h2>Overall interpretation</h2><p>The results show a fast and stable page in this Lighthouse run: content appeared quickly, there was no measured blocking time, and no layout shift was detected. These are strong signs of a smooth browsing experience.</p>
+      <div class="callout"><strong>Important comparison note:</strong> The earlier audit screenshot showed potential savings of 340 ms from render-blocking requests and 108 KiB from unused JavaScript, plus one long main-thread task. The new metrics are encouraging, but they do not by themselves prove those individual diagnostics have disappeared. To confirm that, compare the new Lighthouse Insights and Diagnostics panels using the same device, browser, and test settings.</div>
+      <p class="note" style="margin-top:14px">Lighthouse scores and timings are estimates and can vary between runs because of device speed, browser conditions, network, cache, and audit settings.</p>
+    </section>
+    <section class="panel"><h2>Conclusion</h2><p>My portfolio achieved strong results across all five displayed performance metrics. The low FCP, LCP, TBT, CLS, and Speed Index values indicate quick rendering, responsive loading, and a stable layout. This analysis shows why performance optimization matters: it improves how quickly users can see and interact with a website without requiring a complete visual redesign.</p><p><a href="../index.html">View the Web Programming Portfolio →</a></p></section>
+  </main>
+</body>
+</html>
