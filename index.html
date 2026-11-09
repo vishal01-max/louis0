@@ -336,125 +336,6 @@
     }
     .footer-inner a { color: var(--blue); text-decoration: none; font-weight: 700; }
 
-    .project-course-tag {
-      display: inline-flex;
-      padding: 7px 11px;
-      color: #315d89;
-      background: #edf4fc;
-      border: 1px solid #dce9f6;
-      border-radius: 999px;
-      font-size: 10px;
-      font-weight: 800;
-      letter-spacing: .8px;
-      white-space: nowrap;
-    }
-    .team-project-section { margin-top: 58px; }
-    .team-project-section .section-heading { margin-top: 0; }
-    .team-project-card {
-      display: grid;
-      grid-template-columns: .85fr 1.15fr;
-      overflow: hidden;
-      min-height: 320px;
-      background: #fff;
-      border: 1px solid var(--line);
-      border-radius: 20px;
-      box-shadow: var(--shadow);
-    }
-    .project-art {
-      position: relative;
-      display: grid;
-      place-items: center;
-      min-height: 300px;
-      overflow: hidden;
-      background: radial-gradient(circle at 50% 45%, #284f83 0%, #17375f 42%, #102b4e 100%);
-    }
-    .project-art-orbit {
-      position: absolute;
-      border: 1px solid rgba(255,255,255,.16);
-      border-radius: 50%;
-    }
-    .orbit-one { width: 310px; height: 310px; }
-    .orbit-two { width: 220px; height: 220px; }
-    .project-app-icon {
-      z-index: 1;
-      display: block;
-      width: 132px;
-      height: 132px;
-      object-fit: contain;
-      border-radius: 28px;
-      box-shadow: 0 18px 50px rgba(0,0,0,.28);
-    }
-    .project-art-caption {
-      position: absolute;
-      bottom: 22px;
-      color: #c9d9ed;
-      font-size: 10px;
-      font-weight: 800;
-      letter-spacing: 2.2px;
-    }
-    .project-chat-bubble {
-      position: absolute;
-      z-index: 2;
-      padding: 10px 14px;
-      color: #20334c;
-      background: #fff;
-      border-radius: 13px 13px 13px 4px;
-      box-shadow: 0 10px 24px rgba(0,0,0,.15);
-      font-size: 11px;
-      font-weight: 700;
-    }
-    .bubble-one { top: 24%; left: 8%; }
-    .bubble-two { right: 7%; bottom: 27%; border-radius: 13px 13px 4px 13px; }
-    .team-project-copy { align-self: center; padding: 34px clamp(24px, 4vw, 48px); }
-    .project-meta {
-      display: flex;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 8px;
-      color: #52749a;
-      font-size: 10px;
-      font-weight: 800;
-      letter-spacing: 1.1px;
-    }
-    .project-live-dot { width: 7px; height: 7px; background: #28a879; border-radius: 50%; }
-    .project-meta-divider { color: #a7b5c5; }
-    .team-project-copy h3 {
-      margin: 13px 0 10px;
-      color: var(--navy);
-      font-size: clamp(25px, 3vw, 34px);
-      line-height: 1.2;
-      letter-spacing: -1px;
-    }
-    .team-project-copy p { max-width: 560px; margin: 0; color: var(--muted); font-size: 14px; line-height: 1.8; }
-    .project-tech-list { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 19px; }
-    .project-tech-list span {
-      padding: 6px 10px;
-      color: #315d89;
-      background: #f0f5fb;
-      border: 1px solid #e1ebf5;
-      border-radius: 7px;
-      font-size: 11px;
-      font-weight: 700;
-    }
-    .project-card-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 10px 16px; margin-top: 24px; }
-    .project-action-primary, .project-action-secondary {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      min-height: 42px;
-      padding: 0 14px;
-      border-radius: 8px;
-      text-decoration: none;
-      font-size: 12px;
-      font-weight: 700;
-    }
-    .project-action-primary { color: #fff; background: var(--navy); }
-    .project-action-primary:hover { color: #fff; background: var(--navy-2); }
-    .project-action-secondary { color: var(--navy); background: #edf4fc; border: 1px solid #dce9f6; }
-    .project-action-secondary:hover { color: var(--blue); }
-    .project-source-link { color: var(--blue); font-size: 12px; font-weight: 700; text-decoration: none; }
-    .project-source-link:hover { text-decoration: underline; }
-
     @media (max-width: 760px) {
       .nav-wrap { min-height: 64px; padding: 0 20px; }
       .nav-links { gap: 15px; }
@@ -500,7 +381,6 @@
       </a>
       <nav class="nav-links" aria-label="Main navigation">
         <a href="#assignments">Assignments</a>
-        <a href="#team-project">Team Project</a>
         <a href="#about">About</a>
         <a href="#readme">README</a>
       </nav>
@@ -665,41 +545,6 @@
 
 
 
-
-    <section class="team-project-section" id="team-project" aria-labelledby="team-project-title">
-      <div class="section-heading">
-        <div>
-          <p class="section-kicker">Featured collaboration</p>
-          <h2 id="team-project-title">Team project</h2>
-          <p>A collaborative project developed as part of my university coursework.</p>
-        </div>
-        <span class="project-course-tag">GACHON UNIVERSITY</span>
-      </div>
-
-      <article class="team-project-card">
-        <div class="project-art" aria-hidden="true">
-          <div class="project-art-orbit orbit-one"></div>
-          <div class="project-art-orbit orbit-two"></div>
-          <img class="project-app-icon" src="Team%20Project/Gaze_%20logo.webp" alt="Gaze messaging application logo" width="132" height="132" loading="lazy">
-          <span class="project-art-caption">STAY CONNECTED</span>
-          <div class="project-chat-bubble bubble-one">Hey! 👋</div>
-          <div class="project-chat-bubble bubble-two">Let's catch up soon.</div>
-        </div>
-        <div class="team-project-copy">
-          <div class="project-meta"><span class="project-live-dot"></span> TEAM PROJECT <span class="project-meta-divider">/</span> MESSAGING APPLICATION</div>
-          <h3>Gaze — Stay connected.</h3>
-          <p>Gaze is a team-built messaging application concept focused on simple digital communication. Explore our project showcase, learn about the idea, and open the messaging application.</p>
-          <div class="project-tech-list" aria-label="Project technologies">
-            <span>HTML</span><span>CSS</span><span>JavaScript</span><span>Firebase</span><span>WebRTC</span>
-          </div>
-          <div class="project-card-actions">
-            <a class="project-action-primary" href="Team%20Project/project-details.html">Explore project <span aria-hidden="true">↗</span></a>
-            <a class="project-action-secondary" href="Team%20Project/team-project.html">Open Gaze app <span aria-hidden="true">↗</span></a>
-            <a class="project-source-link" href="https://github.com/vishal01-max/louis0/tree/main/Team%20Project" target="_blank" rel="noopener noreferrer">View source on GitHub</a>
-          </div>
-        </div>
-      </article>
-    </section>
 
     <section class="about-panel" id="about">
       <div>
