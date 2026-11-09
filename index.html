@@ -377,17 +377,12 @@
     .orbit-two { width: 220px; height: 220px; }
     .project-app-icon {
       z-index: 1;
-      display: grid;
-      place-items: center;
-      width: 104px;
-      height: 104px;
-      color: #fff;
-      background: linear-gradient(145deg, #a58aff, #527fe8);
-      border: 1px solid rgba(255,255,255,.35);
-      border-radius: 30px;
+      display: block;
+      width: 132px;
+      height: 132px;
+      object-fit: contain;
+      border-radius: 28px;
       box-shadow: 0 18px 50px rgba(0,0,0,.28);
-      font-size: 54px;
-      font-weight: 800;
     }
     .project-art-caption {
       position: absolute;
@@ -685,7 +680,7 @@
         <div class="project-art" aria-hidden="true">
           <div class="project-art-orbit orbit-one"></div>
           <div class="project-art-orbit orbit-two"></div>
-          <div class="project-app-icon">G</div>
+          <img class="project-app-icon" src="Team%20Project/Gaze_%20logo.webp" alt="Gaze messaging application logo" width="132" height="132" loading="lazy">
           <span class="project-art-caption">STAY CONNECTED</span>
           <div class="project-chat-bubble bubble-one">Hey! 👋</div>
           <div class="project-chat-bubble bubble-two">Let's catch up soon.</div>
