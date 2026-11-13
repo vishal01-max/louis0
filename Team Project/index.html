@@ -1,53 +1,344 @@
-<!-- TEAM PROJECT HTML TEST -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Web Programming Team Project</title>
-  <style>
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #101827, #263b63);
-      color: white;
-      min-height: 100vh;
-      display: grid;
-      place-items: center;
-      padding: 24px;
-    }
-    main {
-      max-width: 700px;
-      padding: 50px 35px;
-      text-align: center;
-      background: rgba(255,255,255,.09);
-      border: 1px solid rgba(255,255,255,.2);
-      border-radius: 20px;
-    }
-    h1 { font-size: 2.4rem; }
-    p { color: #d5deef; line-height: 1.8; }
-    a {
-      display: inline-block;
-      margin-top: 22px;
-      padding: 13px 22px;
-      background: #7c9cff;
-      color: #101827;
-      text-decoration: none;
-      border-radius: 8px;
-      font-weight: bold;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Learn about Gaze, a simple chatting and messaging project.">
+
+    <title>Gaze | Project Details</title>
+
+    <style>
+        /* ===== General Styling ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #f3f6fc;
+            color: #263248;
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        /* ===== Header ===== */
+        .header {
+            background: linear-gradient(135deg, #101c3b, #244c91, #4779c9);
+            color: white;
+            text-align: center;
+            padding: 75px 20px 85px;
+            position: relative;
+        }
+
+        .back-link {
+            position: absolute;
+            top: 25px;
+            left: 30px;
+            color: white;
+            border: 1px solid rgba(255,255,255,0.4);
+            padding: 8px 17px;
+            border-radius: 30px;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .back-link:hover {
+            background: white;
+            color: #244c91;
+        }
+
+        .eyebrow {
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            font-size: 12px;
+            color: #c5d9ff;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .header h1 {
+            font-size: clamp(48px, 8vw, 76px);
+            font-weight: 800;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+
+        .header > p:last-child {
+            font-size: 17px;
+            color: #e0eaff;
+        }
+
+        /* ===== Main Content ===== */
+        main {
+            max-width: 1000px;
+            margin: -35px auto 50px;
+            padding: 0 22px;
+            position: relative;
+        }
+
+        .panel {
+            background: white;
+            padding: 35px;
+            margin-bottom: 25px;
+            border-radius: 18px;
+            border: 1px solid #e8edf5;
+            box-shadow: 0 8px 30px rgba(25, 48, 85, 0.07);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .panel:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 14px 35px rgba(25, 48, 85, 0.11);
+        }
+
+        .panel h2 {
+            font-size: 25px;
+            color: #173b75;
+            margin-bottom: 15px;
+            padding-left: 14px;
+            border-left: 4px solid #4779c9;
+        }
+
+        .panel p {
+            color: #657187;
+            margin-bottom: 15px;
+            font-size: 15px;
+        }
+
+        /* ===== Buttons ===== */
+        .actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 23px;
+        }
+
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: #244c91;
+            color: white;
+            padding: 12px 19px;
+            border-radius: 9px;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.25s ease;
+        }
+
+        .button:hover {
+            background: #142e5b;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(36, 76, 145, 0.2);
+        }
+
+        .button.secondary {
+            background: #edf3fc;
+            color: #244c91;
+            border: 1px solid #dce7f8;
+        }
+
+        .button.secondary:hover {
+            background: #dce8fa;
+            color: #142e5b;
+        }
+
+        /* ===== Video Section ===== */
+        .hint {
+            font-size: 14px;
+        }
+
+        .video-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+            padding: 14px 22px;
+            border-radius: 10px;
+            background: #fff0f0;
+            color: #c33c48;
+            font-weight: 700;
+            border: 1px solid #ffdddd;
+            transition: 0.3s;
+        }
+
+        .video-link:hover {
+            background: #c33c48;
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* ===== Footer ===== */
+        footer {
+            text-align: center;
+            padding: 25px 15px;
+            background: #101c3b;
+            color: #c5d2e8;
+            font-size: 13px;
+            letter-spacing: 0.5px;
+        }
+
+        /* ===== Responsive Design ===== */
+        @media (max-width: 600px) {
+            .header {
+                padding: 100px 20px 65px;
+            }
+
+            .back-link {
+                top: 20px;
+                left: 20px;
+            }
+
+            .header h1 {
+                font-size: 48px;
+            }
+
+            .header > p:last-child {
+                font-size: 14px;
+            }
+
+            main {
+                padding: 0 14px;
+            }
+
+            .panel {
+                padding: 23px 19px;
+            }
+
+            .panel h2 {
+                font-size: 21px;
+            }
+
+            .actions {
+                flex-direction: column;
+            }
+
+            .button {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
 </head>
+
 <body>
-  <main>
-    <h1>Web Programming Team Project</h1>
-    <p>Welcome to our Web Programming Team Project.</p>
-    <p>This project represents our practical learning, collaboration, and web development skills at Gachon University.</p>
-    <p>Created as part of our university Web Programming coursework.</p>
-    <a href="https://rawatimansingh718-vk.github.io/Iman/index.html">
-      Back to Main Website
-    </a>
-  </main>
+
+    <header class="header">
+        <a class="back-link" href="../index.html">← Back to Home</a>
+
+        <p class="eyebrow">Team Project</p>
+        <h1>Gaze</h1>
+        <p>A simple chatting and messaging app to connect people together.</p>
+    </header>
+
+    <main>
+
+        <!-- About the Project -->
+        <section class="panel" aria-labelledby="about-title">
+
+            <h2 id="about-title">About the Project</h2>
+
+            <p>
+                Gaze is a simple chatting and messaging app to connect people together.
+            </p>
+
+            <p>The problems we want to solve.</p>
+
+            <div class="actions">
+                <a class="button" href="team-project.html">
+                    Visit the Gaze Website →
+                </a>
+
+                <a class="button secondary" href="../index.html#team-project">
+                    Back to Home
+                </a>
+            </div>
+
+        </section>
+
+        <!-- Project Resources -->
+        <section class="panel" aria-labelledby="resources-title">
+
+            <h2 id="resources-title">Project Resources</h2>
+
+            <p>
+                Explore our project presentation and team members' web development projects.
+            </p>
+
+            <div class="actions">
+
+                <a class="button"
+                   href="https://canva.link/8cjjb55nvxh2sne"
+                   target="_blank"
+                   rel="noopener noreferrer">
+                    ✦ View Project Presentation
+                </a>
+
+                <a class="button secondary"
+                   href="https://syushantu-ops.github.io/Web/"
+                   target="_blank"
+                   rel="noopener noreferrer">
+                    Neupane Sushant (202637472) – GitHub Pages
+                </a>
+
+                <a class="button secondary"
+                   href="https://rawatimansingh718-vk.github.io/Iman/"
+                   target="_blank"
+                   rel="noopener noreferrer">
+                    Rawat Iman Singh (202637455) – GitHub Pages
+                </a>
+
+                <a class="button secondary"
+                   href="https://anish123619.github.io/web-programming/"
+                   target="_blank"
+                   rel="noopener noreferrer">
+                    Tamang Anish (202637595) – GitHub Pages
+                </a>
+
+                <a class="button secondary"
+                   href="https://sirlab1.github.io/SATKAR..LAB/"
+                   target="_blank"
+                   rel="noopener noreferrer">
+                    Khadka Satkar (202637619) – GitHub Pages
+                </a>
+
+            </div>
+
+        </section>
+
+        <!-- Project Video -->
+        <section class="panel" aria-labelledby="video-title">
+
+            <h2 id="video-title">Project Proposal Video</h2>
+
+            <p class="hint">
+                Watch our Team 12 project proposal video:
+            </p>
+
+            <a
+                href="https://drive.google.com/file/d/16iirBqWk17teamhFiRF-3VQJ-KfzFb49/view?usp=sharing"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="video-link">
+
+                ▶ Watch Project Proposal Video (Group-12)
+
+            </a>
+
+        </section>
+
+    </main>
+
+    <footer>
+        Gaze · Team Project · Gachon University
+    </footer>
+
 </body>
 </html>
