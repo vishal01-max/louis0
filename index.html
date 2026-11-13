@@ -301,6 +301,87 @@
       border: 1px dashed #cbd7e4;
       border-radius: 14px;
     }
+    .team-project-card {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      overflow: hidden;
+      margin-top: 64px;
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .project-art {
+      min-height: 300px;
+      display: grid;
+      place-items: center;
+      padding: 30px;
+      color: white;
+      background: radial-gradient(circle at 75% 20%, #477fb5 0, transparent 34%), linear-gradient(135deg, #102b4e, #24588b);
+    }
+    .project-art-mark {
+      width: 150px;
+      height: 150px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(255,255,255,.35);
+      border-radius: 38px;
+      background: rgba(255,255,255,.1);
+      font-size: 68px;
+      font-weight: 800;
+      box-shadow: 0 18px 45px rgba(0,0,0,.16);
+    }
+    .team-project-copy {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 38px;
+    }
+    .project-course-tag {
+      display: inline-flex;
+      margin-bottom: 14px;
+      padding: 6px 10px;
+      color: #315d89;
+      background: var(--blue-soft);
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .7px;
+      text-transform: uppercase;
+    }
+    .team-project-copy h2 {
+      margin: 0;
+      color: var(--navy);
+      font-size: clamp(27px, 3vw, 36px);
+      letter-spacing: -1px;
+    }
+    .team-project-copy p {
+      max-width: 480px;
+      margin: 13px 0 22px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.8;
+    }
+    .project-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+    .project-actions a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 42px;
+      padding: 0 15px;
+      color: white;
+      background: var(--navy);
+      border: 1px solid var(--navy);
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .project-actions a.secondary {
+      color: var(--navy);
+      background: white;
+      border-color: #dce5ef;
+    }
     .about-panel {
       display: grid;
       grid-template-columns: 1.2fr .8fr;
@@ -552,6 +633,20 @@
       <div class="empty-state" id="emptyState" role="status" aria-live="polite">No assignments match your search. Try another keyword.</div>
     </section>
 
+    <section class="team-project-card" id="team-project" aria-labelledby="team-project-title">
+      <div class="project-art" aria-hidden="true">
+        <div class="project-art-mark">G</div>
+      </div>
+      <div class="team-project-copy">
+        <span class="project-course-tag">Featured team project</span>
+        <h2 id="team-project-title">Gaze</h2>
+        <p>A simple chatting and messaging app designed to help people connect. Explore the team project page and its details.</p>
+        <div class="project-actions">
+          <a href="Team%20Project/index.html">Open Gaze project ↗</a>
+          <a class="secondary" href="Team%20Project/project-details.html">View project details</a>
+        </div>
+      </div>
+    </section>
 
 
 
