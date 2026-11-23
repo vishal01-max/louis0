@@ -9,380 +9,195 @@
 
 
 <style>
-main {
-  max-width: 1180px;
-  margin: auto;
-  padding: clamp(16px,4vw,52px);
+:root{
+  color-scheme:light;
+  --ink:#17231f;
+  --muted:#66756d;
+  --paper:#f5f4ed;
+  --card:#fffefa;
+  --line:#dce2d8;
+  --green:#1f684f;
+  --green-dark:#164b3a;
+  --lime:#d8f36a;
+  --orange:#ed8158;
+  --shadow:0 18px 45px rgba(27,48,38,.08);
 }
-
-header { padding: 0 0 22px; }
-
-h1 {
-  font-size: clamp(2rem,6vw,4.2rem);
-  line-height: 1;
-  margin: .55em 0 .25em;
-  letter-spacing: -.04em;
-}
-
-h2,h3 { line-height: 1.2; }
-
-a { color: #a8d8ff; }
-
-section.task {
-  margin-bottom: 18px;
-  scroll-margin-top: 20px;
-}
-
-article,aside {
-  border: 1px solid var(--line);
-  border-radius: 18px;
-  padding: 18px;
-  background: linear-gradient(145deg,#211f2b,#171923);
-  min-width: 0;
-  box-shadow: 0 12px 30px #00000020;
-}
-
-.shop {
-  display: grid;
-  grid-template-columns: minmax(0,2fr) minmax(260px,1fr);
-  gap: 18px;
-}
-
-.products,.labs {
-  display: grid;
-  grid-template-columns: repeat(auto-fit,minmax(min(100%,220px),1fr));
-  gap: 16px;
-}
-
-.labs {
-  grid-template-columns: repeat(auto-fit,minmax(min(100%,300px),1fr));
-}
-
-.products article {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  transition: transform .2s ease,border-color .2s ease,box-shadow .2s ease;
-}
-
-.products article:hover {
-  transform: translateY(-4px);
-  border-color: #83b9ed;
-  box-shadow: 0 16px 34px #00000038;
-}
-
-.products img {
-  display: block;
-  width: 100%;
-  height: 175px;
-  object-fit: contain;
-  background: linear-gradient(135deg,#f4f7fb,#e4eaf2);
-  border-radius: 13px;
-  padding: 12px;
-}
-
-.products h3 {
-  font-size: 1rem;
-  min-height: 2.4em;
-  margin: .25rem 0;
-}
-
-.products article p {
-  font-weight: 750;
-  color: #a8d8ff;
-  margin: .2rem 0 .6rem;
-}
-
-button,input,textarea { font: inherit; }
-
-button {
-  border: 1px solid #527ba5;
-  border-radius: 10px;
-  padding: .55rem .85rem;
-  background: #263d58;
-  color: inherit;
-  cursor: pointer;
-  margin: .15rem;
-  transition: background .2s ease,transform .2s ease;
-}
-
-button:disabled {
-  opacity: .5;
-  cursor: default;
-}
-
-button:hover:not(:disabled) {
-  background: #365b80;
-  transform: translateY(-1px);
-}
-
-:focus-visible {
-  outline: 3px solid #ffd68e;
-  outline-offset: 3px;
-}
-
-textarea,input:not([type=checkbox]) {
-  display: block;
-  width: 100%;
-  background: #11151e;
-  border: 1px solid #527ba5;
-  color: inherit;
-  border-radius: 10px;
-  padding: .65rem;
-  margin: .4rem 0;
-}
-
-textarea { resize: vertical; }
-
-.controls {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 7px;
-}
-
-li {
-  margin-block: .4rem;
-  overflow-wrap: anywhere;
-}
-
-.jump { margin-bottom: 24px; }
-
-.jump a {
-  border: 1px solid var(--line);
-  padding: 8px 12px;
-  border-radius: 8px;
-}
-
-.jump a:hover { border-color: #83b9ed; }
-
-.task:target { border-color: #83b9ed; }
-
-@media(max-width:740px) {
-  .shop { grid-template-columns: 1fr; }
-}
-
-main .hero { padding: 36px 0 22px; }
-
-.workspace {
-  display: grid;
-  grid-template-columns: 220px minmax(0,1fr);
-  gap: 20px;
-  align-items: start;
-  padding-bottom: 40px;
-}
-
-.exercise-menu {
-  display: grid;
-  gap: 6px;
-  padding: 16px;
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  background: var(--panel);
-}
-
-.exercise-menu h2,.exercise-menu p { margin: 0; }
-
-.exercise-menu progress {
-  width: 100%;
-  accent-color: var(--red);
-  margin-bottom: 8px;
-}
-
-.exercise-menu button { text-align: left; margin: 0; }
-
-.exercise-menu button[aria-pressed=true] {
-  border-color: #ff7180;
-  background: #652530;
-}
-
-.exercise-toolbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-  flex-wrap: wrap;
-  margin-bottom: 10px;
-}
-
-.exercise-stage .task:hover { transform: none; }
-.exercise-stage .task h2 { margin-top: 0; }
-
-@media(max-width:780px) {
-  .workspace { grid-template-columns: 1fr; }
-
-  .exercise-menu {
-    grid-template-columns: repeat(2,minmax(0,1fr));
-  }
-
-  .exercise-menu h2,
-  .exercise-menu p,
-  .exercise-menu progress {
-    grid-column: 1/-1;
-  }
-}
-
-.desk-tools {
-  display: grid;
-  gap: 12px;
-  margin-bottom: 16px;
-}
-
-.desk-tools>div {
-  border: 1px solid var(--line);
-  padding: 12px;
-  border-radius: 10px;
-}
-
-.desk-tools h3,.desk-tools p { margin: 0 0 6px; }
-
-.desk-tools button[aria-pressed=true] {
-  background: #652530;
-  border-color: #ff7180;
-}
-
-.shop { align-items: start; }
-
-.budget-label {
-  display: block;
-  font-weight: 700;
-}
-
-.budget-label input[type=range] {
-  padding: 0;
-  accent-color: var(--red);
-}
-
-.shop progress {
-  width: 100%;
-  accent-color: var(--red);
-}
-
-.budget-over { color: #ff9da8; }
-
-.desk-items {
-  list-style: none;
-  padding: 0;
-}
-
-.desk-items li {
-  border-top: 1px solid var(--line);
-  padding-top: 8px;
-}
-
-.desk-items small { display: block; }
-
-.desk-total {
-  font-size: 16px;
-  font-weight: 700;
-  color: var(--text);
-}
-
-.launchpad {
-  display: grid;
-  grid-template-columns: 1fr minmax(0,.78fr);
-  align-items: center;
-  gap: 28px;
-  margin: 26px 0;
-  padding: 32px!important;
-  border: 1px solid var(--line);
-  border-radius: 18px;
-  background: radial-gradient(ellipse at 0% 100%,#59162290,transparent 70%),#141318;
-}
-
-.launchpad h1 {
-  font-size: clamp(52px,8vw,104px);
-  margin: 12px 0;
-}
-
-.launch-button {
-  background: #a61931;
-  font-weight: 700;
-}
-
-.launch-preview {
-  padding: 20px;
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  background: #0c0b0f;
-}
-
-.launch-detail { min-height: 116px; }
-
-.launch-detail h2,.launch-detail p {
-  margin: 0 0 8px;
-}
-
-.launch-choices {
-  display: grid;
-  grid-template-columns: repeat(2,minmax(0,1fr));
-  gap: 6px;
-}
-
-.launch-choices button {
-  text-align: left;
-  margin: 0;
-  font-size: .86rem;
-}
-
-.launch-choices button[aria-pressed=true] {
-  background: #652530;
-  border-color: #ff7180;
-}
-
-.workspace { scroll-margin-top: 16px; }
-
-.workspace:focus-visible {
-  outline: 2px solid #ff7180;
-  outline-offset: 5px;
-}
-
-@media(max-width:820px) {
-  .launchpad {
-    grid-template-columns: 1fr;
-    gap: 16px;
-    padding: 20px!important;
-  }
-
-  .launch-detail { min-height: 0; }
-}
-
-:root{--line:#3a3540;color-scheme:dark}
 *{box-sizing:border-box}
-body{margin:0;background:#141318;color:#f4f6fb;font-family:Arial,Helvetica,sans-serif;line-height:1.6}
-.shell{max-width:1280px;margin:auto;padding:22px clamp(16px,4vw,42px) 56px}
-.header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 0 22px;border-bottom:1px solid var(--line)}
-.brand{color:#f4f6fb;text-decoration:none;font-weight:800;letter-spacing:1px}
-.brand span{color:#a8d8ff}
-.header nav a{color:#a8d8ff;text-decoration:none;font-size:14px}
-.hero{padding:26px 0 20px}
-.eyebrow{color:#a8d8ff;font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase}
-.lead{max-width:650px;color:#c5c2cc;font-size:16px;line-height:1.7}
-.panel{padding:20px;border:1px solid var(--line);border-radius:16px;background:#211f2b}
-.launchpad{padding:30px!important;border:1px solid var(--line);border-radius:20px;background:radial-gradient(ellipse at 0% 100%,#24476b80,transparent 70%),#191820}
-.launchpad h1{font-size:clamp(48px,7vw,88px);margin:12px 0}
-button,input,textarea{font:inherit}
-button{border:1px solid #527ba5;border-radius:10px;padding:.55rem .85rem;background:#263d58;color:inherit;cursor:pointer;margin:.15rem}
-button:disabled{opacity:.5;cursor:default}
-button:hover:not(:disabled){background:#365b80}
-:focus-visible{outline:3px solid #ffd68e;outline-offset:3px}
-input:not([type=checkbox]),textarea{display:block;width:100%;background:#11151e;border:1px solid #527ba5;color:inherit;border-radius:10px;padding:.65rem;margin:.4rem 0}
-textarea{resize:vertical}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:
+    radial-gradient(circle at 88% 5%,rgba(216,243,106,.28),transparent 22rem),
+    var(--paper);
+  color:var(--ink);
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  line-height:1.6;
+}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer}
+.shell{max-width:1320px;margin:auto;padding:22px clamp(16px,4vw,54px) 70px}
+.header{
+  display:flex;align-items:center;justify-content:space-between;gap:18px;
+  padding:12px 0 20px;border-bottom:1px solid var(--line)
+}
+.brand{
+  color:var(--ink);text-decoration:none;font-size:18px;font-weight:950;
+  letter-spacing:-.7px
+}
+.brand span{color:var(--green)}
+.header nav{display:flex;align-items:center;gap:18px}
+.header nav a{color:var(--green);font-size:13px;font-weight:750;text-decoration:none}
+.header nav a:hover{text-decoration:underline}
+.hero{
+  display:grid;grid-template-columns:minmax(0,1.2fr) minmax(280px,.8fr);
+  gap:28px;align-items:center;margin:28px 0 24px;padding:clamp(24px,5vw,58px);
+  border-radius:28px;background:var(--green-dark);color:#fff;
+  position:relative;overflow:hidden;isolation:isolate
+}
+.hero:after{
+  content:"";position:absolute;z-index:-1;width:420px;height:420px;
+  border:1px solid rgba(255,255,255,.14);border-radius:50%;
+  right:-130px;top:-190px;box-shadow:0 0 0 45px rgba(255,255,255,.035),0 0 0 90px rgba(255,255,255,.025)
+}
+.eyebrow{
+  margin:0 0 10px;color:var(--lime);font-size:11px;font-weight:900;
+  letter-spacing:1.8px;text-transform:uppercase
+}
+.hero h1{
+  margin:8px 0 16px;font-size:clamp(48px,8vw,100px);
+  line-height:.92;letter-spacing:-.075em
+}
+.hero h1 span{color:var(--lime)}
+.lead{max-width:610px;margin:0 0 22px;color:#d8e7de;font-size:16px}
+.launch-button{
+  border:0;border-radius:999px;padding:12px 20px;background:var(--lime);
+  color:var(--ink);font-weight:850;box-shadow:0 7px 0 rgba(0,0,0,.13)
+}
+.launch-button:hover{transform:translateY(-2px);background:#e5ff8a}
+.launch-preview{
+  padding:22px;border:1px solid rgba(255,255,255,.2);border-radius:20px;
+  background:rgba(255,255,255,.08);backdrop-filter:blur(8px)
+}
+.launch-detail{min-height:118px}
+.launch-detail h2{margin:4px 0 8px;font-size:22px}
+.launch-detail p:last-child{margin:0;color:#d8e7de;font-size:14px}
+.launch-choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.launch-choices button{
+  padding:10px;border:1px solid rgba(255,255,255,.2);border-radius:11px;
+  background:rgba(255,255,255,.08);color:#fff;text-align:left;font-size:12px
+}
+.launch-choices button[aria-pressed=true]{background:var(--lime);color:var(--ink);border-color:var(--lime);font-weight:800}
+.workspace{
+  display:grid;grid-template-columns:230px minmax(0,1fr);gap:20px;
+  align-items:start;scroll-margin-top:18px
+}
+.exercise-menu,.exercise-stage{
+  min-width:0;border:1px solid var(--line);border-radius:22px;
+  background:var(--card);box-shadow:var(--shadow)
+}
+.exercise-menu{position:sticky;top:16px;padding:18px}
+.exercise-menu h2{margin:0;font-size:19px;letter-spacing:-.5px}
+.exercise-menu p{margin:4px 0 10px;color:var(--muted);font-size:12px}
+.exercise-menu progress{width:100%;height:8px;accent-color:var(--green);margin-bottom:14px}
+.exercise-menu button{
+  width:100%;display:flex;align-items:center;gap:9px;margin:4px 0;
+  padding:11px 12px;border:1px solid transparent;border-radius:12px;
+  background:transparent;color:#526158;text-align:left;font-size:13px;font-weight:700
+}
+.exercise-menu button:hover{background:#f0f4ec}
+.exercise-menu button[aria-pressed=true]{background:#e9f2e9;color:var(--green-dark);border-color:#c9ddcc}
+.exercise-stage{padding:clamp(16px,3vw,28px)}
+.exercise-toolbar{
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+  flex-wrap:wrap;margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid var(--line)
+}
+.exercise-toolbar .eyebrow{color:var(--green);margin:0}
+.exercise-toolbar button{
+  border:1px solid var(--line);border-radius:999px;padding:8px 13px;
+  background:#fff;color:var(--green-dark);font-size:12px;font-weight:800
+}
+.exercise-toolbar button[aria-pressed=true]{background:var(--lime);border-color:var(--lime)}
+section.task{margin:0 0 18px;scroll-margin-top:20px}
+section.task h2{margin:0 0 18px;font-size:clamp(21px,3vw,29px);letter-spacing:-1px}
+article,aside{
+  min-width:0;padding:18px;border:1px solid var(--line);border-radius:17px;
+  background:#fff;box-shadow:0 8px 24px rgba(27,48,38,.045)
+}
+.shop{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(240px,.8fr);gap:16px;align-items:start}
+.products,.labs{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,205px),1fr));gap:13px}
+.products article{display:flex;flex-direction:column;gap:7px;transition:transform .2s,border-color .2s}
+.products article:hover{transform:translateY(-3px);border-color:#8ab69c}
+.products img{
+  display:block;width:100%;height:150px;object-fit:contain;
+  border-radius:12px;background:#f0f3ed;padding:12px
+}
+.products h3{margin:4px 0;font-size:14px;line-height:1.35}
+.products article p{margin:0;color:var(--green);font-weight:850}
+.products button,.desk-tools button,.controls button,.exercise-stage button{
+  border:1px solid #cbd8cd;border-radius:10px;padding:8px 12px;
+  background:#f5f8f2;color:var(--green-dark);font-size:12px;font-weight:750
+}
+.products button:hover,.desk-tools button:hover,.controls button:hover,.exercise-stage button:hover:not(:disabled){
+  background:#e5f0e5;border-color:#9cbea4
+}
+.products button:disabled,.exercise-stage button:disabled{opacity:.45;cursor:not-allowed}
+.desk-tools{display:grid;gap:12px;margin-bottom:16px}
+.desk-tools>div{padding:14px;border:1px solid var(--line);border-radius:15px;background:#fff}
+.desk-tools h3,.desk-tools p{margin:0 0 8px}
+.desk-tools p{color:var(--muted);font-size:12px}
+.desk-tools button[aria-pressed=true]{background:var(--green);color:white;border-color:var(--green)}
+.product-tools{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 12px}
+.product-tools input,.product-tools select{flex:1;min-width:130px}
+.budget-label{display:block;font-weight:800;font-size:13px}
+.budget-label input[type=range]{width:100%;accent-color:var(--green)}
+.shop progress{width:100%;height:9px;accent-color:var(--green)}
+.budget-over{color:#c44f37!important}
+.desk-items{list-style:none;padding:0}
+.desk-items li{padding:10px 0;border-top:1px solid var(--line);overflow-wrap:anywhere}
+.desk-items small{display:block;color:var(--muted)}
+.desk-total{font-size:15px;font-weight:900;color:var(--green-dark)}
 .controls{display:flex;align-items:center;flex-wrap:wrap;gap:7px}
-article,aside{border:1px solid var(--line);border-radius:18px;padding:18px;background:linear-gradient(145deg,#211f2b,#171923);min-width:0}
-.shop{display:grid;grid-template-columns:minmax(0,2fr) minmax(260px,1fr);gap:18px}
-.products,.labs{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:16px}
-.products img{display:block;width:100%;height:175px;object-fit:contain;background:#f4f7fb;border-radius:13px;padding:12px}
-.products article p{color:#a8d8ff;font-weight:750}
-.workspace{display:grid;grid-template-columns:minmax(190px,.7fr) minmax(0,2fr);gap:18px;margin-top:26px;scroll-margin-top:16px}
-.exercise-menu,.exercise-stage{padding:18px;border:1px solid var(--line);border-radius:16px;background:#1b1921;min-width:0}
-.exercise-menu button{display:block;width:100%;text-align:left;margin:7px 0}
-.exercise-toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:12px 0}
-.launch-preview{padding:20px;border:1px solid var(--line);border-radius:14px;background:#111018}
-.launch-choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
-.launch-choices button{text-align:left;margin:0}
-@media(max-width:820px){.workspace,.shop{grid-template-columns:1fr}.launchpad{padding:20px!important}}
-
+.counter-display{
+  display:flex;align-items:center;justify-content:center;min-height:150px;
+  margin:10px 0 16px;border-radius:18px;background:#edf4e9;
+  color:var(--green-dark);font-size:clamp(48px,8vw,76px);font-weight:950;letter-spacing:-4px
+}
+.score-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.score-player{text-align:center}
+.score-player h3{margin:0 0 10px}
+.score-player .score-number{font-size:46px;line-height:1.2;font-weight:950;color:var(--green)}
+.score-player.winner{border-color:var(--green);background:#f0f8e9}
+textarea,input:not([type=checkbox]),select{
+  width:100%;padding:10px 12px;border:1px solid #d5ded4;border-radius:10px;
+  background:#fff;color:var(--ink)
+}
+textarea{resize:vertical}
+label{font-weight:700}
+:focus-visible{outline:3px solid var(--orange);outline-offset:3px}
+li{margin-block:5px}
+.task-note{color:var(--muted);font-size:13px}
+.tip-card{padding:18px;border-radius:15px;background:#edf4e9}
+.queue-item{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:10px 0;border-bottom:1px solid var(--line)}
+.queue-item label{display:flex;align-items:center;gap:8px}
+.queue-item small{color:var(--muted)}
+.workspace:focus-visible{outline:3px solid var(--orange);outline-offset:4px}
+@media(max-width:850px){
+  .hero{grid-template-columns:1fr}
+  .workspace{grid-template-columns:1fr}
+  .exercise-menu{position:static;display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+  .exercise-menu h2,.exercise-menu p,.exercise-menu progress{grid-column:1/-1}
+  .shop{grid-template-columns:1fr}
+}
+@media(max-width:520px){
+  .shell{padding:12px 12px 40px}
+  .header nav{gap:8px}
+  .hero{padding:23px;border-radius:20px}
+  .exercise-stage{padding:14px}
+  .exercise-menu{padding:12px;gap:3px}
+  .exercise-menu button{font-size:11px;padding:9px}
+  .score-grid{grid-template-columns:1fr}
+  .launch-choices{grid-template-columns:1fr 1fr}
+}
 </style>
 </head>
 
@@ -469,6 +284,9 @@ function ShoppingCart() {
   const [items,setItems] = useState([]);
   const [group,setGroup] = useState('All gear');
   const [budget,setBudget] = useState(4000000);
+  const [search,setSearch] = useState('');
+  const [sort,setSort] = useState('featured');
+  const [saved,setSaved] = useState([]);
 
   function change(product,delta) {
 
@@ -518,9 +336,24 @@ function ShoppingCart() {
 
   const ids = groups.find(([name]) => name === group)[1];
 
-  const visible = products.filter(
-    product => !ids.length || ids.includes(product.id)
-  );
+  const visible = products
+    .filter(product =>
+      (!ids.length || ids.includes(product.id)) &&
+      product.name.toLowerCase().includes(search.toLowerCase())
+    )
+    .sort((a,b) => {
+      if(sort === 'low') return a.price-b.price;
+      if(sort === 'high') return b.price-a.price;
+      return a.id-b.id;
+    });
+
+  function toggleSaved(productId) {
+    setSaved(previous =>
+      previous.includes(productId)
+        ? previous.filter(id => id !== productId)
+        : [...previous,productId]
+    );
+  }
 
   return card('Tech Desk Builder · Shopping Cart',
 
@@ -565,7 +398,28 @@ function ShoppingCart() {
 
     h('div',{className:'shop'},
 
-      h('div',{className:'products'},
+      h('div',null,
+
+        h('div',{className:'product-tools'},
+          h('input',{
+            type:'search',
+            placeholder:'Search desk gear...',
+            value:search,
+            'aria-label':'Search products',
+            onChange:event => setSearch(event.target.value)
+          }),
+          h('select',{
+            value:sort,
+            'aria-label':'Sort products',
+            onChange:event => setSort(event.target.value)
+          },
+            h('option',{value:'featured'},'Featured'),
+            h('option',{value:'low'},'Price: low to high'),
+            h('option',{value:'high'},'Price: high to low')
+          )
+        ),
+
+        h('div',{className:'products'},
 
         visible.map(product =>
           h('article',{key:product.id},
@@ -586,15 +440,21 @@ function ShoppingCart() {
               'Add to setup',
               () => change(product,1),
               {'aria-label':'Add '+product.name}
+            ),
+            button(
+              saved.includes(product.id) ? '♥ Saved' : '♡ Save',
+              () => toggleSaved(product.id),
+              {'aria-pressed':saved.includes(product.id)}
             )
           )
+        )
         )
       ),
 
       h('aside',{'aria-label':'Cart'},
 
         h('h3',null,'Your setup'),
-        h('p',null,'Demo prices in KRW'),
+        h('p',null,'Demo prices in KRW · '+saved.length+' saved items'),
 
         h('label',{className:'budget-label'},
           'Budget: '+money.format(budget),
@@ -693,6 +553,7 @@ function Counter() {
 
   const [count,setCount] = useState(0);
   const [history,setHistory] = useState([0]);
+  const [step,setStep] = useState(1);
 
   function save(next) {
 
@@ -718,13 +579,23 @@ function Counter() {
 
   return card('Counter with History',
 
-    h('p',{role:'status'},'Count: '+count),
+    h('div',{className:'counter-display','aria-live':'polite'},count),
+
+    h('p',{className:'task-note'},'Choose a step size, then increase or decrease your count.'),
 
     h('div',{className:'controls'},
+      [1,5,10].map(value =>
+        button(value+' step',() => setStep(value),{
+          key:value,
+          'aria-pressed':step===value
+        })
+      )
+    ),
 
-      button('+1',() => save(count+1)),
-      button('−1',() => save(count-1)),
-      button('Reset',() => save(0)),
+    h('div',{className:'controls'},
+      button('− '+step,() => save(count-step)),
+      button('+ '+step,() => save(count+step)),
+      button('Reset',() => {save(0);setHistory([0]);}),
       button('Undo',undo,{disabled:history.length<2})
     ),
 
@@ -756,34 +627,46 @@ function ScoreBoard() {
 
   const [first,setFirst] = useState(0);
   const [second,setSecond] = useState(0);
+  const [target,setTarget] = useState(10);
+  const winner = first >= target ? 'Player 1' : second >= target ? 'Player 2' : '';
 
   return card('Two-Player Scoreboard',
 
+    h('p',{className:'task-note'},'First player to reach the target wins.'),
+
+    h('label',null,'Winning score',
+      h('select',{
+        value:target,
+        onChange:event => setTarget(Number(event.target.value))
+      },
+        [5,10,15,20].map(value =>
+          h('option',{key:value,value},value+' points')
+        )
+      )
+    ),
+
+    h('div',{className:'score-grid'},
+
+      h('article',{className:'score-player'+(winner==='Player 1'?' winner':'')},
+        h('h3',null,'Player 1'),
+        h('div',{className:'score-number'},first),
+        button('−',() => setFirst(value=>Math.max(0,value-1))),
+        button('+',() => setFirst(value=>value+1))
+      ),
+
+      h('article',{className:'score-player'+(winner==='Player 2'?' winner':'')},
+        h('h3',null,'Player 2'),
+        h('div',{className:'score-number'},second),
+        button('−',() => setSecond(value=>Math.max(0,value-1))),
+        button('+',() => setSecond(value=>value+1))
+      )
+    ),
+
+    h('p',{role:'status'},winner ? winner+' wins!' : 'Match in progress'),
+
     h('div',{className:'controls'},
-
-      h(PlayerScore,{
-        name:'Player 1',
-        score:first,
-        update:delta =>
-          setFirst(previous => previous+delta)
-      }),
-
-      h(PlayerScore,{
-        name:'Player 2',
-        score:second,
-        update:delta =>
-          setSecond(previous => previous+delta)
-      })
-    ),
-
-    h('p',{role:'status'},
-      'Combined score: '+(first+second)
-    ),
-
-    button('Reset scores',() => {
-      setFirst(0);
-      setSecond(0);
-    })
+      button('Reset match',() => {setFirst(0);setSecond(0);})
+    )
   );
 }
 
@@ -809,7 +692,11 @@ function WordCount() {
     ),
 
     h('p',{role:'status'},
-      words+' words · '+text.length+' characters'
+      words+' words · '+text.length+' characters · '+
+      text.replace(/\\s/g,'').length+' without spaces'
+    ),
+    h('p',{className:'task-note'},
+      'Estimated reading time: '+(words===0 ? 0 : Math.max(1,Math.ceil(words/200)))+' min'
     ),
 
     button(
@@ -853,9 +740,11 @@ function QuickTip() {
 
       button(
         'Next tip',
-        () => setIndex(previous =>
-          (previous+1)%tips.length
-        )
+        () => setIndex(previous => (previous+1)%tips.length)
+      ),
+      button(
+        'Surprise me',
+        () => setIndex(Math.floor(Math.random()*tips.length))
       )
     )
   );
@@ -1012,7 +901,7 @@ function App() {
         className:'brand',
         href:'../#coursework'
       },
-        'SUDIP',
+        'VISHAL',
         h('span',null,' / LAB')
       ),
 
@@ -1032,7 +921,7 @@ function App() {
       h('div',{className:'launch-copy'},
 
         h('p',{className:'eyebrow'},
-          'WEEK 12 MONDAY / WEB PROGRAMMING'
+          'VISHAL'S WORKBENCH / WEEK 12.1'
         ),
 
         h('h1',{id:'week-title'},
@@ -1041,7 +930,7 @@ function App() {
         ),
 
         h('p',{className:'lead'},
-          'Start with the Tech Desk Builder homework or pick an exercise to practice how React remembers changes.'
+          'Build your own tech setup, track your progress, and experiment with interactive React tools in a fresh workspace.'
         ),
 
         button(
