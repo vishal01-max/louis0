@@ -319,17 +319,12 @@
       color: white;
       background: radial-gradient(circle at 75% 20%, #477fb5 0, transparent 34%), linear-gradient(135deg, #102b4e, #24588b);
     }
-    .project-art-mark {
-      width: 150px;
-      height: 150px;
-      display: grid;
-      place-items: center;
-      border: 1px solid rgba(255,255,255,.35);
-      border-radius: 38px;
-      background: rgba(255,255,255,.1);
-      font-size: 68px;
-      font-weight: 800;
-      box-shadow: 0 18px 45px rgba(0,0,0,.16);
+    .project-logo {
+      width: min(100%, 230px);
+      height: auto;
+      display: block;
+      border-radius: 18px;
+      box-shadow: 0 18px 45px rgba(0,0,0,.22);
     }
     .team-project-copy {
       display: flex;
@@ -670,7 +665,7 @@
 
     <section class="team-project-card" id="team-project" aria-labelledby="team-project-title">
       <div class="project-art" aria-hidden="true">
-        <div class="project-art-mark">G</div>
+        <img class="project-logo" src="assets/gaze-logo.webp" alt="Gaze logo">
       </div>
       <div class="team-project-copy">
         <span class="project-course-tag">Featured team project</span>
