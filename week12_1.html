@@ -1,0 +1,1072 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Week 12.1 React State | Web Programming</title>
+
+
+
+<style>
+:root{
+  color-scheme:light;
+  --ink:#17231f;
+  --muted:#66756d;
+  --paper:#f5f4ed;
+  --card:#fffefa;
+  --line:#dce2d8;
+  --green:#1f684f;
+  --green-dark:#164b3a;
+  --lime:#d8f36a;
+  --orange:#ed8158;
+  --shadow:0 18px 45px rgba(27,48,38,.08);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:
+    radial-gradient(circle at 88% 5%,rgba(216,243,106,.28),transparent 22rem),
+    var(--paper);
+  color:var(--ink);
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  line-height:1.6;
+}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer}
+.shell{max-width:1320px;margin:auto;padding:22px clamp(16px,4vw,54px) 70px}
+.header{
+  display:flex;align-items:center;justify-content:space-between;gap:18px;
+  padding:12px 0 20px;border-bottom:1px solid var(--line)
+}
+.brand{
+  color:var(--ink);text-decoration:none;font-size:18px;font-weight:950;
+  letter-spacing:-.7px
+}
+.brand span{color:var(--green)}
+.header nav{display:flex;align-items:center;gap:18px}
+.header nav a{color:var(--green);font-size:13px;font-weight:750;text-decoration:none}
+.header nav a:hover{text-decoration:underline}
+.hero{
+  display:grid;grid-template-columns:minmax(0,1.2fr) minmax(280px,.8fr);
+  gap:28px;align-items:center;margin:28px 0 24px;padding:clamp(24px,5vw,58px);
+  border-radius:28px;background:var(--green-dark);color:#fff;
+  position:relative;overflow:hidden;isolation:isolate
+}
+.hero:after{
+  content:"";position:absolute;z-index:-1;width:420px;height:420px;
+  border:1px solid rgba(255,255,255,.14);border-radius:50%;
+  right:-130px;top:-190px;box-shadow:0 0 0 45px rgba(255,255,255,.035),0 0 0 90px rgba(255,255,255,.025)
+}
+.eyebrow{
+  margin:0 0 10px;color:var(--lime);font-size:11px;font-weight:900;
+  letter-spacing:1.8px;text-transform:uppercase
+}
+.hero h1{
+  margin:8px 0 16px;font-size:clamp(48px,8vw,100px);
+  line-height:.92;letter-spacing:-.075em
+}
+.hero h1 span{color:var(--lime)}
+.lead{max-width:610px;margin:0 0 22px;color:#d8e7de;font-size:16px}
+.launch-button{
+  border:0;border-radius:999px;padding:12px 20px;background:var(--lime);
+  color:var(--ink);font-weight:850;box-shadow:0 7px 0 rgba(0,0,0,.13)
+}
+.launch-button:hover{transform:translateY(-2px);background:#e5ff8a}
+.launch-preview{
+  padding:22px;border:1px solid rgba(255,255,255,.2);border-radius:20px;
+  background:rgba(255,255,255,.08);backdrop-filter:blur(8px)
+}
+.launch-detail{min-height:118px}
+.launch-detail h2{margin:4px 0 8px;font-size:22px}
+.launch-detail p:last-child{margin:0;color:#d8e7de;font-size:14px}
+.launch-choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.launch-choices button{
+  padding:10px;border:1px solid rgba(255,255,255,.2);border-radius:11px;
+  background:rgba(255,255,255,.08);color:#fff;text-align:left;font-size:12px
+}
+.launch-choices button[aria-pressed=true]{background:var(--lime);color:var(--ink);border-color:var(--lime);font-weight:800}
+.workspace{
+  display:grid;grid-template-columns:230px minmax(0,1fr);gap:20px;
+  align-items:start;scroll-margin-top:18px
+}
+.exercise-menu,.exercise-stage{
+  min-width:0;border:1px solid var(--line);border-radius:22px;
+  background:var(--card);box-shadow:var(--shadow)
+}
+.exercise-menu{position:sticky;top:16px;padding:18px}
+.exercise-menu h2{margin:0;font-size:19px;letter-spacing:-.5px}
+.exercise-menu p{margin:4px 0 10px;color:var(--muted);font-size:12px}
+.exercise-menu progress{width:100%;height:8px;accent-color:var(--green);margin-bottom:14px}
+.exercise-menu button{
+  width:100%;display:flex;align-items:center;gap:9px;margin:4px 0;
+  padding:11px 12px;border:1px solid transparent;border-radius:12px;
+  background:transparent;color:#526158;text-align:left;font-size:13px;font-weight:700
+}
+.exercise-menu button:hover{background:#f0f4ec}
+.exercise-menu button[aria-pressed=true]{background:#e9f2e9;color:var(--green-dark);border-color:#c9ddcc}
+.exercise-stage{padding:clamp(16px,3vw,28px)}
+.exercise-toolbar{
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+  flex-wrap:wrap;margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid var(--line)
+}
+.exercise-toolbar .eyebrow{color:var(--green);margin:0}
+.exercise-toolbar button{
+  border:1px solid var(--line);border-radius:999px;padding:8px 13px;
+  background:#fff;color:var(--green-dark);font-size:12px;font-weight:800
+}
+.exercise-toolbar button[aria-pressed=true]{background:var(--lime);border-color:var(--lime)}
+section.task{margin:0 0 18px;scroll-margin-top:20px}
+section.task h2{margin:0 0 18px;font-size:clamp(21px,3vw,29px);letter-spacing:-1px}
+article,aside{
+  min-width:0;padding:18px;border:1px solid var(--line);border-radius:17px;
+  background:#fff;box-shadow:0 8px 24px rgba(27,48,38,.045)
+}
+.shop{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(240px,.8fr);gap:16px;align-items:start}
+.products,.labs{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,205px),1fr));gap:13px}
+.products article{display:flex;flex-direction:column;gap:7px;transition:transform .2s,border-color .2s}
+.products article:hover{transform:translateY(-3px);border-color:#8ab69c}
+.products img{
+  display:block;width:100%;height:150px;object-fit:contain;
+  border-radius:12px;background:#f0f3ed;padding:12px
+}
+.products h3{margin:4px 0;font-size:14px;line-height:1.35}
+.products article p{margin:0;color:var(--green);font-weight:850}
+.products button,.desk-tools button,.controls button,.exercise-stage button{
+  border:1px solid #cbd8cd;border-radius:10px;padding:8px 12px;
+  background:#f5f8f2;color:var(--green-dark);font-size:12px;font-weight:750
+}
+.products button:hover,.desk-tools button:hover,.controls button:hover,.exercise-stage button:hover:not(:disabled){
+  background:#e5f0e5;border-color:#9cbea4
+}
+.products button:disabled,.exercise-stage button:disabled{opacity:.45;cursor:not-allowed}
+.desk-tools{display:grid;gap:12px;margin-bottom:16px}
+.desk-tools>div{padding:14px;border:1px solid var(--line);border-radius:15px;background:#fff}
+.desk-tools h3,.desk-tools p{margin:0 0 8px}
+.desk-tools p{color:var(--muted);font-size:12px}
+.desk-tools button[aria-pressed=true]{background:var(--green);color:white;border-color:var(--green)}
+.product-tools{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 12px}
+.product-tools input,.product-tools select{flex:1;min-width:130px}
+.budget-label{display:block;font-weight:800;font-size:13px}
+.budget-label input[type=range]{width:100%;accent-color:var(--green)}
+.shop progress{width:100%;height:9px;accent-color:var(--green)}
+.budget-over{color:#c44f37!important}
+.desk-items{list-style:none;padding:0}
+.desk-items li{padding:10px 0;border-top:1px solid var(--line);overflow-wrap:anywhere}
+.desk-items small{display:block;color:var(--muted)}
+.desk-total{font-size:15px;font-weight:900;color:var(--green-dark)}
+.controls{display:flex;align-items:center;flex-wrap:wrap;gap:7px}
+.counter-display{
+  display:flex;align-items:center;justify-content:center;min-height:150px;
+  margin:10px 0 16px;border-radius:18px;background:#edf4e9;
+  color:var(--green-dark);font-size:clamp(48px,8vw,76px);font-weight:950;letter-spacing:-4px
+}
+.score-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.score-player{text-align:center}
+.score-player h3{margin:0 0 10px}
+.score-player .score-number{font-size:46px;line-height:1.2;font-weight:950;color:var(--green)}
+.score-player.winner{border-color:var(--green);background:#f0f8e9}
+textarea,input:not([type=checkbox]),select{
+  width:100%;padding:10px 12px;border:1px solid #d5ded4;border-radius:10px;
+  background:#fff;color:var(--ink)
+}
+textarea{resize:vertical}
+label{font-weight:700}
+:focus-visible{outline:3px solid var(--orange);outline-offset:3px}
+li{margin-block:5px}
+.task-note{color:var(--muted);font-size:13px}
+.tip-card{padding:18px;border-radius:15px;background:#edf4e9}
+.queue-item{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:10px 0;border-bottom:1px solid var(--line)}
+.queue-item label{display:flex;align-items:center;gap:8px}
+.queue-item small{color:var(--muted)}
+.workspace:focus-visible{outline:3px solid var(--orange);outline-offset:4px}
+@media(max-width:850px){
+  .hero{grid-template-columns:1fr}
+  .workspace{grid-template-columns:1fr}
+  .exercise-menu{position:static;display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+  .exercise-menu h2,.exercise-menu p,.exercise-menu progress{grid-column:1/-1}
+  .shop{grid-template-columns:1fr}
+}
+@media(max-width:520px){
+  .shell{padding:12px 12px 40px}
+  .header nav{gap:8px}
+  .hero{padding:23px;border-radius:20px}
+  .exercise-stage{padding:14px}
+  .exercise-menu{padding:12px;gap:3px}
+  .exercise-menu button{font-size:11px;padding:9px}
+  .score-grid{grid-template-columns:1fr}
+  .launch-choices{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+
+<body>
+<div id="root"></div>
+<noscript>Enable JavaScript to use the React exercises.</noscript>
+
+<script type="module">
+
+import React, {useState, createElement as h} from "https://esm.sh/react@18.3.1";
+import {createRoot} from "https://esm.sh/react-dom@18.3.1/client";
+
+const button = (label,action,props={}) =>
+  h('button',{type:'button',onClick:action,...props},label);
+
+const sections = [
+  ['cart','Shopping Cart'],
+  ['counter','Counter with History'],
+  ['scoreboard','Two-Player Scoreboard'],
+  ['words','Live Word Count'],
+  ['tips','Quick React Tip'],
+  ['queue','Study Queue']
+];
+
+const card = (title,...children) => {
+  const id = sections.find(([,label]) => title.endsWith(label))[0];
+
+  return h('section',
+    {className:'task',id,'aria-labelledby':id+'-title'},
+    h('h2',{id:id+'-title'},title),
+    ...children
+  );
+};
+
+const money = new Intl.NumberFormat('en-KR',{
+  style:'currency',
+  currency:'KRW'
+});
+
+// PRODUCT COLLECTION
+
+const products = [
+  [1,"Logitech MX Mechanical Keyboard",189000,
+   "https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=900"],
+
+  [2,"Dell UltraSharp 27-inch Monitor",629000,
+   "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=900"],
+
+  [3,"Logitech MX Master 3S Mouse",139000,
+   "https://images.unsplash.com/photo-1527814050087-3793815479db?w=900"],
+
+  [4,"Sony WH-1000XM5 Headphones",399000,
+   "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=900"],
+
+  [5,"Minimal LED Desk Lamp",79000,
+   "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=900"]
+
+].map(([id,name,price,image]) => ({
+  id,name,price,image
+}));
+
+// PREDEFINED SETUPS
+
+const setups = [
+  {name:'Work essentials',ids:[1,2,3]},
+  {name:'Focus setup',ids:[2,4,5]},
+  {name:'Minimal desk',ids:[1,3,5]}
+];
+
+// PRODUCT CATEGORIES
+
+const groups = [
+  ['All gear',[]],
+  ['Keyboards',[1]],
+  ['Displays',[2]],
+  ['Accessories',[3,5]],
+  ['Audio',[4]]
+];
+
+// SHOPPING CART
+
+function ShoppingCart() {
+
+  const [items,setItems] = useState([]);
+  const [group,setGroup] = useState('All gear');
+  const [budget,setBudget] = useState(4000000);
+  const [search,setSearch] = useState('');
+  const [sort,setSort] = useState('featured');
+  const [saved,setSaved] = useState([]);
+
+  function change(product,delta) {
+
+    setItems(previous => {
+
+      const item = previous.find(row => row.id === product.id);
+
+      if(!item)
+        return delta > 0
+          ? [...previous,{...product,quantity:1}]
+          : previous;
+
+      if(item.quantity + delta <= 0)
+        return previous.filter(row => row.id !== product.id);
+
+      return previous.map(row =>
+        row.id === product.id
+          ? {...row,quantity:row.quantity+delta}
+          : row
+      );
+    });
+  }
+
+  function addSetup(ids) {
+
+    setItems(previous => [
+      ...previous,
+
+      ...products
+        .filter(product =>
+          ids.includes(product.id) &&
+          !previous.some(item => item.id === product.id)
+        )
+        .map(product => ({...product,quantity:1}))
+    ]);
+  }
+
+  const total = items.reduce(
+    (sum,item) => sum + item.price * item.quantity,0
+  );
+
+  const units = items.reduce(
+    (sum,item) => sum + item.quantity,0
+  );
+
+  const difference = budget - total;
+
+  const ids = groups.find(([name]) => name === group)[1];
+
+  const visible = products
+    .filter(product =>
+      (!ids.length || ids.includes(product.id)) &&
+      product.name.toLowerCase().includes(search.toLowerCase())
+    )
+    .sort((a,b) => {
+      if(sort === 'low') return a.price-b.price;
+      if(sort === 'high') return b.price-a.price;
+      return a.id-b.id;
+    });
+
+  function toggleSaved(productId) {
+    setSaved(previous =>
+      previous.includes(productId)
+        ? previous.filter(id => id !== productId)
+        : [...previous,productId]
+    );
+  }
+
+  return card('Tech Desk Builder · Shopping Cart',
+
+    h('div',{className:'desk-tools'},
+
+      h('div',null,
+        h('h3',null,'Start with a setup'),
+        h('p',null,'Adds missing gear and keeps everything already in your cart.'),
+
+        h('div',{className:'controls'},
+          setups.map(setup =>
+            button(
+              setup.name,
+              () => addSetup(setup.ids),
+              {key:setup.name}
+            )
+          )
+        )
+      ),
+
+      h('div',null,
+        h('h3',null,'Browse the gear'),
+
+        h('div',{
+          className:'controls',
+          role:'group',
+          'aria-label':'Product categories'
+        },
+          groups.map(([name]) =>
+            button(
+              name,
+              () => setGroup(name),
+              {
+                key:name,
+                'aria-pressed':group === name
+              }
+            )
+          )
+        )
+      )
+    ),
+
+    h('div',{className:'shop'},
+
+      h('div',null,
+
+        h('div',{className:'product-tools'},
+          h('input',{
+            type:'search',
+            placeholder:'Search desk gear...',
+            value:search,
+            'aria-label':'Search products',
+            onChange:event => setSearch(event.target.value)
+          }),
+          h('select',{
+            value:sort,
+            'aria-label':'Sort products',
+            onChange:event => setSort(event.target.value)
+          },
+            h('option',{value:'featured'},'Featured'),
+            h('option',{value:'low'},'Price: low to high'),
+            h('option',{value:'high'},'Price: high to low')
+          )
+        ),
+
+        h('div',{className:'products'},
+
+        visible.map(product =>
+          h('article',{key:product.id},
+
+            h('img',{
+              src:product.image,
+              alt:product.name,
+              width:320,
+              height:220,
+              decoding:'async'
+            }),
+
+            h('h3',null,product.name),
+
+            h('p',null,money.format(product.price)),
+
+            button(
+              'Add to setup',
+              () => change(product,1),
+              {'aria-label':'Add '+product.name}
+            ),
+            button(
+              saved.includes(product.id) ? '♥ Saved' : '♡ Save',
+              () => toggleSaved(product.id),
+              {'aria-pressed':saved.includes(product.id)}
+            )
+          )
+        )
+        )
+      ),
+
+      h('aside',{'aria-label':'Cart'},
+
+        h('h3',null,'Your setup'),
+        h('p',null,'Demo prices in KRW · '+saved.length+' saved items'),
+
+        h('label',{className:'budget-label'},
+          'Budget: '+money.format(budget),
+
+          h('input',{
+            type:'range',
+            min:500000,
+            max:12000000,
+            step:100000,
+            value:budget,
+            'aria-label':'Budget',
+            'aria-valuetext':money.format(budget),
+            onChange:event =>
+              setBudget(Number(event.target.value))
+          })
+        ),
+
+        h('progress',{
+          max:budget,
+          value:Math.min(total,budget),
+          'aria-label':'Budget used'
+        }),
+
+        h('p',{
+          role:'status',
+          className:difference < 0 ? 'budget-over' : ''
+        },
+          difference < 0
+            ? money.format(-difference)+' over budget'
+            : money.format(difference)+' remaining'
+        ),
+
+        items.length === 0
+
+          ? h('p',null,'Add a product or try a setup.')
+
+          : h('ul',{className:'desk-items'},
+
+              items.map(item =>
+                h('li',{key:item.id},
+
+                  h('strong',null,item.name),
+
+                  h('small',null,
+                    money.format(item.price*item.quantity)
+                  ),
+
+                  h('div',{className:'controls'},
+
+                    button(
+                      '−',
+                      () => change(item,-1),
+                      {'aria-label':'Decrease '+item.name}
+                    ),
+
+                    h('span',null,item.quantity),
+
+                    button(
+                      '+',
+                      () => change(item,1),
+                      {'aria-label':'Increase '+item.name}
+                    ),
+
+                    button(
+                      'Remove',
+                      () => setItems(previous =>
+                        previous.filter(row => row.id !== item.id)
+                      ),
+                      {'aria-label':'Remove '+item.name}
+                    )
+                  )
+                )
+              )
+            ),
+
+        h('p',{
+          role:'status',
+          className:'desk-total'
+        },
+          units+' items · '+money.format(total)
+        ),
+
+        button(
+          'Clear cart',
+          () => setItems([]),
+          {disabled:items.length === 0}
+        )
+      )
+    )
+  );
+}
+
+// COUNTER WITH HISTORY
+
+function Counter() {
+
+  const [count,setCount] = useState(0);
+  const [history,setHistory] = useState([0]);
+  const [step,setStep] = useState(1);
+
+  function save(next) {
+
+    if(next === count) return;
+
+    setCount(next);
+
+    setHistory(previous =>
+      [...previous,next].slice(-5)
+    );
+  }
+
+  function undo() {
+
+    if(history.length < 2) return;
+
+    setCount(history[history.length-2]);
+
+    setHistory(previous =>
+      previous.slice(0,-1)
+    );
+  }
+
+  return card('Counter with History',
+
+    h('div',{className:'counter-display','aria-live':'polite'},count),
+
+    h('p',{className:'task-note'},'Choose a step size, then increase or decrease your count.'),
+
+    h('div',{className:'controls'},
+      [1,5,10].map(value =>
+        button(value+' step',() => setStep(value),{
+          key:value,
+          'aria-pressed':step===value
+        })
+      )
+    ),
+
+    h('div',{className:'controls'},
+      button('− '+step,() => save(count-step)),
+      button('+ '+step,() => save(count+step)),
+      button('Reset',() => {save(0);setHistory([0]);}),
+      button('Undo',undo,{disabled:history.length<2})
+    ),
+
+    h('p',null,'Last five values: '+history.join(' → '))
+  );
+}
+
+// PLAYER SCORE
+
+function PlayerScore({name,score,update}) {
+
+  return h('article',null,
+
+    h('h3',null,name+': '+score),
+
+    button('−',() => update(-1),{
+      'aria-label':'Decrease '+name
+    }),
+
+    button('+',() => update(1),{
+      'aria-label':'Increase '+name
+    })
+  );
+}
+
+// SCOREBOARD
+
+function ScoreBoard() {
+
+  const [first,setFirst] = useState(0);
+  const [second,setSecond] = useState(0);
+  const [target,setTarget] = useState(10);
+  const winner = first >= target ? 'Player 1' : second >= target ? 'Player 2' : '';
+
+  return card('Two-Player Scoreboard',
+
+    h('p',{className:'task-note'},'First player to reach the target wins.'),
+
+    h('label',null,'Winning score',
+      h('select',{
+        value:target,
+        onChange:event => setTarget(Number(event.target.value))
+      },
+        [5,10,15,20].map(value =>
+          h('option',{key:value,value},value+' points')
+        )
+      )
+    ),
+
+    h('div',{className:'score-grid'},
+
+      h('article',{className:'score-player'+(winner==='Player 1'?' winner':'')},
+        h('h3',null,'Player 1'),
+        h('div',{className:'score-number'},first),
+        button('−',() => setFirst(value=>Math.max(0,value-1))),
+        button('+',() => setFirst(value=>value+1))
+      ),
+
+      h('article',{className:'score-player'+(winner==='Player 2'?' winner':'')},
+        h('h3',null,'Player 2'),
+        h('div',{className:'score-number'},second),
+        button('−',() => setSecond(value=>Math.max(0,value-1))),
+        button('+',() => setSecond(value=>value+1))
+      )
+    ),
+
+    h('p',{role:'status'},winner ? winner+' wins!' : 'Match in progress'),
+
+    h('div',{className:'controls'},
+      button('Reset match',() => {setFirst(0);setSecond(0);})
+    )
+  );
+}
+
+// LIVE WORD COUNT
+
+function WordCount() {
+
+  const [text,setText] = useState('');
+
+  const words = text.trim()
+    ? text.trim().split(/\s+/).length
+    : 0;
+
+  return card('Live Word Count',
+
+    h('label',null,'Practice notes',
+
+      h('textarea',{
+        rows:4,
+        value:text,
+        onChange:e => setText(e.target.value)
+      })
+    ),
+
+    h('p',{role:'status'},
+      words+' words · '+text.length+' characters · '+
+      text.replace(/\\s/g,'').length+' without spaces'
+    ),
+    h('p',{className:'task-note'},
+      'Estimated reading time: '+(words===0 ? 0 : Math.max(1,Math.ceil(words/200)))+' min'
+    ),
+
+    button(
+      'Clear notes',
+      () => setText(''),
+      {disabled:!text}
+    )
+  );
+}
+
+// QUICK REACT TIP
+
+const tips = [
+  'Call useState at the top level of your component.',
+  'Use a new array when adding or removing items.',
+  'Keep shared state in the closest common parent.'
+];
+
+function QuickTip() {
+
+  const [open,setOpen] = useState(false);
+  const [index,setIndex] = useState(0);
+
+  return card('Quick React Tip',
+
+    button(
+      open ? 'Hide details' : 'Show details',
+      () => setOpen(previous => !previous),
+      {
+        'aria-expanded':open,
+        'aria-controls':'tip-details'
+      }
+    ),
+
+    h('div',{
+      id:'tip-details',
+      hidden:!open
+    },
+
+      h('p',{role:'status'},tips[index]),
+
+      button(
+        'Next tip',
+        () => setIndex(previous => (previous+1)%tips.length)
+      ),
+      button(
+        'Surprise me',
+        () => setIndex(Math.floor(Math.random()*tips.length))
+      )
+    )
+  );
+}
+
+// STUDY QUEUE
+
+function StudyQueue() {
+
+  const [input,setInput] = useState('');
+  const [items,setItems] = useState([]);
+
+  function add(event) {
+
+    event.preventDefault();
+
+    const title = input.trim();
+
+    if(!title) return;
+
+    const id = crypto.randomUUID();
+
+    setItems(previous => [
+      ...previous,
+      {id,title,done:false}
+    ]);
+
+    setInput('');
+  }
+
+  return card('Study Queue',
+
+    h('form',{onSubmit:add},
+
+      h('label',null,'New study task',
+
+        h('input',{
+          value:input,
+          onChange:e => setInput(e.target.value),
+          required:true
+        })
+      ),
+
+      h('button',{type:'submit'},'Add')
+    ),
+
+    h('p',{role:'status'},
+      items.filter(item => item.done).length+
+      ' of '+items.length+' complete'
+    ),
+
+    button(
+      'Clear completed',
+      () => setItems(previous =>
+        previous.filter(item => !item.done)
+      ),
+      {disabled:!items.some(item => item.done)}
+    ),
+
+    h('ul',null,
+
+      items.map(item =>
+        h('li',{key:item.id},
+
+          h('label',null,
+
+            h('input',{
+              type:'checkbox',
+              checked:item.done,
+              onChange:() =>
+                setItems(previous =>
+                  previous.map(row =>
+                    row.id === item.id
+                      ? {...row,done:!row.done}
+                      : row
+                  )
+                )
+            }),
+
+            item.title
+          ),
+
+          button(
+            'Remove',
+            () => setItems(previous =>
+              previous.filter(row => row.id !== item.id)
+            ),
+            {'aria-label':'Remove '+item.title}
+          )
+        )
+      )
+    )
+  );
+}
+
+// EXERCISE CONFIGURATION
+
+const exercises = [
+  ShoppingCart,
+  Counter,
+  ScoreBoard,
+  WordCount,
+  QuickTip,
+  StudyQueue
+];
+
+const briefs = [
+  'Pick a setup, add gear, and see how it fits your budget.',
+  'Walk back through your last five count values.',
+  'Change either player’s score and watch the combined total.',
+  'See word and character counts as you type.',
+  'Reveal a tip and click through React state examples.',
+  'Add tasks, check them off, and track your progress.'
+];
+
+// MAIN APPLICATION
+
+function App() {
+
+  const [active,setActive] = useState(0);
+  const [preview,setPreview] = useState(0);
+
+  function openExercise() {
+
+    setActive(preview);
+
+    const workspace = document.getElementById('workspace');
+
+    workspace.focus({preventScroll:true});
+
+    workspace.scrollIntoView({block:'start'});
+  }
+
+  const [practiced,setPracticed] = useState([]);
+
+  const [id,label] = sections[active];
+
+  const done = practiced.includes(id);
+
+  function togglePractice() {
+
+    setPracticed(previous =>
+      previous.includes(id)
+        ? previous.filter(item => item !== id)
+        : [...previous,id]
+    );
+  }
+
+  return h('main',{className:'shell'},
+
+    h('header',{className:'header'},
+
+      h('a',{
+        className:'brand',
+        href:'../#coursework'
+      },
+        'VISHAL',
+        h('span',null,' / LAB')
+      ),
+
+      h('nav',{'aria-label':'Course navigation'},
+
+        h('a',{
+          href:'../#coursework'
+        },'Coursework')
+      )
+    ),
+
+    h('section',{
+      className:'hero launchpad',
+      'aria-labelledby':'week-title'
+    },
+
+      h('div',{className:'launch-copy'},
+
+        h('p',{className:'eyebrow'},
+          'VISHAL'S WORKBENCH / WEEK 12.1'
+        ),
+
+        h('h1',{id:'week-title'},
+          'REACT ',
+          h('span',null,'STATE')
+        ),
+
+        h('p',{className:'lead'},
+          'Build your own tech setup, track your progress, and experiment with interactive React tools in a fresh workspace.'
+        ),
+
+        button(
+          'Open '+sections[preview][1]+' ↓',
+          openExercise,
+          {className:'launch-button'}
+        )
+      ),
+
+      h('div',{className:'launch-preview'},
+
+        h('div',{
+          className:'launch-detail',
+          'aria-live':'polite'
+        },
+
+          h('p',{className:'eyebrow'},
+            preview === 0 ? 'HOMEWORK' : 'PRACTICE'
+          ),
+
+          h('h2',null,sections[preview][1]),
+
+          h('p',null,briefs[preview])
+        ),
+
+        h('div',{
+          className:'launch-choices',
+          role:'group',
+          'aria-label':'Preview an exercise'
+        },
+
+          sections.map(([id,label],index) =>
+            button(
+              label,
+              () => setPreview(index),
+              {
+                key:id,
+                'aria-pressed':preview === index
+              }
+            )
+          )
+        )
+      )
+    ),
+
+    h('div',{
+      className:'workspace',
+      id:'workspace',
+      tabIndex:-1,
+      'aria-label':'Exercise workspace'
+    },
+
+      h('div',{className:'exercise-menu'},
+
+        h('h2',null,'Exercises'),
+
+        h('p',{role:'status'},
+          practiced.length+' of '+sections.length+' practiced'
+        ),
+
+        h('progress',{
+          max:sections.length,
+          value:practiced.length,
+          'aria-label':'Practice progress'
+        }),
+
+        sections.map(([key,name],index) =>
+          button(
+            name,
+            () => setActive(index),
+            {
+              key,
+              'aria-pressed':active === index,
+              'aria-controls':'panel-'+key,
+              'aria-label':name+
+                (practiced.includes(key) ? ', practiced' : '')
+            }
+          )
+        )
+      ),
+
+      h('div',{className:'exercise-stage'},
+
+        h('div',{className:'exercise-toolbar'},
+
+          h('span',{className:'eyebrow'},
+            active === 0 ? 'HOMEWORK' : 'PRACTICE'
+          ),
+
+          button(
+            done ? 'Practiced ✓' : 'Mark as practiced',
+            togglePractice,
+            {'aria-pressed':done}
+          )
+        ),
+
+        sections.map(([key,name],index) =>
+          h('div',{
+            key,
+            id:'panel-'+key,
+            hidden:active !== index
+          },
+            h(exercises[index])
+          )
+        ),
+
+        h('div',{className:'exercise-toolbar'},
+
+          button(
+            '← Previous',
+            () => setActive(previous => previous-1),
+            {disabled:active === 0}
+          ),
+
+          h('span',{
+            className:'eyebrow',
+            role:'status'
+          },
+            label+' · '+(active+1)+' / '+sections.length
+          ),
+
+          button(
+            'Next →',
+            () => setActive(previous => previous+1),
+            {disabled:active === sections.length-1}
+          )
+        )
+      )
+    )
+  );
+}
+
+createRoot(
+  document.querySelector('#root')
+).render(h(App));
+
+</script>
+</body>
+</html>
