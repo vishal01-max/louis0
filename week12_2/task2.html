@@ -76,9 +76,9 @@ function StopwatchTask(){
  return <><div className="clock" aria-live="off">{pad(minutes)}:{pad(seconds)}.{pad(centiseconds)}</div><div className="clock-actions"><button className="btn" onClick={()=>setRunning(!running)}>{running?"Pause":"Start"}</button><button className="btn secondary" onClick={()=>{setRunning(false);setElapsed(0)}}>Reset</button></div><p className="hint">The interval runs only while the stopwatch is active. Cleanup clears it when paused or when you switch exercises.</p></>
 }
 function App(){
- const [active,setActive]=useState("github");
+ const [active,setActive]=useState(()=>{const id=window.location.hash.slice(1);return tasks.some(t=>t.id===id)?id:"github"});
  const current=tasks.find(t=>t.id===active);
- return <><div className="tabs" role="tablist" aria-label="Week 12.2 assignments">{tasks.map((t,i)=><button key={t.id} className="tab" role="tab" id={"tab-"+t.id} aria-controls={"panel-"+t.id} aria-selected={active===t.id} onClick={()=>setActive(t.id)}>{String(i+1).padStart(2,"0")} · {t.label}</button>)}</div>
+ return <><div className="tabs" role="tablist" aria-label="Week 12.2 assignments">{tasks.map((t,i)=><button key={t.id} className="tab" role="tab" id={"tab-"+t.id} aria-controls={"panel-"+t.id} aria-selected={active===t.id} onClick={()=>{setActive(t.id);history.replaceState(null,"","#"+t.id)}}>{String(i+1).padStart(2,"0")} · {t.label}</button>)}</div>
  {tasks.map((t,i)=><section key={t.id} className="panel" id={"panel-"+t.id} role="tabpanel" aria-labelledby={"tab-"+t.id} hidden={active!==t.id}><div className="panel-head"><div><h2>{t.title}</h2><p>{["Search a public GitHub account and display its profile data.","Fetch current weather information from the Open-Meteo API.","Edit text and update the browser tab title with useEffect.","Fetch and display a sample user profile when the component mounts.","Measure elapsed time and clean up the interval when it stops."][i]}</p></div><span className="number">ASSIGNMENT {String(i+1).padStart(2,"0")} / 05</span></div>{t.id==="github"&&<GitHubTask/>}{t.id==="weather"&&<WeatherTask/>}{t.id==="title"&&<TitleTask/>}{t.id==="user"&&<UserTask/>}{t.id==="stopwatch"&&<StopwatchTask/>}</section>)}</>
 }
 ReactDOM.createRoot(document.getElementById("root")).render(<App/>);
