@@ -1,213 +1,88 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Week 13 React Forms topics and working exercises by Vishal Bohara.">
-<meta name="theme-color" content="#142b35">
-<title>Week 13 · React Forms | Vishal Bohara</title>
+<meta name="description" content="Week 13 React Forms topics and exercises by Vishal Bohara.">
+<title>Week 13 | React Forms</title>
 <style>
-:root{--ink:#172b32;--muted:#61747a;--deep:#142b35;--teal:#087e79;--mint:#e8f5f1;--line:#dce7e4;--paper:#fff;--bg:#f4f7f5;--orange:#e49a58}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.65 Inter,Arial,sans-serif}a{color:inherit}.skip{position:absolute;left:12px;top:-60px;padding:10px;background:#fff;z-index:9}.skip:focus{top:12px}
-header{background:var(--deep);color:#fff}.nav{max-width:1120px;margin:auto;padding:17px 26px;display:flex;justify-content:space-between;align-items:center;gap:15px}.brand{font-weight:900;letter-spacing:1.4px;text-decoration:none}.brand span{color:#83d8c6}.nav small{color:#b9ccca;font-size:11px;letter-spacing:1px}
-.hero{max-width:1120px;margin:auto;padding:64px 26px 76px;position:relative}.eyebrow{color:#8bd8c8;font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase}.hero h1{font-size:clamp(40px,7vw,70px);line-height:1.02;letter-spacing:-2.5px;margin:12px 0 17px;max-width:750px}.hero h1 span{color:#8bd8c8}.hero p{max-width:670px;color:#c6d5d3;margin:0}.hero .jump{display:inline-block;margin-top:25px;background:#8bd8c8;color:#102b30;padding:11px 17px;border-radius:7px;text-decoration:none;font-size:13px;font-weight:800}
-main{max-width:1120px;margin:auto;padding:38px 26px 70px}.summary{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:-66px;position:relative}.metric{background:#fff;border:1px solid var(--line);padding:17px 20px;border-radius:11px}.metric strong{display:block;color:var(--teal);font-size:25px}.metric span{font-size:12px;color:var(--muted)}
-.section-head{display:flex;justify-content:space-between;align-items:end;gap:18px;margin:52px 0 18px}.section-head h2{margin:0;color:var(--deep);font-size:26px;letter-spacing:-.7px}.section-head p{margin:4px 0 0;color:var(--muted);font-size:13px}.section-tag{color:var(--teal);font-size:10px;font-weight:900;letter-spacing:1.5px;text-transform:uppercase}
-.topics,.tasks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.topic,.task{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:20px}.topic{border-left:4px solid var(--teal)}.topic h3,.task h3{margin:4px 0 7px;color:var(--deep);font-size:17px}.topic p,.task p{margin:0;color:var(--muted);font-size:13px}.topic code{background:#eef5f2;padding:2px 5px;border-radius:4px;color:#075d59}.topic .num{font-size:10px;font-weight:900;letter-spacing:1px;color:var(--teal)}
-.task{display:flex;flex-direction:column;gap:8px}.task .task-no{font-size:10px;color:var(--teal);font-weight:900;letter-spacing:1.3px}.task a{margin-top:auto;padding-top:8px;color:var(--teal);font-size:12px;font-weight:800;text-decoration:none}.task a:hover{text-decoration:underline}
-.demo{margin-top:14px;background:#fff;border:1px solid var(--line);border-radius:13px;padding:23px;scroll-margin-top:18px}.demo-head{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:16px}.demo-head h3{margin:0;color:var(--deep);font-size:18px}.demo-head span{font-size:10px;color:var(--teal);font-weight:900;letter-spacing:1px;text-transform:uppercase}
-form{display:grid;gap:13px}.fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.field{display:grid;gap:5px}.field.full{grid-column:1/-1}label,legend{font-size:12px;font-weight:800;color:#31484d}input,select,textarea{width:100%;border:1px solid #cbd9d5;border-radius:7px;padding:10px 11px;font:14px Arial,sans-serif;color:var(--ink);background:#fff}input:focus,select:focus,textarea:focus{outline:3px solid #b7e5d9;border-color:var(--teal)}textarea{min-height:95px;resize:vertical}fieldset{border:1px solid var(--line);border-radius:8px;padding:12px}fieldset label{display:inline-flex;align-items:center;gap:7px;margin:6px 14px 4px 0;font-weight:600}input[type=checkbox],input[type=radio]{width:auto;accent-color:var(--teal)}button,.btn{border:0;border-radius:7px;background:var(--deep);color:#fff;padding:10px 16px;font-weight:800;font-size:12px;cursor:pointer}button:hover,.btn:hover{background:var(--teal)}button:focus-visible,a:focus-visible{outline:3px solid var(--orange);outline-offset:3px}.btn-row{display:flex;flex-wrap:wrap;gap:9px;align-items:center}.btn-soft{background:var(--mint);color:#075d59}.btn-soft:hover{background:#d2eee5;color:#075d59}.feedback{font-size:12px;color:var(--muted);min-height:18px}.success{color:#08734e;font-weight:700}.error{color:#b42318;font-size:12px}.counter{font-size:12px;color:var(--muted);text-align:right}.result{background:#f1f7f4;border-radius:8px;padding:12px;color:#24443d;font-size:13px;min-height:40px}.progress{height:7px;background:#e8efec;border-radius:9px;overflow:hidden}.progress span{display:block;height:100%;background:var(--teal);width:33%;transition:width .2s}.footer{margin-top:42px;padding-top:20px;border-top:1px solid var(--line);color:var(--muted);font-size:11px}
-@media(max-width:680px){.nav{padding:15px 17px}.nav small{font-size:9px}.hero{padding:48px 18px 76px}main{padding:30px 17px 55px}.summary{grid-template-columns:1fr;gap:8px}.metric{padding:12px 16px}.topics,.tasks,.fields{grid-template-columns:1fr}.field.full{grid-column:auto}.section-head{align-items:start;flex-direction:column}.demo{padding:17px}}
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important}}
+:root{--ink:#1c3037;--muted:#63747a;--accent:#087e79;--accent2:#d8f0e8;--line:#dce6e2;--panel:#fff;--bg:#f3f7f5;--shadow:0 8px 24px rgba(27,62,54,.07)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--ink);background:var(--bg);font:15px/1.65 Inter,system-ui,Arial,sans-serif}
+a{color:var(--accent)}a:focus-visible,button:focus-visible{outline:3px solid #e5a65f;outline-offset:3px}
+.skip-link{position:absolute;left:-9999px;top:10px;background:#fff;padding:10px;z-index:10}.skip-link:focus{left:10px}
+.back-button{position:fixed;right:22px;top:18px;z-index:5;border:1px solid rgba(255,255,255,.3);border-radius:8px;background:#fff;color:#164a49;padding:8px 13px;font-weight:800;cursor:pointer}
+.site-header{background:#17383e;color:#fff}.header-inner{max-width:1120px;margin:auto;padding:60px 26px 35px}
+.eyebrow{margin:0 0 12px;color:#9ad9ca;font-size:11px;font-weight:900;letter-spacing:1.8px;text-transform:uppercase}
+h1{margin:0;font-size:clamp(40px,6vw,62px);line-height:1.04;letter-spacing:-2px}
+.intro{max-width:770px;margin:17px 0 25px;color:#d1dfdc;font-size:15px}
+.page-nav{display:flex;flex-wrap:wrap;gap:8px}.page-nav a{padding:7px 11px;border:1px solid rgba(255,255,255,.2);border-radius:7px;color:#eaf5f1;text-decoration:none;font-size:11px}.page-nav a:hover,.page-nav a[aria-current=page]{background:#d8f0e8;color:#17433f;border-color:#d8f0e8}
+main{max-width:1120px;margin:auto;padding:36px 26px 65px}.resource-panel{padding:23px;border:1px solid var(--line);border-radius:12px;background:var(--panel);box-shadow:var(--shadow)}
+h2{margin:0 0 5px;color:#1a4245;font-size:25px;letter-spacing:-.5px}.resource-panel>p,.section-lead p{margin:0 0 18px;color:var(--muted);font-size:13px}
+.lab-grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(245px,1fr))}
+.lab-card{display:flex;flex-direction:column;padding:20px;border:1px solid var(--line);border-top:4px solid var(--accent);border-radius:10px;background:var(--panel);box-shadow:var(--shadow);min-width:0}
+.lab-card h3{margin:0 0 6px;color:#21474a;font-size:16px;line-height:1.4}.lab-card p{margin:0;color:var(--muted);font-size:13px}.lab-card .file-link{margin-top:auto;padding-top:14px}.file-link a{font-size:12px;font-weight:900;text-decoration:none}.file-link a:hover{text-decoration:underline}
+.section-lead{display:flex;justify-content:space-between;align-items:end;gap:16px;margin:42px 0 16px}.section-lead h2{margin:0}.section-lead p{margin:3px 0 0}.legend{padding:5px 10px;border:1px solid #b9ded2;border-radius:20px;background:#e8f5ef;color:#17645b;font-size:10px;font-weight:900;letter-spacing:.8px;text-transform:uppercase}
+.week{margin:0 0 14px;border:1px solid var(--line);border-radius:12px;background:#fff;box-shadow:var(--shadow);overflow:hidden}.week summary{display:flex;align-items:center;gap:14px;padding:17px 20px;cursor:pointer;list-style:none}.week summary::-webkit-details-marker{display:none}.week summary:after{content:"＋";margin-left:auto;color:var(--accent);font-size:20px;font-weight:700}.week[open] summary:after{content:"−"}
+.week-number{display:grid;place-items:center;width:37px;height:37px;border-radius:9px;background:var(--accent2);color:#12645b;font-weight:900}.week-title h3{margin:0;color:#1b4144;font-size:17px}.week-title p{margin:0;color:var(--muted);font-size:11px}.sessions{padding:0 20px 20px}.sessions .lab-card{background:#fbfdfc}
+footer{padding:22px;text-align:center;background:#17383e;color:#c4d7d2;font-size:11px}
+@media(max-width:620px){.header-inner{padding:55px 18px 27px}.back-button{right:12px;top:12px}main{padding:25px 16px 48px}.resource-panel{padding:16px}.section-lead{align-items:start;flex-direction:column}.week summary{padding:14px}.sessions{padding:0 13px 14px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 </style>
 </head>
 <body>
-<a class="skip" href="#main">Skip to main content</a>
-<header>
-<nav class="nav"><a class="brand" href="../index.html">VB <span>/ WEB LAB</span></a><small>WEEK 13 · FORM PRACTICE</small></nav>
-<div class="hero">
-<div class="eyebrow">Gachon University · Web Programming</div>
-<h1>Forms that feel<br><span>simple and smart.</span></h1>
-<p>Week 13 explores controlled inputs, select menus, textareas, checkboxes, radio buttons, shared change handlers and validation. The examples below are customized for Vishal's portfolio and include working browser interactions.</p>
-<a class="jump" href="#practice">Explore the exercises ↓</a>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<button class="back-button" type="button" onclick="history.back()">Back</button>
+<header class="site-header">
+<div class="header-inner">
+<p class="eyebrow">Vishal Bohara · Web Programming · Gachon University</p>
+<h1>Week 13<br>React Forms</h1>
+<p class="intro">Controlled inputs, select and textarea, checkboxes and radio buttons, one handler for many inputs, and form validation. Each topic and activity opens as a standalone HTML page with its own working JavaScript.</p>
+<nav class="page-nav" aria-label="Course navigation">
+<a href="../index.html">Portfolio home</a>
+<a href="../week12_2/index.html">Week 12 · React Effects</a>
+<a href="index.html" aria-current="page">Week 13 · React Forms</a>
+</nav>
 </div>
 </header>
-<main id="main">
-<div class="summary">
-<div class="metric"><strong>05</strong><span>Core topics</span></div>
-<div class="metric"><strong>06</strong><span>Hands-on activities</span></div>
-<div class="metric"><strong>100%</strong><span>In-page demos</span></div>
-</div>
-
-<div class="section-head"><div><div class="section-tag">Learn the concepts</div><h2>Topics</h2><p>Short notes for the main React Forms ideas.</p></div></div>
-<section class="topics" aria-label="Week 13 topics">
-<article class="topic"><span class="num">TOPIC 01</span><h3>Controlled text inputs</h3><p>React state stores the input value. The <code>value</code> prop displays it, while <code>onChange</code> updates state whenever the user types.</p></article>
-<article class="topic"><span class="num">TOPIC 02</span><h3>Select and textarea</h3><p>Dropdowns and multi-line text fields follow the same controlled pattern: connect their current value to state and update it on change.</p></article>
-<article class="topic"><span class="num">TOPIC 03</span><h3>Checkboxes and radio buttons</h3><p>Checkboxes are useful for multiple choices; radio buttons are for one choice from a group. Their state is commonly boolean, array or string.</p></article>
-<article class="topic"><span class="num">TOPIC 04</span><h3>One handler for many inputs</h3><p>Give each field a <code>name</code>. A shared handler reads <code>event.target.name</code> and <code>event.target.value</code> to update the matching field.</p></article>
-<article class="topic"><span class="num">TOPIC 05</span><h3>Form validation</h3><p>Check required fields and formats before accepting a submission. Show clear messages beside invalid fields and confirm successful submissions.</p></article>
+<main id="main-content" tabindex="-1">
+<section class="resource-panel" aria-labelledby="topics-title">
+<h2 id="topics-title">Topics</h2>
+<p>Each topic is a standalone HTML file with its script written inside the page.</p>
+<div class="lab-grid" id="topic-list"></div>
 </section>
-
-<div class="section-head" id="practice"><div><div class="section-tag">Build and test</div><h2>Exercises & homework</h2><p>Each card jumps to a working task below. Try entering your own information.</p></div></div>
-<section class="tasks" aria-label="Week 13 exercises">
-<article class="task"><span class="task-no">EXERCISE 01</span><h3>Bio field</h3><p>Write a short introduction with a 200-character limit and live character counter.</p><a href="#bio">Open exercise ↗</a></article>
-<article class="task"><span class="task-no">EXERCISE 02</span><h3>Contact form</h3><p>Submit a contact request with required fields, inline validation and a confirmation message.</p><a href="#contact">Open exercise ↗</a></article>
-<article class="task"><span class="task-no">EXERCISE 03</span><h3>Skill picker</h3><p>Select your skills from six options. The page counts selections and warns when more than three are chosen.</p><a href="#skills">Open exercise ↗</a></article>
-<article class="task"><span class="task-no">CHALLENGE 01</span><h3>Multi-step registration wizard</h3><p>Complete three steps with validation, a progress bar and a final summary.</p><a href="#wizard">Open challenge ↗</a></article>
-<article class="task"><span class="task-no">HOMEWORK 01</span><h3>Course feedback form</h3><p>Share a course rating, topics and comments. Student ID must contain eight digits.</p><a href="#feedback">Open homework ↗</a></article>
-<article class="task"><span class="task-no">PORTFOLIO UPDATE</span><h3>Portfolio contact form</h3><p>A compact contact form inspired by the same controlled-input and validation concepts.</p><a href="#portfolio">Open portfolio demo ↗</a></article>
-</section>
-
-<section class="demo" id="bio">
-<div class="demo-head"><h3>Exercise 01 · Bio field</h3><span>Textarea + live count</span></div>
-<div class="field"><label for="bioText">About me</label><textarea id="bioText" maxlength="200" placeholder="Write a short introduction about yourself..."></textarea><div class="counter" id="bioCount">0 / 200 characters</div></div>
-</section>
-
-<section class="demo" id="contact">
-<div class="demo-head"><h3>Exercise 02 · Contact form</h3><span>Required fields + validation</span></div>
-<form id="contactForm" novalidate>
-<div class="fields">
-<div class="field"><label for="contactName">Full name *</label><input id="contactName" required placeholder="Vishal Bohara"></div>
-<div class="field"><label for="contactEmail">Email address *</label><input id="contactEmail" type="email" required placeholder="name@example.com"></div>
-<div class="field full"><label for="contactMessage">Message *</label><textarea id="contactMessage" required placeholder="Write your message..."></textarea></div>
-</div>
-<div class="btn-row"><button type="submit">Send message</button><button class="btn-soft" type="reset">Reset</button></div>
-<p class="feedback" id="contactResult" aria-live="polite"></p>
-</form>
-</section>
-
-<section class="demo" id="skills">
-<div class="demo-head"><h3>Exercise 03 · Skill picker</h3><span>Checkbox state</span></div>
-<p style="margin-top:0;color:var(--muted);font-size:13px">Choose the skills you are currently learning or practicing.</p>
-<fieldset><legend>My skills</legend>
-<label><input type="checkbox" name="skill" value="HTML"> HTML</label>
-<label><input type="checkbox" name="skill" value="CSS"> CSS</label>
-<label><input type="checkbox" name="skill" value="JavaScript"> JavaScript</label>
-<label><input type="checkbox" name="skill" value="Python"> Python</label>
-<label><input type="checkbox" name="skill" value="React"> React</label>
-<label><input type="checkbox" name="skill" value="AI / ML"> AI / ML</label>
-</fieldset>
-<p class="feedback" id="skillResult" aria-live="polite">0 skills selected.</p>
-</section>
-
-<section class="demo" id="wizard">
-<div class="demo-head"><h3>Challenge · Multi-step registration</h3><span>3-step form</span></div>
-<div class="progress" aria-label="Registration progress"><span id="progressBar"></span></div>
-<p class="feedback" id="stepLabel">Step 1 of 3 · Personal details</p>
-<form id="wizardForm">
-<div id="step1">
-<div class="fields">
-<div class="field"><label for="wizardName">Full name *</label><input id="wizardName" placeholder="Your name"></div>
-<div class="field"><label for="wizardEmail">Email *</label><input id="wizardEmail" type="email" placeholder="you@example.com"></div>
-</div>
-</div>
-<div id="step2" hidden>
-<div class="fields">
-<div class="field"><label for="wizardMajor">Major / study area *</label><input id="wizardMajor" placeholder="Software and AI"></div>
-<div class="field"><label for="wizardYear">Study year *</label><select id="wizardYear"><option value="">Choose year</option><option>1st year</option><option>2nd year</option><option>3rd year</option><option>4th year</option></select></div>
-</div>
-</div>
-<div id="step3" hidden>
-<div class="field"><label for="wizardGoal">Your learning goal *</label><textarea id="wizardGoal" placeholder="What would you like to achieve?"></textarea></div>
-<div class="result" id="wizardSummary">Your registration details will appear here.</div>
-</div>
-<p class="feedback" id="wizardError" aria-live="polite"></p>
-<div class="btn-row"><button type="button" class="btn-soft" id="wizardBack" hidden>Back</button><button type="button" id="wizardNext">Continue</button></div>
-</form>
-</section>
-
-<section class="demo" id="feedback">
-<div class="demo-head"><h3>Homework · Course feedback</h3><span>Validation + multiple controls</span></div>
-<form id="feedbackForm" novalidate>
-<div class="fields">
-<div class="field"><label for="studentName">Student name *</label><input id="studentName" placeholder="Your full name"></div>
-<div class="field"><label for="studentId">Student ID (8 digits) *</label><input id="studentId" inputmode="numeric" maxlength="8" placeholder="20260001"></div>
-</div>
-<fieldset><legend>Course rating *</legend>
-<label><input type="radio" name="rating" value="5"> 5 · Excellent</label>
-<label><input type="radio" name="rating" value="4"> 4 · Good</label>
-<label><input type="radio" name="rating" value="3"> 3 · Average</label>
-<label><input type="radio" name="rating" value="2"> 2 · Fair</label>
-<label><input type="radio" name="rating" value="1"> 1 · Poor</label>
-</fieldset>
-<fieldset><legend>Topics you enjoyed</legend>
-<label><input type="checkbox" name="liked" value="React Forms"> React Forms</label>
-<label><input type="checkbox" name="liked" value="JavaScript"> JavaScript</label>
-<label><input type="checkbox" name="liked" value="CSS"> CSS</label>
-<label><input type="checkbox" name="liked" value="APIs"> APIs</label>
-</fieldset>
-<div class="field"><label for="feedbackComment">Comments *</label><textarea id="feedbackComment" placeholder="What was useful? What could be improved?"></textarea></div>
-<button type="submit">Submit course feedback</button>
-<p class="feedback" id="feedbackResult" aria-live="polite"></p>
-</form>
-</section>
-
-<section class="demo" id="portfolio">
-<div class="demo-head"><h3>Portfolio demo · Send Vishal a message</h3><span>Personalized example</span></div>
-<form id="portfolioForm" novalidate>
-<div class="fields">
-<div class="field"><label for="portfolioName">Your name</label><input id="portfolioName" placeholder="Enter your name"></div>
-<div class="field"><label for="portfolioEmail">Your email</label><input id="portfolioEmail" type="email" placeholder="you@example.com"></div>
-<div class="field full"><label for="portfolioTopic">What would you like to discuss?</label><select id="portfolioTopic"><option value="">Choose a topic</option><option>Web development</option><option>AI and machine learning</option><option>University collaboration</option><option>Other</option></select></div>
-<div class="field full"><label for="portfolioMessage">Message</label><textarea id="portfolioMessage" placeholder="Write a short message..."></textarea></div>
-</div>
-<button type="submit">Preview message</button>
-<div class="result" id="portfolioResult" aria-live="polite">Your message preview will appear here.</div>
-</form>
-</section>
-<div class="footer">Vishal Bohara · Gachon University · Web Programming · Week 13 React Forms <a href="../index.html" style="color:var(--teal);font-weight:700">← Back to portfolio</a></div>
+<div class="section-lead"><div><h2>Exercises</h2><p>Choose an activity to open its interactive page.</p></div><div class="legend" aria-label="Exercise status">Interactive</div></div>
+<section class="week-list session-list" id="session-list" aria-label="Week 13 exercise sessions"></section>
 </main>
+<footer>Vishal Bohara · Web Programming · Gachon University · 2026</footer>
 <script>
-const bio=document.getElementById('bioText');
-bio.addEventListener('input',()=>document.getElementById('bioCount').textContent= bio.value.length+' / 200 characters');
-
-document.getElementById('contactForm').addEventListener('submit',e=>{
- e.preventDefault();const name=document.getElementById('contactName').value.trim(),email=document.getElementById('contactEmail').value.trim(),msg=document.getElementById('contactMessage').value.trim(),out=document.getElementById('contactResult');
- if(!name||!email||!msg){out.className='feedback error';out.textContent='Please complete all required fields.';return}
- if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){out.className='feedback error';out.textContent='Please enter a valid email address.';return}
- out.className='feedback success';out.textContent='Thanks, '+name+'! Your message has been checked successfully.';e.target.reset();
-});
-document.querySelectorAll('input[name="skill"]').forEach(x=>x.addEventListener('change',()=>{
- const chosen=[...document.querySelectorAll('input[name="skill"]:checked')].map(i=>i.value),out=document.getElementById('skillResult');
- out.className='feedback '+(chosen.length>3?'error':'');out.textContent=chosen.length+' skills selected'+(chosen.length>3?' — try choosing no more than 3.':chosen.length?' · '+chosen.join(', '):'.');
-}));
-
-let step=1;
-const showStep=()=>{
- [1,2,3].forEach(n=>document.getElementById('step'+n).hidden=n!==step);
- document.getElementById('progressBar').style.width=(step/3*100)+'%';
- document.getElementById('stepLabel').textContent='Step '+step+' of 3 · '+['Personal details','Study information','Learning goal'][step-1];
- document.getElementById('wizardBack').hidden=step===1;
- document.getElementById('wizardNext').textContent=step===3?'Finish registration':'Continue';
+const weekFiles={
+ topics:[
+ {id:"topic-controlled-inputs",title:"Topic 1 · Controlled text inputs",description:"value + onChange keep React state as the single source of truth.",href:"topic_01_controlled_text_inputs.html"},
+ {id:"topic-select-textarea",title:"Topic 2 · Select and textarea",description:"Both are controlled with value + onChange; textarea uses the value prop.",href:"topic_02_select_and_textarea.html"},
+ {id:"topic-checkboxes-radios",title:"Topic 3 · Checkboxes and radio buttons",description:"Boolean state, array state and string state for choice inputs.",href:"topic_03_checkboxes_and_radio_buttons.html"},
+ {id:"topic-one-handler",title:"Topic 4 · Multiple inputs, one handler",description:"One state object and one handler using e.target.name.",href:"topic_04_multiple_inputs_one_handler.html"},
+ {id:"topic-validation",title:"Topic 5 · Form validation",description:"Validate on submit, store errors by field, clear them as the user types.",href:"topic_05_form_validation.html"}
+ ],
+ sessions:[{name:"Session 1",files:[
+ {id:"bio",title:"Exercise 1 · Bio field",description:"A textarea with a 200-character limit and a live count.",href:"exercise_01_bio_field.html"},
+ {id:"contact",title:"Exercise 2 · Contact form",description:"Required fields with errors, a thank-you message and a reset.",href:"exercise_02_contact_form.html"},
+ {id:"skills",title:"Exercise 3 · Skill picker",description:"Six skill checkboxes with a counter and a warning above 3.",href:"exercise_03_skill_picker.html"},
+ {id:"wizard",title:"Challenge · Multi-step registration wizard",description:"Three validated steps, a progress bar, and one state object for all data.",href:"challenge_01_multi_step_registration.html"},
+ {id:"feedback",title:"Homework · Course feedback form",description:"Name, 8-digit student ID, star rating, topics and comments with validation.",href:"homework_01_course_feedback_form.html"},
+ {id:"portfolio",title:"Portfolio website changes",description:"A practical example of applying controlled form concepts to a portfolio contact form.",href:"portfolio-website-changes.html"}
+ ]}]
 };
-document.getElementById('wizardNext').addEventListener('click',()=>{
- const error=document.getElementById('wizardError');error.textContent='';
- if(step===1){
-  const n=document.getElementById('wizardName').value.trim(),em=document.getElementById('wizardEmail').value.trim();
-  if(!n||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)){error.className='feedback error';error.textContent='Enter your name and a valid email to continue.';return}
- }else if(step===2){
-  if(!document.getElementById('wizardMajor').value.trim()||!document.getElementById('wizardYear').value){error.className='feedback error';error.textContent='Please complete your major and study year.';return}
- }else{
-  if(!document.getElementById('wizardGoal').value.trim()){error.className='feedback error';error.textContent='Please add your learning goal.';return}
-  document.getElementById('wizardSummary').innerHTML='<strong>Registration complete!</strong><br>'+document.getElementById('wizardName').value+' · '+document.getElementById('wizardEmail').value+'<br>'+document.getElementById('wizardMajor').value+' · '+document.getElementById('wizardYear').value+'<br>Goal: '+document.getElementById('wizardGoal').value;
-  error.className='feedback success';error.textContent='Your registration details are ready.';return;
- }
- step++;showStep();
-});
-document.getElementById('wizardBack').addEventListener('click',()=>{if(step>1){step--;showStep();document.getElementById('wizardError').textContent=''}});
-showStep();
-
-document.getElementById('feedbackForm').addEventListener('submit',e=>{
- e.preventDefault();const name=document.getElementById('studentName').value.trim(),id=document.getElementById('studentId').value.trim(),rating=document.querySelector('input[name="rating"]:checked'),comment=document.getElementById('feedbackComment').value.trim(),out=document.getElementById('feedbackResult');
- if(!name||!/^\d{8}$/.test(id)||!rating||!comment){out.className='feedback error';out.textContent='Check all required fields. Student ID must contain exactly 8 digits.';return}
- const likes=[...document.querySelectorAll('input[name="liked"]:checked')].map(x=>x.value);
- out.className='feedback success';out.textContent='Thank you, '+name+'! Rating: '+rating.value+'/5. Topics: '+(likes.join(', ')||'Not selected')+'. Your feedback is ready.';e.target.reset();
-});
-document.getElementById('portfolioForm').addEventListener('submit',e=>{
- e.preventDefault();const name=document.getElementById('portfolioName').value.trim(),email=document.getElementById('portfolioEmail').value.trim(),topic=document.getElementById('portfolioTopic').value,msg=document.getElementById('portfolioMessage').value.trim(),out=document.getElementById('portfolioResult');
- if(!name||!email||!topic||!msg||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){out.textContent='Please complete every field with a valid email.';return}
- out.textContent='Message preview — From: '+name+' ('+email+') · Topic: '+topic+' · Message: '+msg;
-});
+const fileCard=file=>`
+<article class="lab-card" id="${file.id}">
+<h3>${file.title}</h3><p>${file.description}</p>
+<p class="file-link"><a href="${encodeURI(file.href)}">Open HTML file</a></p>
+</article>`;
+document.getElementById("topic-list").innerHTML=weekFiles.topics.map(fileCard).join("");
+document.getElementById("session-list").innerHTML=weekFiles.sessions.map((session,index)=>`
+<details id="session-${index+1}" class="week session-details" open>
+<summary><span class="week-number">${index+1}</span><span class="week-title"><h3>${session.name}</h3><p>${session.files.length} files · all activities</p></span></summary>
+<div class="sessions"><div class="lab-grid">${session.files.map(fileCard).join("")}</div></div>
+</details>`).join("");
 </script>
 </body>
 </html>
